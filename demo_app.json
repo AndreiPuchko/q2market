@@ -9,9 +9,9 @@
   },
   {
    "name": "autorun",
-   "script": "myapp.app_version     = '2022-07-18 21:33:35'\nself.app_url = \"https://raw.githubusercontent.com/AndreiPuchko/q2market/main/demo_app\"\nself.app_title = \"Demo app!\"\nself.app_description = \"First q2RAD demo app!\"\n\nconst.mydata = \"123\"\nconst.check(\"some_my_const\",  \"label\", \"value\", \"comment\")",
+   "script": "self.app_url = \"https://raw.githubusercontent.com/AndreiPuchko/q2market/main/demo_app\"\nself.app_title = \"Demo app!\"\nself.app_description = \"First q2RAD demo app!\"\n\nconst.mydata = \"123\"\nconst.check(\"some_my_const\",  \"label\", \"value\", \"comment\")",
    "comment": "",
-   "q2_time": "20220718213218",
+   "q2_time": "20220718230116",
    "q2_mode": "u"
   },
   {
@@ -26,6 +26,13 @@
    "script": "q2Mess(self.app_title)",
    "comment": "",
    "q2_time": "20220718213324",
+   "q2_mode": "i"
+  },
+  {
+   "name": "show me q2App version",
+   "script": "q2Mess(self.app_version)",
+   "comment": "",
+   "q2_time": "20220718230145",
    "q2_mode": "i"
   }
  ],
