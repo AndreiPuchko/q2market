@@ -1,84 +1,38 @@
 {
- "constants": [
-  {
-   "const_name": "mydata",
-   "const_text": "",
-   "const_value": "123",
-   "comment": "",
-   "q2_time": "20220718230105",
-   "q2_mode": "u"
-  },
-  {
-   "const_name": "some_my_const",
-   "const_text": "label",
-   "const_value": "value",
-   "comment": "comment",
-   "q2_time": "20220718102127",
-   "q2_mode": "i"
-  }
- ],
- "invoice": [],
- "sqlite_sequence": [
-  {
-   "name": "actions",
-   "seq": "11"
-  },
-  {
-   "name": "lines",
-   "seq": "9"
-  },
-  {
-   "name": "lines",
-   "seq": "14"
-  },
-  {
-   "name": "lines",
-   "seq": "14"
-  }
- ],
- "customers": [
-  {
-   "cid": "13",
-   "name": "2313",
-   "q2_time": "20220718210239",
-   "q2_mode": "i"
-  }
- ],
- "invoice_lines": [],
  "modules": [
   {
    "name": "run_report",
    "script": "rep = get_report(\"Invoice\")\nrep.params[\"id\"] = 1\nrep.run()",
    "comment": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234735",
    "q2_mode": "i"
   },
   {
    "name": "autorun",
-   "script": "myapp.app_version = '2022-07-18 23:36:46'\nself.app_url = \"https://raw.githubusercontent.com/AndreiPuchko/q2market/main/demo_app\"\nself.app_title = \"Demo app!\"\nself.app_description = \"First q2RAD demo app!\"\n\nconst.mydata = \"123\"\nconst.check(\"some_my_const\",  \"label\", \"value\", \"comment\")",
+   "script": "myapp.app_version = '2022-07-18 23:48:30'\nself.app_url = \"https://raw.githubusercontent.com/AndreiPuchko/q2market/main/demo_app\"\nself.app_title = \"Demo app!\"\nself.app_description = \"First q2RAD demo app!\"\n\nconst.mydata = \"123\"\nconst.check(\"some_my_const\",  \"label\", \"value\", \"comment\")",
    "comment": "",
-   "q2_time": "20220718231809",
+   "q2_time": "20220718234756",
    "q2_mode": "u"
   },
   {
    "name": "run_mod",
    "script": "run_module(\"run_report\")",
    "comment": "run module \"run_report\"",
-   "q2_time": "20220718233632",
-   "q2_mode": "u"
+   "q2_time": "20220718234736",
+   "q2_mode": "i"
   },
   {
    "name": "show me some message",
    "script": "q2Mess(self.app_title)",
    "comment": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234736",
    "q2_mode": "i"
   },
   {
    "name": "show me q2App version",
    "script": "q2Mess(self.app_version)",
    "comment": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234736",
    "q2_mode": "i"
   }
  ],
@@ -109,7 +63,7 @@
    "before_delete": "",
    "after_delete": "",
    "form_valid": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234736",
    "q2_mode": "i"
   },
   {
@@ -138,7 +92,7 @@
    "before_delete": "",
    "after_delete": "",
    "form_valid": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234736",
    "q2_mode": "i"
   },
   {
@@ -167,7 +121,7 @@
    "before_delete": "",
    "after_delete": "",
    "form_valid": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234736",
    "q2_mode": "i"
   }
  ],
@@ -198,7 +152,7 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234736",
    "q2_mode": "i"
   },
   {
@@ -227,7 +181,7 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234736",
    "q2_mode": "i"
   },
   {
@@ -256,7 +210,7 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234736",
    "q2_mode": "i"
   },
   {
@@ -285,7 +239,7 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234736",
    "q2_mode": "i"
   },
   {
@@ -314,7 +268,7 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234736",
    "q2_mode": "i"
   },
   {
@@ -343,7 +297,7 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234736",
    "q2_mode": "i"
   },
   {
@@ -372,7 +326,7 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234736",
    "q2_mode": "i"
   },
   {
@@ -401,7 +355,7 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234736",
    "q2_mode": "i"
   },
   {
@@ -430,7 +384,7 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234736",
    "q2_mode": "i"
   },
   {
@@ -459,8 +413,18 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234736",
    "q2_mode": "i"
+  }
+ ],
+ "sqlite_sequence": [
+  {
+   "name": "lines",
+   "seq": "10"
+  },
+  {
+   "name": "actions",
+   "seq": "6"
   }
  ],
  "queries": [
@@ -468,13 +432,13 @@
    "name": "222",
    "content": "{\n  \"queries\": {\n    \"new_query\": \"select * \\nfrom invoice\\nwhere id = :id\",\n    \"cust\": \"select *\\nfrom customers\"\n  },\n  \"params\": {\n    \"id\": \"1\"\n  }\n}",
    "comment": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234736",
    "q2_mode": "i"
   }
  ],
  "actions": [
   {
-   "id": "6",
+   "id": "1",
    "name": "invoice_header",
    "action_text": "",
    "seq": "0",
@@ -489,11 +453,11 @@
    "child_copy_mode": "1",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234736",
    "q2_mode": "i"
   },
   {
-   "id": "7",
+   "id": "2",
    "name": "customer",
    "action_text": "",
    "seq": "10",
@@ -508,11 +472,11 @@
    "child_copy_mode": "1",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234736",
    "q2_mode": "i"
   },
   {
-   "id": "8",
+   "id": "3",
    "name": "invoice_lines",
    "action_text": "",
    "seq": "0",
@@ -527,11 +491,11 @@
    "child_copy_mode": "1",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234736",
    "q2_mode": "i"
   },
   {
-   "id": "9",
+   "id": "4",
    "name": "invoice_header",
    "action_text": "Lines",
    "seq": "1",
@@ -546,11 +510,11 @@
    "child_copy_mode": "1",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234736",
    "q2_mode": "i"
   },
   {
-   "id": "10",
+   "id": "5",
    "name": "customer",
    "action_text": "Invoices",
    "seq": "11",
@@ -565,11 +529,11 @@
    "child_copy_mode": "1",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234736",
    "q2_mode": "i"
   },
   {
-   "id": "11",
+   "id": "6",
    "name": "invoice_header",
    "action_text": "Print",
    "seq": "2",
@@ -584,7 +548,7 @@
    "child_copy_mode": "1",
    "action_worker": "rep = get_report(\"Invoice\")\nrep.params[\"id\"] = form.r.id\nrep.run()",
    "comment": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234736",
    "q2_mode": "i"
   }
  ],
@@ -593,7 +557,7 @@
    "name": "Invoice",
    "content": "{\n  \"queries\": {\n    \"header\": \"select invoice.* , customers.name\\nfrom invoice\\nleft join customers on invoice.cid = customers.cid\\nwhere invoice.id = :id \\n\",\n    \"lines\": \"select invoice_lines.*\\nfrom invoice_lines\\nwhere parent_id = :id\\norder by id\"\n  },\n  \"params\": {\n    \"id\": \"1\"\n  },\n  \"pages\": [\n    {\n      \"columns\": [\n        {\n          \"rows\": [\n            {\n              \"role\": \"table\",\n              \"data_source\": \"header\",\n              \"groupby\": \"\",\n              \"table_groups\": [],\n              \"print_when\": \"\",\n              \"print_after\": \"\",\n              \"new_page_before\": \"\",\n              \"new_page_after\": \"\",\n              \"heights\": [\n                \"0-0\",\n                \"0-0\"\n              ],\n              \"cells\": {\n                \"0,0\": {\n                  \"data\": \"Invoice number <b>{id}</b>{const.some_my_const}\",\n                  \"style\": {\n                    \"text-align\": \"center\",\n                    \"font-size\": \"17pt\",\n                    \"border-width\": \"8 0 1 0\"\n                  },\n                  \"rowspan\": 1,\n                  \"colspan\": 5\n                },\n                \"1,0\": {\n                  \"data\": \"Customer\",\n                  \"style\": {\n                    \"text-align\": \"right\"\n                  }\n                },\n                \"1,2\": {\n                  \"style\": {\n                    \"text-align\": \"left\"\n                  }\n                },\n                \"1,1\": {\n                  \"data\": \"{name}\",\n                  \"style\": {\n                    \"text-align\": \"left\",\n                    \"font-weight\": \"bold\"\n                  },\n                  \"rowspan\": 1,\n                  \"colspan\": 4\n                }\n              },\n              \"style\": {\n                \"text-align\": \"center\",\n                \"vertical-align\": \"middle\",\n                \"font-size\": \"13pt\",\n                \"border-width\": \"0 0 0 0\"\n              }\n            },\n            {\n              \"role\": \"table\",\n              \"data_source\": \"lines\",\n              \"groupby\": \"\",\n              \"table_groups\": [],\n              \"print_when\": \"\",\n              \"print_after\": \"\",\n              \"new_page_before\": \"\",\n              \"new_page_after\": \"\",\n              \"heights\": [\n                \"0-0\"\n              ],\n              \"cells\": {\n                \"0,2\": {\n                  \"data\": \"{qt}\",\n                  \"style\": {\n                    \"text-align\": \"right\"\n                  }\n                },\n                \"0,0\": {\n                  \"data\": \"{product}\",\n                  \"rowspan\": 1,\n                  \"colspan\": 2\n                },\n                \"0,3\": {\n                  \"data\": \"{price}\",\n                  \"style\": {\n                    \"text-align\": \"right\"\n                  }\n                },\n                \"0,4\": {\n                  \"style\": {\n                    \"text-align\": \"right\"\n                  },\n                  \"data\": \"{num(qt)*num(price)}\"\n                }\n              },\n              \"table_header\": {\n                \"role\": \"table_header\",\n                \"data_source\": \"\",\n                \"groupby\": \"\",\n                \"table_groups\": [],\n                \"print_when\": \"\",\n                \"print_after\": \"\",\n                \"new_page_before\": \"\",\n                \"new_page_after\": \"\",\n                \"heights\": [\n                  \"0-0\"\n                ],\n                \"cells\": {\n                  \"0,0\": {\n                    \"data\": \"Product\",\n                    \"rowspan\": 1,\n                    \"colspan\": 2\n                  },\n                  \"0,2\": {\n                    \"data\": \"Quantity\"\n                  },\n                  \"0,3\": {\n                    \"data\": \"Price\"\n                  },\n                  \"0,4\": {\n                    \"data\": \"Total\"\n                  }\n                },\n                \"style\": {\n                  \"text-align\": \"center\",\n                  \"vertical-align\": \"middle\",\n                  \"font-size\": \"13pt\"\n                }\n              },\n              \"table_footer\": {\n                \"role\": \"table_footer\",\n                \"data_source\": \"\",\n                \"groupby\": \"\",\n                \"table_groups\": [],\n                \"print_when\": \"\",\n                \"print_after\": \"\",\n                \"new_page_before\": \"\",\n                \"new_page_after\": \"\",\n                \"heights\": [\n                  \"0-0\",\n                  \"0-0\"\n                ],\n                \"cells\": {\n                  \"1,0\": {\n                    \"style\": {\n                      \"border-width\": \"1 0 0 0\"\n                    }\n                  },\n                  \"1,1\": {\n                    \"style\": {\n                      \"border-width\": \"1 0 0 0\"\n                    }\n                  },\n                  \"1,3\": {\n                    \"style\": {\n                      \"border-width\": \"0 0 0 0\",\n                      \"font-weight\": \"bold\",\n                      \"font-size\": \"11pt\"\n                    }\n                  },\n                  \"1,4\": {\n                    \"style\": {\n                      \"text-align\": \"right\",\n                      \"font-weight\": \"bold\"\n                    },\n                    \"data\": \"{sum:num(qt)*num(price)}\"\n                  },\n                  \"1,2\": {\n                    \"data\": \"{sum:qt}\",\n                    \"style\": {\n                      \"text-align\": \"right\",\n                      \"vertical-align\": \"bottom\",\n                      \"font-weight\": \"bold\"\n                    }\n                  },\n                  \"0,0\": {\n                    \"rowspan\": 1,\n                    \"colspan\": 5,\n                    \"style\": {\n                      \"font-size\": \"2pt\",\n                      \"border-width\": \"1 0 1 0\"\n                    }\n                  }\n                },\n                \"style\": {\n                  \"font-size\": \"10pt\"\n                }\n              }\n            }\n          ],\n          \"widths\": [\n            \"0.00\",\n            \"0.00\",\n            \"3.00\",\n            \"3.00\",\n            \"3.00\"\n          ]\n        }\n      ],\n      \"page_width\": 21.0,\n      \"page_height\": 29.0,\n      \"page_margin_left\": 2.0,\n      \"page_margin_top\": 2.0,\n      \"page_margin_right\": 1.0,\n      \"page_margin_bottom\": 2.0\n    }\n  ],\n  \"style\": {\n    \"font-family\": \"Arial\",\n    \"font-size\": \"8pt\",\n    \"font-weight\": \"normal\",\n    \"border-width\": \"1 1 1 1\",\n    \"padding\": \"0.05cm 0.05cm 0.05cm 0.05cm\",\n    \"text-align\": \"left\",\n    \"vertical-align\": \"top\"\n  }\n}",
    "comment": "",
-   "q2_time": "20220718231747",
+   "q2_time": "20220718234736",
    "q2_mode": "i"
   }
  ]

@@ -433,6 +433,10 @@
   {
    "name": "lines",
    "seq": "14"
+  },
+  {
+   "name": "invoice",
+   "seq": "4"
   }
  ],
  "queries": [
@@ -571,23 +575,152 @@
  ],
  "constants": [
   {
+   "const_name": "appurl",
+   "const_text": "Url for update",
+   "const_value": "!!!!!!!!!!11111",
+   "comment": "",
+   "q2_time": "20220614115433",
+   "q2_mode": "u"
+  },
+  {
    "const_name": "mydata",
    "const_text": "",
    "const_value": "123",
    "comment": "",
-   "q2_time": "20220718233558",
+   "q2_time": "20220718234820",
    "q2_mode": "u"
   },
   {
    "const_name": "some_my_const",
    "const_text": "label",
-   "const_value": "value",
+   "const_value": "___some_my_const___",
    "comment": "comment",
-   "q2_time": "20220718231824",
+   "q2_time": "20220614125641",
+   "q2_mode": "u"
+  }
+ ],
+ "customers": [
+  {
+   "cid": "1",
+   "name": "Software owner",
+   "q2_time": "20220611135203",
+   "q2_mode": "i"
+  },
+  {
+   "cid": "2",
+   "name": "Customer 1",
+   "q2_time": "20220611135223",
+   "q2_mode": "i"
+  },
+  {
+   "cid": "3",
+   "name": "Customer 2",
+   "q2_time": "20220611232402",
    "q2_mode": "i"
   }
  ],
- "customers": [],
- "invoice": [],
- "invoice_lines": []
+ "invoice": [
+  {
+   "id": "0",
+   "date": "2022-06-11",
+   "cid": "1",
+   "q2_time": "20220611233846",
+   "q2_mode": "i"
+  },
+  {
+   "id": "1",
+   "date": "2022-06-12",
+   "cid": "2",
+   "q2_time": "20220611234435",
+   "q2_mode": "u"
+  },
+  {
+   "id": "2",
+   "date": "2022-12-11",
+   "cid": "3",
+   "q2_time": "20220613195005",
+   "q2_mode": "u"
+  },
+  {
+   "id": "4",
+   "date": "2022-06-13",
+   "cid": "2",
+   "q2_time": "20220613195047",
+   "q2_mode": "i"
+  }
+ ],
+ "invoice_lines": [
+  {
+   "id": "0",
+   "parent_id": "1",
+   "price": "1",
+   "qt": "2",
+   "product": "rvdfghbdfgh fdh dfgh d",
+   "q2_time": "20220612214124",
+   "q2_mode": "u"
+  },
+  {
+   "id": "1",
+   "parent_id": "1",
+   "price": "3",
+   "qt": "5",
+   "product": "r234r23r23",
+   "q2_time": "20220701123456",
+   "q2_mode": "u"
+  },
+  {
+   "id": "2",
+   "parent_id": "2",
+   "price": "23",
+   "qt": "234",
+   "product": "423424  fd gsdg sdg",
+   "q2_time": "20220614095305",
+   "q2_mode": "u"
+  },
+  {
+   "id": "3",
+   "parent_id": "2",
+   "price": "3",
+   "qt": "432",
+   "product": "dfg sdg ds gsdg sd",
+   "q2_time": "20220614095310",
+   "q2_mode": "u"
+  },
+  {
+   "id": "4",
+   "parent_id": "0",
+   "price": "23",
+   "qt": "124",
+   "product": "vdfjkvlsjkdfgbsdg",
+   "q2_time": "20220612214104",
+   "q2_mode": "u"
+  },
+  {
+   "id": "5",
+   "parent_id": "0",
+   "price": "23423",
+   "qt": "23",
+   "product": "fsdfgsdgs\ncdsvg;sdlmfg;kldg",
+   "q2_time": "20220612214113",
+   "q2_mode": "u"
+  },
+  {
+   "id": "6",
+   "parent_id": "4",
+   "price": "23",
+   "qt": "234",
+   "product": " fgdhdfhdfg dgf dhgf dfg",
+   "q2_time": "20220612214136",
+   "q2_mode": "u"
+  },
+  {
+   "id": "7",
+   "parent_id": "4",
+   "price": "5",
+   "qt": "3",
+   "product": " dfghfh dfgh dgf hdgf",
+   "q2_time": "20220612214141",
+   "q2_mode": "u"
+  }
+ ]
 }
