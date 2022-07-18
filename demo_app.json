@@ -9,9 +9,9 @@
   },
   {
    "name": "autorun",
-   "script": "myapp.app_version     = '2022-07-18 11:58:56'\nself.app_url = \"https://raw.githubusercontent.com/AndreiPuchko/q2market/main/demo_app\"\nself.app_title = \"Demo app!\"\nself.app_description = \"First q2RAD demo app!\"\n\nconst.mydata = \"123\"\nconst.check(\"some_my_const\",  \"label\", \"value\", \"comment\")",
+   "script": "myapp.app_version     = '2022-07-18 21:33:35'\nself.app_url = \"https://raw.githubusercontent.com/AndreiPuchko/q2market/main/demo_app\"\nself.app_title = \"Demo app!\"\nself.app_description = \"First q2RAD demo app!\"\n\nconst.mydata = \"123\"\nconst.check(\"some_my_const\",  \"label\", \"value\", \"comment\")",
    "comment": "",
-   "q2_time": "20220718115849",
+   "q2_time": "20220718213218",
    "q2_mode": "u"
   },
   {
@@ -20,6 +20,13 @@
    "comment": "runs module \"run_report\"",
    "q2_time": "20220718113642",
    "q2_mode": "u"
+  },
+  {
+   "name": "show me some message",
+   "script": "q2Mess(self.app_title)",
+   "comment": "",
+   "q2_time": "20220718213324",
+   "q2_mode": "i"
   }
  ],
  "forms": [
