@@ -1,4 +1,30 @@
 {
+ "constants": [
+  {
+   "const_name": "appurl",
+   "const_text": "Url for update",
+   "const_value": "!!!!!!!!!!11111",
+   "comment": "",
+   "q2_time": "20220614115433",
+   "q2_mode": "u"
+  },
+  {
+   "const_name": "mydata",
+   "const_text": "",
+   "const_value": "123",
+   "comment": "",
+   "q2_time": "20221213213010",
+   "q2_mode": "u"
+  },
+  {
+   "const_name": "some_my_const",
+   "const_text": "label",
+   "const_value": "___some_my_const___",
+   "comment": "comment",
+   "q2_time": "20220614125641",
+   "q2_mode": "u"
+  }
+ ],
  "customers": [
   {
    "cid": "1",
@@ -142,32 +168,6 @@
    "qt": "3",
    "product": " dfghfh dfgh dgf hdgf",
    "q2_time": "20220612214141",
-   "q2_mode": "u"
-  }
- ],
- "constants": [
-  {
-   "const_name": "appurl",
-   "const_text": "Url for update",
-   "const_value": "!!!!!!!!!!11111",
-   "comment": "",
-   "q2_time": "20220614115433",
-   "q2_mode": "u"
-  },
-  {
-   "const_name": "mydata",
-   "const_text": "",
-   "const_value": "123",
-   "comment": "",
-   "q2_time": "20220719001437",
-   "q2_mode": "u"
-  },
-  {
-   "const_name": "some_my_const",
-   "const_text": "label",
-   "const_value": "___some_my_const___",
-   "comment": "comment",
-   "q2_time": "20220614125641",
    "q2_mode": "u"
   }
  ]
