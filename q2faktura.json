@@ -9,7 +9,7 @@
   },
   {
    "name": "autorun",
-   "script": "self.app_version = '2023-01-23 00:51:14'\nself.app_url = \"https://raw.githubusercontent.com/AndreiPuchko/q2market/main/q2faktura\"\nself.app_title = \"q2faktura\"\nself.app_description = \"Rechnungen und mehr\"\r\n\r\nimport pdfplumber\r\nrun_module(\"ref_ini\")\r\n\r\nif self.dev_mode:\r\n    self.run_forms()\r\n# run_form(\"ref_cln\")",
+   "script": "self.app_version = '2023-01-26 01:13:51'\nself.app_url = \"https://raw.githubusercontent.com/AndreiPuchko/q2market/main/q2faktura\"\nself.app_title = \"q2faktura\"\nself.app_description = \"Rechnungen und mehr\"\r\n\r\nimport pdfplumber\r\nrun_module(\"ref_ini\")\r\n\r\nif self.dev_mode:\r\n    self.run_forms()\r\n# run_form(\"ref_cln\")",
    "comment": "",
    "q2_time": "20230110233455",
    "q2_mode": "u"
