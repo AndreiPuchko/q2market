@@ -9,9 +9,9 @@
   },
   {
    "name": "autorun",
-   "script": "self.app_version = '2023-02-08 23:17:55'\nself.app_url = \"https://raw.githubusercontent.com/AndreiPuchko/q2market/main/q2faktura\"\nself.app_title = \"q2faktura\"\nself.app_description = \"Rechnungen und mehr\"\r\n\r\nimport pdfplumber\r\nrun_module(\"ref_ini\")\r\n\r\n# if self.dev_mode:\r\n    # self.run_forms()\r\n# run_form(\"ref_cln\")\r\n# self.run_reports()",
+   "script": "self.app_version = '2023-02-09 10:19:28'\nself.app_url = \"https://raw.githubusercontent.com/AndreiPuchko/q2market/main/q2faktura\"\nself.app_title = \"q2faktura\"\nself.app_description = \"Rechnungen und mehr\"\r\n\r\nimport pdfplumber\r\nrun_module(\"ref_ini\")\r\n\r\n# if self.dev_mode:\r\n    # self.run_forms()\r\n# run_form(\"ref_cln\")\r\n# self.run_reports()",
    "comment": "",
-   "q2_time": "20230208221945",
+   "q2_time": "20230209101822",
    "q2_mode": "u"
   },
   {
@@ -50,13 +50,6 @@
    "q2_mode": "i"
   },
   {
-   "name": "ref_ini",
-   "script": "insert_if_not_exist(\"ref_cln\", {}, \"cln\")\r\ninsert_if_not_exist(\"ref_wrk\", {}, \"wrk\")\r\ninsert_if_not_exist(\"ref_stg\", {}, \"stg\")",
-   "comment": "",
-   "q2_time": "20221219115444",
-   "q2_mode": "u"
-  },
-  {
    "name": "import pdfplumber",
    "script": "import pdfplumber",
    "comment": "",
@@ -82,6 +75,13 @@
    "script": "self.run_reports()",
    "comment": "",
    "q2_time": "20230208122823",
+   "q2_mode": "u"
+  },
+  {
+   "name": "manifest",
+   "script": "self.app_url = \"https://raw.githubusercontent.com/AndreiPuchko/q2market/main/q2faktura\"\r\nself.app_title = \"q2faktura\"\r\nself.app_description = \"Rechnungen und mehr\"",
+   "comment": "",
+   "q2_time": "20230209095148",
    "q2_mode": "u"
   }
  ],
