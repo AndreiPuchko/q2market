@@ -9,7 +9,7 @@
   },
   {
    "name": "autorun",
-   "script": "self.app_version = '2023-02-09 10:19:28'\nself.app_url = \"https://raw.githubusercontent.com/AndreiPuchko/q2market/main/q2faktura\"\nself.app_title = \"q2faktura\"\nself.app_description = \"Rechnungen und mehr\"\r\n\r\nimport pdfplumber\r\nrun_module(\"ref_ini\")\r\n\r\n# if self.dev_mode:\r\n    # self.run_forms()\r\n# run_form(\"ref_cln\")\r\n# self.run_reports()",
+   "script": "self.app_url = \"https://raw.githubusercontent.com/AndreiPuchko/q2market/main/q2faktura\"\nself.app_title = \"q2faktura\"\nself.app_description = \"Rechnungen und mehr\"\r\n\r\nimport pdfplumber\r\nrun_module(\"ref_ini\")\r\n\r\n# if self.dev_mode:\r\n    # self.run_forms()\r\n# run_form(\"ref_cln\")\r\n# self.run_reports()",
    "comment": "",
    "q2_time": "20230209101822",
    "q2_mode": "u"
@@ -83,6 +83,20 @@
    "comment": "",
    "q2_time": "20230209095148",
    "q2_mode": "u"
+  },
+  {
+   "name": "app man",
+   "script": "modules = AppManager().get_app_json()[\"modules\"]\r\ndc = {dic['name']:dic for row, dic in enumerate(modules)}\r\nif dc.get(\"version\") is None:\r\n    modules.append({'name': 'version', 'script': 'self.app_version = 123'})\r\nelse:\r\n    dc[\"version\"][\"script\"]  = 'self.app_version = 1234'\r\n\r\n\r\nprint([x[\"name\"] for x in modules])\r\ndc = {dic['name']:dic for row, dic in enumerate(modules)}\r\nprint(dc.get(\"version\"))",
+   "comment": "",
+   "q2_time": "20230209104703",
+   "q2_mode": "u"
+  },
+  {
+   "name": "version",
+   "script": "self.app_version = '2023-02-09 10:57:07'",
+   "comment": "",
+   "q2_time": "20230209105707",
+   "q2_mode": "i"
   }
  ],
  "forms": [
