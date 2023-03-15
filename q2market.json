@@ -8,5 +8,10 @@
     "app_title": "q2faktura",
     "app_version": "2023-02-24 13:04:12",
     "app_description": "Rechnungen und mehr"
+  },
+  "ttps://raw.githubusercontent.com/AndreiPuchko/q2market/main/rent-the-light": {
+    "app_title": "Rent-The-Light",
+    "app_version": "2023-03-15 03:07:44",
+    "app_description": ""
   }
 }
