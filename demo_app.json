@@ -42,10 +42,10 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2023-05-09 14:52:04'",
+   "script": "self.app_version = '2023-05-19 23:34:36'",
    "comment": "",
-   "q2_time": "20230509145204",
-   "q2_mode": "i",
+   "q2_time": "20230519233436",
+   "q2_mode": "u",
    "last_line": "0"
   },
   {
