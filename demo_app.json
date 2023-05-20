@@ -2,11 +2,19 @@
  "modules": [
   {
    "name": "autorun",
-   "script": "self.app_version = '2022-12-13 22:17:29'\nself.app_url = \"https://raw.githubusercontent.com/AndreiPuchko/q2market/main/demo_app\"\nself.app_title = \"Demo app!\"\nself.app_description = \"First q2RAD demo app!\"\n\nconst.mydata = \"123\"\nconst.check(\"some_my_const\",  \"label\", \"value\", \"comment\")",
+   "script": "const.mydata = \"123\"\nconst.check(\"some_my_const\",  \"label\", \"value\", \"comment\")",
    "comment": "",
-   "q2_time": "20221213221757",
-   "q2_mode": "i",
+   "q2_time": "20230520200558",
+   "q2_mode": "u",
    "last_line": "0"
+  },
+  {
+   "name": "manifest",
+   "script": "self.app_url = \"https://raw.githubusercontent.com/AndreiPuchko/q2market/main/demo_app\"\r\nself.app_title = \"Demo app!\"\r\nself.app_description = \"First q2RAD demo app!\"",
+   "comment": "",
+   "q2_time": "20230520200619",
+   "q2_mode": "i",
+   "last_line": "3"
   },
   {
    "name": "run_mod",
@@ -42,9 +50,9 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2023-05-19 23:34:36'",
+   "script": "self.app_version = '2023-05-20 20:06:37'",
    "comment": "",
-   "q2_time": "20230519233436",
+   "q2_time": "20230520200637",
    "q2_mode": "u",
    "last_line": "0"
   },
