@@ -66,10 +66,10 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2023-07-15 22:49:21'",
+   "script": "self.app_version = '2023-07-15 23:23:08'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20230715224921",
+   "q2_time": "20230715232308",
    "q2_mode": "u"
   }
  ],
@@ -612,7 +612,7 @@
    "datadec": "0",
    "migrate": "*",
    "pk": "*",
-   "ai": "",
+   "ai": "*",
    "to_table": "",
    "to_column": "",
    "related": "",
@@ -621,7 +621,7 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20230704232638",
+   "q2_time": "20230715232133",
    "q2_mode": "u",
    "toolbar": ""
   },
