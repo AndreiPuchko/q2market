@@ -18,10 +18,10 @@
   },
   {
    "name": "load_zip",
-   "script": "def worker():\r\n    run_module(\"select_dataset\", import_only=True)\r\n    url = select_dataset()\r\n    if not url:\r\n        return\r\n    # url = \"https://excelbianalytics.com/wp/wp-content/uploads/2017/07/5000-Sales-Records.zip\"\r\n    from urllib import request\r\n    from io import BytesIO, TextIOWrapper\r\n    from zipfile import ZipFile\r\n    from q2gui.q2model import Q2CsvModel\r\n    from q2gui.q2dialogs import q2Mess, q2Wait, q2working\r\n    from datetime import datetime\r\n\r\n    \r\n    \r\n    req = request.Request(url, headers={\"User-Agent\": \"Safari\"})\r\n    \r\n    data = q2working(lambda: request.urlopen(req).read(), \"Loading file...\")\r\n\r\n    mem_zip_file_data = BytesIO()\r\n    mem_zip_file_data.write(data)\r\n    zip_file: ZipFile = ZipFile(mem_zip_file_data)\r\n    csv_file_object = TextIOWrapper(zip_file.open(zip_file.namelist()[0]))\r\n    model = q2working(lambda: Q2CsvModel(csv_file_object=csv_file_object), \"Loading CSV\")\r\n\r\n    q2cursor(\"delete from sales\")\r\n\r\n    keys = list(model.records[0].keys())\r\n    wait=q2wait(len(model.records), \"Inserting records\")\r\n    transaction()\r\n    for rec in model.records:\r\n        wait.step(1000)\r\n        for col in keys:\r\n            rec[col.lower()] = rec[col]\r\n        rec[\"order_date\"] = datetime.strftime(datetime.strptime(rec[\"order_date\"], \"%m/%d/%Y\"), \"%Y-%m-%d\")\r\n        raw_insert(\"sales\", rec)\r\n    commit()\r\n    wait.close()\r\n\r\nif __name__ == \"__main__\":\r\n    worker()\r\n    run_form(\"sales\")",
+   "script": "def worker():\r\n    run_module(\"select_dataset\", import_only=True)\r\n    url = select_dataset()\r\n    if not url:\r\n        return\r\n    # url = \"https://excelbianalytics.com/wp/wp-content/uploads/2017/07/5000-Sales-Records.zip\"\r\n    from urllib import request\r\n    from io import BytesIO, TextIOWrapper\r\n    from zipfile import ZipFile\r\n    from q2gui.q2model import Q2CsvModel\r\n    from q2gui.q2dialogs import q2Mess, q2Wait, q2working\r\n    from datetime import datetime\r\n\r\n    \r\n    \r\n    req = request.Request(url, headers={\"User-Agent\": \"Safari\"})\r\n    \r\n    data = q2working(lambda: request.urlopen(req).read(), \"Loading file...\")\r\n\r\n    mem_zip_file_data = BytesIO()\r\n    mem_zip_file_data.write(data)\r\n    zip_file: ZipFile = ZipFile(mem_zip_file_data)\r\n    csv_file_object = TextIOWrapper(zip_file.open(zip_file.namelist()[0]))\r\n    model = q2working(lambda: Q2CsvModel(csv_file_object=csv_file_object), \"Loading CSV\")\r\n\r\n    q2cursor(\"delete from sales\")\r\n\r\n    keys = list(model.records[0].keys())\r\n    wait=q2wait(len(model.records), \"Inserting records\")\r\n    transaction()\r\n    for rec in model.records:\r\n        wait.step(1000)\r\n        for col in keys:\r\n            rec[col.lower()] = rec[col]\r\n        rec[\"order_date\"] = datetime.strftime(datetime.strptime(rec[\"order_date\"], \"%m/%d/%Y\"), \"%Y-%m-%d\")\r\n        raw_insert(\"sales\", rec)\r\n        if self.db_data.last_sql_error:\r\n            q2Mess(f\"Error: {self.db_data.last_sql_error}\")\r\n            break\r\n    commit()\r\n    wait.close()\r\n\r\nif __name__ == \"__main__\":\r\n    worker()\r\n    run_form(\"sales\")",
    "comment": "",
-   "last_line": "9",
-   "q2_time": "20230705170341",
+   "last_line": "38",
+   "q2_time": "20230715232803",
    "q2_mode": "u"
   },
   {
@@ -66,10 +66,10 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2023-07-15 23:23:08'",
+   "script": "self.app_version = '2023-07-15 23:28:20'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20230715232308",
+   "q2_time": "20230715232820",
    "q2_mode": "u"
   }
  ],
