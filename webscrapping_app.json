@@ -66,10 +66,10 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2023-07-15 00:20:14'",
+   "script": "self.app_version = '2023-07-15 22:49:21'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20230715002014",
+   "q2_time": "20230715224921",
    "q2_mode": "u"
   }
  ],
@@ -192,7 +192,7 @@
    "before_grid_build": "",
    "before_grid_show": "",
    "after_grid_show": "",
-   "before_form_show": "def form_show(mem=mem):\r\n    from q2gui.q2app import Q2Controls\r\n    mem.heap.form_name = \"sales\"\r\n    cu = q2cursor(\r\n                f\"\"\"\r\n                    select *\r\n                    from lines\r\n                    where name  = '{mem.heap.form_name}'\r\n                        and migrate<>''\r\n                        and (label <>'' or gridlabel <> '')\r\n                    order by seq\r\n                \"\"\", mem.q2_app.db_logic)\r\n\r\n    for col in cu.records():\r\n        col = Q2Controls.validate(col)\r\n\r\n    mem.heap.form_label_list = [f\"{x['label'] if x['label'] else x['gridlabel']}\" for x in cu.records()]\r\n    mem.heap.form_column_list = [f\"{x['column']}\" for x in cu.records()]\r\n\r\n    mem.w.x_column.set_data(mem.heap.form_label_list)\r\n    mem.w.d_column.set_data(mem.heap.form_label_list)\r\n\r\n    mem.s.x_column = 0\r\n    mem.s.d_column = 6\r\n    mem.heap.active = True\r\n    mem.heap.select_data_and_build_chart()\r\n    \r\nform_show()",
+   "before_form_show": "def form_show(mem=mem):\r\n    from q2gui.q2app import Q2Controls\r\n    mem.heap.form_name = \"sales\"\r\n    cu = q2cursor(\r\n                f\"\"\"\r\n                    select *\r\n                    from `lines`\r\n                    where name  = '{mem.heap.form_name}'\r\n                        and migrate<>''\r\n                        and (label <>'' or gridlabel <> '')\r\n                    order by seq\r\n                \"\"\", mem.q2_app.db_logic)\r\n\r\n    for col in cu.records():\r\n        col = Q2Controls.validate(col)\r\n\r\n    mem.heap.form_label_list = [f\"{x['label'] if x['label'] else x['gridlabel']}\" for x in cu.records()]\r\n    mem.heap.form_column_list = [f\"{x['column']}\" for x in cu.records()]\r\n\r\n    mem.w.x_column.set_data(mem.heap.form_label_list)\r\n    mem.w.d_column.set_data(mem.heap.form_label_list)\r\n\r\n    mem.s.x_column = 0\r\n    mem.s.d_column = 6\r\n    mem.heap.active = True\r\n    mem.heap.select_data_and_build_chart()\r\n    \r\nform_show()",
    "after_form_show": "",
    "before_crud_save": "",
    "after_crud_save": "",
@@ -200,7 +200,7 @@
    "after_delete": "",
    "form_valid": "",
    "after_form_closed": "",
-   "q2_time": "20230714215718",
+   "q2_time": "20230715224803",
    "q2_mode": "u",
    "no_view_action": "",
    "view_action": "",
