@@ -18,10 +18,10 @@
   },
   {
    "name": "load_zip",
-   "script": "def worker():\r\n    run_module(\"select_dataset\", import_only=True)\r\n    url = select_dataset()\r\n    if not url:\r\n        return\r\n    # url = \"https://excelbianalytics.com/wp/wp-content/uploads/2017/07/5000-Sales-Records.zip\"\r\n    from urllib import request\r\n    from io import BytesIO, TextIOWrapper\r\n    from zipfile import ZipFile\r\n    from q2gui.q2model import Q2CsvModel\r\n    from q2gui.q2dialogs import q2Mess, q2Wait, q2working\r\n    from datetime import datetime\r\n\r\n    \r\n    \r\n    req = request.Request(url, headers={\"User-Agent\": \"Safari\"})\r\n    \r\n    data = q2working(lambda: request.urlopen(req).read(), \"Loading file...\")\r\n\r\n    mem_zip_file_data = BytesIO()\r\n    mem_zip_file_data.write(data)\r\n    zip_file: ZipFile = ZipFile(mem_zip_file_data)\r\n    csv_file_object = TextIOWrapper(zip_file.open(zip_file.namelist()[0]))\r\n    model = q2working(lambda: Q2CsvModel(csv_file_object=csv_file_object), \"Loading CSV\")\r\n\r\n    q2cursor(\"delete from sales\")\r\n\r\n    keys = list(model.records[0].keys())\r\n    wait=q2wait(len(model.records), \"Inserting records\")\r\n    transaction()\r\n    for rec in model.records:\r\n        wait.step(1000)\r\n        for col in keys:\r\n            rec[col.lower()] = rec[col]\r\n        rec[\"order_date\"] = datetime.strftime(datetime.strptime(rec[\"order_date\"], \"%m/%d/%Y\"), \"%Y-%m-%d\")\r\n        raw_insert(\"sales\", rec)\r\n        if self.db_data.last_sql_error:\r\n            q2Mess(f\"Error: {self.db_data.last_sql_error}\")\r\n            break\r\n    commit()\r\n    wait.close()\r\n\r\nif __name__ == \"__main__\":\r\n    worker()\r\n    run_form(\"sales\")",
+   "script": "def worker():\r\n    run_module(\"select_dataset\", import_only=True)\r\n    url = select_dataset()\r\n    if not url:\r\n        return\r\n    # url = \"https://excelbianalytics.com/wp/wp-content/uploads/2017/07/5000-Sales-Records.zip\"\r\n    from urllib import request\r\n    from io import BytesIO, TextIOWrapper\r\n    from zipfile import ZipFile\r\n    from q2gui.q2model import Q2CsvModel\r\n    from q2gui.q2dialogs import q2Mess, q2Wait, q2working\r\n    from datetime import datetime\r\n    import time\r\n    \r\n    \r\n    req = request.Request(url, headers={\"User-Agent\": \"Safari\"})\r\n    \r\n    data = q2working(lambda: request.urlopen(req).read(), \"Loading file...\")\r\n\r\n    mem_zip_file_data = BytesIO()\r\n    mem_zip_file_data.write(data)\r\n    zip_file: ZipFile = ZipFile(mem_zip_file_data)\r\n    csv_file_object = TextIOWrapper(zip_file.open(zip_file.namelist()[0]))\r\n    model = q2working(lambda: Q2CsvModel(csv_file_object=csv_file_object), \"Loading CSV\")\r\n\r\n    q2cursor(\"delete from sales\")\r\n\r\n    keys = list(model.records[0].keys())\r\n    wait=q2wait(len(model.records), \"Inserting records\")\r\n    transaction()\r\n    stime = time.time()\r\n    scounter = 0\r\n    for rec in model.records:\r\n        wait.step(1000)\r\n        scounter += 1\r\n        if scounter%10000 == 0:\r\n            ?time.time() - stime\r\n            stime = time.time()\r\n            scounter = 0\r\n        for col in keys:\r\n            rec[col.lower()] = rec[col]\r\n        rec[\"order_date\"] = datetime.strftime(datetime.strptime(rec[\"order_date\"], \"%m/%d/%Y\"), \"%Y-%m-%d\")\r\n        raw_insert(\"sales\", rec)\r\n        if self.db_data.last_sql_error:\r\n            q2Mess(f\"Error: {self.db_data.last_sql_error}\")\r\n            break\r\n    commit()\r\n    wait.close()\r\n\r\nif __name__ == \"__main__\":\r\n    worker()\r\n    run_form(\"sales\")",
    "comment": "",
-   "last_line": "38",
-   "q2_time": "20230715232803",
+   "last_line": "35",
+   "q2_time": "20230716234600",
    "q2_mode": "u"
   },
   {
@@ -58,18 +58,18 @@
   },
   {
    "name": "select_dataset",
-   "script": "def select_dataset():\r\n    from urllib import request\r\n    from q2rad.q2utils import q2choice\r\n\r\n    url = \"https://excelbianalytics.com/wp/downloads-18-sample-csv-files-data-sets-for-testing-sales/\"\r\n    req = request.Request(url, headers={\"User-Agent\": \"Safari\"})\r\n    data = str(q2working(lambda: request.urlopen(req).read(), \"Loading webpage...\"))\r\n\r\n    links = []\r\n    for x in data.split('<a href=\"'):\r\n        link = x.split('\">')[0]\r\n        if \".zip\" in link:\r\n            links.append({\"link\": link})\r\n    rez = q2choice(links)\r\n    return rez\r\nif __name__ == \"__main__\":\r\n    print(select_dataset())",
+   "script": "def select_dataset():\r\n    from urllib import request\r\n    from q2rad.q2utils import q2choice\r\n\r\n    url = \"https://excelbianalytics.com/wp/downloads-18-sample-csv-files-data-sets-for-testing-sales/\"\r\n    req = request.Request(url, headers={\"User-Agent\": \"Safari\"})\r\n    data = str(q2working(lambda: request.urlopen(req).read(), \"Loading webpage...\"))\r\n\r\n    links = []\r\n    for x in data.split('<a href=\"'):\r\n        link = x.split('\">')[0]\r\n        if \".zip\" in link:\r\n            links.append({\"link\": link})\r\n    rez = q2choice(links, column_title=\"Dataset links\")\r\n    return rez\r\nif __name__ == \"__main__\":\r\n    print(select_dataset())",
    "comment": "",
    "last_line": "16",
-   "q2_time": "20230701111733",
+   "q2_time": "20230716224541",
    "q2_mode": "u"
   },
   {
    "name": "version",
-   "script": "self.app_version = '2023-07-15 23:28:20'",
+   "script": "self.app_version = '2023-07-17 11:54:30'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20230715232820",
+   "q2_time": "20230717115430",
    "q2_mode": "u"
   }
  ],
@@ -93,7 +93,7 @@
    "before_grid_build": "",
    "before_grid_show": "",
    "after_grid_show": "",
-   "before_form_show": "mem.s.unit_price1 = 3\r\nmem.s.unit_price2 = 60\r\nmem.w.unit_price1.get_check().set_checked()\r\n\r\nmem.s.region = \"As\"\r\nmem.w.region.get_check().set_checked()",
+   "before_form_show": "mem.s.unit_price1 = 3\r\nmem.s.unit_price2 = 60\r\n# mem.w.unit_price1.get_check().set_checked()\r\n\r\nmem.s.region = \"As\"\r\n# mem.w.region.get_check().set_checked()",
    "after_form_show": "",
    "before_crud_save": "",
    "after_crud_save": "",
@@ -101,7 +101,7 @@
    "after_delete": "",
    "form_valid": "",
    "after_form_closed": "",
-   "q2_time": "20230715001658",
+   "q2_time": "20230717110538",
    "q2_mode": "u",
    "no_view_action": "",
    "view_action": "",
@@ -174,6 +174,39 @@
    "form_refresh": ""
   },
   {
+   "name": "insert_stat",
+   "title": "",
+   "seq": "7",
+   "menu_path": "",
+   "menu_text": "",
+   "menu_before": "",
+   "menu_tiptext": "",
+   "menu_separator": "",
+   "toolbar": "",
+   "ok_button": "",
+   "cancel_button": "",
+   "form_table": "insert_stat",
+   "form_table_sort": "",
+   "comment": "",
+   "before_form_build": "",
+   "before_grid_build": "",
+   "before_grid_show": "",
+   "after_grid_show": "",
+   "before_form_show": "",
+   "after_form_show": "",
+   "before_crud_save": "",
+   "after_crud_save": "",
+   "before_delete": "",
+   "after_delete": "",
+   "form_valid": "",
+   "after_form_closed": "",
+   "q2_time": "20230716223201",
+   "q2_mode": "i",
+   "no_view_action": "",
+   "view_action": "",
+   "form_refresh": ""
+  },
+  {
    "name": "plot",
    "title": "Diagram",
    "seq": "3",
@@ -241,6 +274,70 @@
   }
  ],
  "lines": [
+  {
+   "id": "45",
+   "name": "insert_stat",
+   "column": "id",
+   "label": "Id",
+   "gridlabel": "",
+   "seq": "0",
+   "nogrid": "",
+   "noform": "",
+   "check": "",
+   "disabled": "",
+   "readonly": "",
+   "control": "line",
+   "pic": "",
+   "datatype": "int",
+   "datalen": "0",
+   "datadec": "0",
+   "migrate": "*",
+   "pk": "*",
+   "ai": "*",
+   "to_table": "",
+   "to_column": "",
+   "related": "",
+   "to_form": "",
+   "comment": "",
+   "code_when": "",
+   "code_show": "",
+   "code_valid": "",
+   "q2_time": "20230716223335",
+   "q2_mode": "u",
+   "toolbar": ""
+  },
+  {
+   "id": "46",
+   "name": "insert_stat",
+   "column": "time",
+   "label": "Time",
+   "gridlabel": "",
+   "seq": "1",
+   "nogrid": "",
+   "noform": "",
+   "check": "",
+   "disabled": "",
+   "readonly": "",
+   "control": "line",
+   "pic": "",
+   "datatype": "num",
+   "datalen": "10",
+   "datadec": "3",
+   "migrate": "*",
+   "pk": "",
+   "ai": "",
+   "to_table": "",
+   "to_column": "",
+   "related": "",
+   "to_form": "",
+   "comment": "",
+   "code_when": "",
+   "code_show": "",
+   "code_valid": "",
+   "q2_time": "20230716223341",
+   "q2_mode": "u",
+   "toolbar": ""
+  },
   {
    "id": "28",
    "name": "plot",
@@ -885,11 +982,11 @@
  "sqlite_sequence": [
   {
    "name": "lines",
-   "seq": "44"
+   "seq": "46"
   },
   {
    "name": "actions",
-   "seq": "6"
+   "seq": "7"
   }
  ],
  "queries": [
@@ -902,6 +999,26 @@
   }
  ],
  "actions": [
+  {
+   "id": "7",
+   "name": "insert_stat",
+   "action_text": "",
+   "seq": "0",
+   "action_mode": "1",
+   "action_mess": "",
+   "action_icon": "",
+   "action_key": "",
+   "eof_disabled": "",
+   "child_form": "",
+   "child_where": "",
+   "child_noshow": "",
+   "child_copy_mode": "1",
+   "action_worker": "",
+   "comment": "",
+   "q2_time": "20230716223310",
+   "q2_mode": "i",
+   "toolbar": ""
+  },
   {
    "id": "1",
    "name": "sales",
