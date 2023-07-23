@@ -13,7 +13,7 @@
    "const_text": "",
    "const_value": "123",
    "comment": "",
-   "q2_time": "20230520200632",
+   "q2_time": "20230723224443",
    "q2_mode": "u"
   },
   {
@@ -50,8 +50,8 @@
    "id": "0",
    "date": "2022-06-11",
    "cid": "1",
-   "q2_time": "20220611233846",
-   "q2_mode": "i"
+   "q2_time": "20230625163211",
+   "q2_mode": "u"
   },
   {
    "id": "1",
@@ -73,28 +73,6 @@
    "cid": "3",
    "q2_time": "20220613195005",
    "q2_mode": "u"
-  }
- ],
- "sqlite_sequence": [
-  {
-   "name": "actions",
-   "seq": "5"
-  },
-  {
-   "name": "lines",
-   "seq": "9"
-  },
-  {
-   "name": "lines",
-   "seq": "14"
-  },
-  {
-   "name": "lines",
-   "seq": "14"
-  },
-  {
-   "name": "invoice",
-   "seq": "4"
   }
  ],
  "invoice_lines": [

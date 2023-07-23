@@ -17,6 +17,14 @@
    "last_line": "3"
   },
   {
+   "name": "q2task",
+   "script": "class Q2Task():\r\n    def __init__(self):\r\n        self.rez = {}\r\n        self.threads = {}\r\n\r\n    def _worker(self, name):\r\n        self.rez[name] = self.threads[name]['worker'](*self.threads[name]['args'])\r\n    \r\n    def add(self, worker, *args, name=\"\"):\r\n        import random, string, threading\r\n        if name == \"\" or name in self.threads:\r\n            name = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(5))\r\n        self.threads[name] = {'worker':  worker, 'args':  args}\r\n        self.threads[name]['thread'] = threading.Thread(target=self._worker, args=(name,))\r\n        self.threads[name]['thread'].start()\r\n\r\n    def wait(self):\r\n        for name in self.threads:\r\n            self.threads[name]['thread'].join()\r\n        return self.rez\r\n\r\n\r\ntask = Q2Task()\r\nfor x in q2_modules:\r\n    task.add(q2_app.get_package_versions, x, name=x)\r\nprint(task.wait())",
+   "comment": "",
+   "q2_time": "20230609105753",
+   "q2_mode": "u",
+   "last_line": "25"
+  },
+  {
    "name": "run_mod",
    "script": "run_module(\"run_report\")",
    "comment": "run module \"run_report\"",
@@ -36,8 +44,8 @@
    "name": "show me q2App version",
    "script": "q2Mess(self.app_version)",
    "comment": "",
-   "q2_time": "20221213221757",
-   "q2_mode": "i",
+   "q2_time": "20230615211713",
+   "q2_mode": "u",
    "last_line": "0"
   },
   {
@@ -49,10 +57,34 @@
    "last_line": "0"
   },
   {
-   "name": "version",
-   "script": "self.app_version = '2023-05-20 20:06:37'",
+   "name": "stdout_window",
+   "script": "last_q2app = q2app.q2_app\r\n\r\nclass q2printer(Q2App):\r\n    def on_start(self):\r\n        self.hide_menubar()\r\n        self.hide_statusbar()\r\n        self.hide_tabbar()\r\n        self.hide_toolbar()\r\n        self.first_form()\r\n        self.set_title(\"stdout\")\r\n\r\n    def first_form(self):\r\n        self.form = Q2Form(\"Stdout\")\r\n        self.form.add_control(\"stdout\", control=\"text\")\r\n        self.form.show_mdi_form()\r\nprint (q2app.q2_app)\r\nw1 = q2printer()\r\nw1.run()\r\nw1.form.s.stdout = \"123<br>4444444444\"\r\n\r\nprint(123)\r\nprint (q2app.q2_app)\r\n\r\nq2app.q2_app = last_q2app",
    "comment": "",
-   "q2_time": "20230520200637",
+   "q2_time": "20230615211817",
+   "q2_mode": "u",
+   "last_line": "16"
+  },
+  {
+   "name": "threads",
+   "script": "rez = {}\r\n\r\ndef cover(rez=rez):\r\n    import threading\r\n    import time\r\n\r\n    def thread_it():\r\n       \r\n        def _worker(x, rez, worker):\r\n            rez[x] = worker(x)\r\n\r\n        threads = []\r\n        for x in q2_modules:\r\n            thread = threading.Thread(target=_worker, args=(x, rez, q2_app.get_package_versions))\r\n            thread.start()\r\n            threads.append(thread)\r\n            time.sleep(1)\r\n        for thread in threads:\r\n            thread.join()\r\n    return thread_it\r\n   \r\nq2Wait(cover(), \"Checking packages...\")\r\nprint(rez)",
+   "comment": "",
+   "q2_time": "20230609101803",
+   "q2_mode": "u",
+   "last_line": "22"
+  },
+  {
+   "name": "tmp",
+   "script": "print (q2app.q2_app)",
+   "comment": "",
+   "q2_time": "20230610231314",
+   "q2_mode": "u",
+   "last_line": "0"
+  },
+  {
+   "name": "version",
+   "script": "self.app_version = '2023-07-23 22:51:10'",
+   "comment": "",
+   "q2_time": "20230723225110",
    "q2_mode": "u",
    "last_line": "0"
   },
@@ -68,9 +100,17 @@
    "name": "w2",
    "script": "q2Mess(run_module(\"w1\"))",
    "comment": "",
-   "q2_time": "20221213221757",
-   "q2_mode": "i",
+   "q2_time": "20230607224748",
+   "q2_mode": "u",
    "last_line": "0"
+  },
+  {
+   "name": "wait",
+   "script": "def worker():\r\n    import time\r\n    for x in range(10):\r\n        time.sleep(1)\r\n\r\nq2Wait(worker, \"222\")",
+   "comment": "",
+   "q2_time": "20230608233645",
+   "q2_mode": "u",
+   "last_line": "5"
   }
  ],
  "forms": [
@@ -100,8 +140,12 @@
    "before_delete": "",
    "after_delete": "",
    "form_valid": "",
-   "q2_time": "20221213221757",
-   "q2_mode": "i"
+   "q2_time": "20230625163154",
+   "q2_mode": "u",
+   "after_close": "print(123)",
+   "after_form_closed": "print(123)",
+   "view_action": "",
+   "form_refresh": ""
   },
   {
    "name": "invoice_header",
@@ -130,7 +174,11 @@
    "after_delete": "",
    "form_valid": "",
    "q2_time": "20221213221757",
-   "q2_mode": "i"
+   "q2_mode": "i",
+   "after_close": "",
+   "after_form_closed": "",
+   "view_action": "",
+   "form_refresh": ""
   },
   {
    "name": "invoice_lines",
@@ -159,7 +207,11 @@
    "after_delete": "",
    "form_valid": "",
    "q2_time": "20221213221757",
-   "q2_mode": "i"
+   "q2_mode": "i",
+   "after_close": "",
+   "after_form_closed": "",
+   "view_action": "",
+   "form_refresh": ""
   }
  ],
  "lines": [
@@ -192,7 +244,8 @@
    "q2_time": "20221213221757",
    "q2_mode": "i",
    "disabled": "",
-   "readonly": ""
+   "readonly": "",
+   "tag": ""
   },
   {
    "id": "14",
@@ -220,10 +273,11 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20221213221757",
-   "q2_mode": "i",
+   "q2_time": "20230723195803",
+   "q2_mode": "u",
    "disabled": "",
-   "readonly": ""
+   "readonly": "",
+   "tag": ""
   },
   {
    "id": "11",
@@ -254,7 +308,8 @@
    "q2_time": "20221213221757",
    "q2_mode": "i",
    "disabled": "",
-   "readonly": ""
+   "readonly": "",
+   "tag": ""
   },
   {
    "id": "12",
@@ -285,7 +340,8 @@
    "q2_time": "20221213221757",
    "q2_mode": "i",
    "disabled": "",
-   "readonly": ""
+   "readonly": "",
+   "tag": ""
   },
   {
    "id": "15",
@@ -316,7 +372,8 @@
    "q2_time": "20221213221757",
    "q2_mode": "i",
    "disabled": "",
-   "readonly": ""
+   "readonly": "",
+   "tag": ""
   },
   {
    "id": "16",
@@ -347,7 +404,8 @@
    "q2_time": "20221213221757",
    "q2_mode": "i",
    "disabled": "",
-   "readonly": ""
+   "readonly": "",
+   "tag": ""
   },
   {
    "id": "17",
@@ -378,7 +436,8 @@
    "q2_time": "20221213221757",
    "q2_mode": "i",
    "disabled": "",
-   "readonly": ""
+   "readonly": "",
+   "tag": ""
   },
   {
    "id": "18",
@@ -409,7 +468,8 @@
    "q2_time": "20221213221757",
    "q2_mode": "i",
    "disabled": "",
-   "readonly": ""
+   "readonly": "",
+   "tag": ""
   },
   {
    "id": "19",
@@ -440,7 +500,8 @@
    "q2_time": "20221213221757",
    "q2_mode": "i",
    "disabled": "",
-   "readonly": ""
+   "readonly": "",
+   "tag": ""
   },
   {
    "id": "20",
@@ -471,17 +532,8 @@
    "q2_time": "20221213221757",
    "q2_mode": "i",
    "disabled": "",
-   "readonly": ""
-  }
- ],
- "sqlite_sequence": [
-  {
-   "name": "lines",
-   "seq": "10"
-  },
-  {
-   "name": "actions",
-   "seq": "24"
+   "readonly": "",
+   "tag": ""
   }
  ],
  "queries": [
@@ -511,7 +563,8 @@
    "action_worker": "",
    "comment": "",
    "q2_time": "20221213221758",
-   "q2_mode": "i"
+   "q2_mode": "i",
+   "tag": ""
   },
   {
    "id": "23",
@@ -529,8 +582,9 @@
    "child_copy_mode": "1",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20221213221758",
-   "q2_mode": "i"
+   "q2_time": "20230723224545",
+   "q2_mode": "u",
+   "tag": "#45dffa"
   },
   {
    "id": "19",
@@ -549,7 +603,8 @@
    "action_worker": "",
    "comment": "",
    "q2_time": "20221213221758",
-   "q2_mode": "i"
+   "q2_mode": "i",
+   "tag": ""
   },
   {
    "id": "22",
@@ -558,7 +613,7 @@
    "seq": "1",
    "action_mode": "2",
    "action_mess": "",
-   "action_icon": "",
+   "action_icon": "\ud83e\uddfe",
    "action_key": "F2",
    "eof_disabled": "*",
    "child_form": "invoice_lines",
@@ -567,8 +622,9 @@
    "child_copy_mode": "1",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20221213221758",
-   "q2_mode": "i"
+   "q2_time": "20230723224753",
+   "q2_mode": "u",
+   "tag": ""
   },
   {
    "id": "24",
@@ -577,7 +633,7 @@
    "seq": "2",
    "action_mode": "2",
    "action_mess": "",
-   "action_icon": "",
+   "action_icon": "\u2399",
    "action_key": "F4",
    "eof_disabled": "*",
    "child_form": "",
@@ -586,8 +642,9 @@
    "child_copy_mode": "1",
    "action_worker": "rep = get_report(\"Invoice\")\nrep.params[\"id\"] = form.r.id\nrep.run()",
    "comment": "",
-   "q2_time": "20221213221758",
-   "q2_mode": "i"
+   "q2_time": "20230723224837",
+   "q2_mode": "u",
+   "tag": ""
   },
   {
    "id": "21",
@@ -606,7 +663,8 @@
    "action_worker": "",
    "comment": "",
    "q2_time": "20221213221758",
-   "q2_mode": "i"
+   "q2_mode": "i",
+   "tag": ""
   }
  ],
  "reports": [
