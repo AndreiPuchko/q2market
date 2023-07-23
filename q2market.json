@@ -16,7 +16,7 @@
   },
   "https://raw.githubusercontent.com/AndreiPuchko/q2market/main/webscrapping_app": {
     "app_title": "q2-WebScrapping DEMO",
-    "app_version": "2023-07-17 11:54:30",
+    "app_version": "2023-07-23 23:03:41",
     "app_description": "Loads some data from Internet and shows some reports"
   }
 }
