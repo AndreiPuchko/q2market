@@ -4,24 +4,24 @@
    "name": "autorun",
    "script": "# run_form(\"sales\")\r\n# self.run_forms()\r\n# self.run_modules()",
    "comment": "",
-   "last_line": "0",
-   "q2_time": "20230724233516",
-   "q2_mode": "i"
+   "last_line": "3",
+   "q2_time": "20230726141610",
+   "q2_mode": "u"
   },
   {
    "name": "error_test.",
    "script": "a=1\r\nb=2\r\n1+\"\"",
    "comment": "print(123)",
-   "last_line": "1",
-   "q2_time": "20230724233516",
-   "q2_mode": "i"
+   "last_line": "0",
+   "q2_time": "20230725232740",
+   "q2_mode": "u"
   },
   {
    "name": "load_zip",
    "script": "def worker():\r\n    run_module(\"select_dataset\", import_only=True)\r\n    url = select_dataset()\r\n    if not url:\r\n        return\r\n    # url = \"https://excelbianalytics.com/wp/wp-content/uploads/2017/07/5000-Sales-Records.zip\"\r\n    from urllib import request\r\n    from io import BytesIO, TextIOWrapper\r\n    from zipfile import ZipFile\r\n    from q2gui.q2model import Q2CsvModel\r\n    from q2gui.q2dialogs import q2Mess, q2Wait, q2working\r\n    from datetime import datetime\r\n    import time\r\n    \r\n    \r\n    req = request.Request(url, headers={\"User-Agent\": \"Safari\"})\r\n    \r\n    data = q2working(lambda: request.urlopen(req).read(), \"Loading file...\")\r\n\r\n    mem_zip_file_data = BytesIO()\r\n    mem_zip_file_data.write(data)\r\n    zip_file: ZipFile = ZipFile(mem_zip_file_data)\r\n    csv_file_object = TextIOWrapper(zip_file.open(zip_file.namelist()[0]))\r\n    model = q2working(lambda: Q2CsvModel(csv_file_object=csv_file_object), \"Loading CSV\")\r\n\r\n    q2cursor(\"delete from sales\")\r\n\r\n    keys = list(model.records[0].keys())\r\n    wait=q2wait(len(model.records), \"Inserting records\")\r\n    transaction()\r\n    stime = time.time()\r\n    scounter = 0\r\n    for rec in model.records:\r\n        wait.step(1000)\r\n        scounter += 1\r\n        if scounter%10000 == 0:\r\n            ?time.time() - stime\r\n            stime = time.time()\r\n            scounter = 0\r\n        for col in keys:\r\n            rec[col.lower()] = rec[col]\r\n        rec[\"order_date\"] = datetime.strftime(datetime.strptime(rec[\"order_date\"], \"%m/%d/%Y\"), \"%Y-%m-%d\")\r\n        raw_insert(\"sales\", rec)\r\n        if self.db_data.last_sql_error:\r\n            q2Mess(f\"Error: {self.db_data.last_sql_error}\")\r\n            break\r\n    commit()\r\n    wait.close()\r\n\r\nif __name__ == \"__main__\":\r\n    worker()\r\n    run_form(\"sales\")",
    "comment": "",
    "last_line": "35",
-   "q2_time": "20230724233516",
+   "q2_time": "20230725210428",
    "q2_mode": "i"
   },
   {
@@ -29,7 +29,7 @@
    "script": "myapp.app_title = \"q2-WebScrapping DEMO\"\nmyapp.app_description = \"Loads some data from Internet and shows some reports\"\nself.app_url = \"https://raw.githubusercontent.com/AndreiPuchko/q2market/main/webscrapping_app\"",
    "comment": "",
    "last_line": "1",
-   "q2_time": "20230724233516",
+   "q2_time": "20230725210428",
    "q2_mode": "i"
   },
   {
@@ -37,7 +37,7 @@
    "script": "where=\"country like '%land%'\"\r\n\r\ndiver = 1000000\r\n\r\ncu = q2cursor(f\"\"\"\r\n    select  \r\n        sum(round(units_sold*unit_price,2))/{diver} as revenue\r\n        , sum(round(units_sold*unit_cost,2))/{diver} as cost\r\n        , country\r\n    from sales \r\n    where {where} \r\n    group by country\r\n    \"\"\")\r\n    \r\ncountries = [x['country'] for x in cu.records()]\r\nrevenue = [round(num(x['revenue']), 2) for x in cu.records()]\r\nprofit = [round(num(x['revenue']), 2)- round(num(x['cost']), 2) for x in cu.records()]\r\n    \r\nimport matplotlib.pyplot as plt\r\nimport numpy as np\r\n\r\nwidth=0.25\r\n\r\nlocations = np.arange(len(countries))  # the label locations\r\n\r\nfig, ax = plt.subplots()\r\n\r\nrect = ax.bar(locations+width, revenue, width, label=\"Rev\")\r\nrect = ax.bar(locations+width*2, profit, width, label=\"Pro\")\r\n\r\nax.set_ylabel('$')\r\nax.set_xlabel('Countries')\r\nax.set_title('Revenue and profit')\r\nax.legend(loc='upper right', ncols=3)\r\nax.set_xticks(locations + 0.35, countries)\r\n\r\nplt.show()",
    "comment": "",
    "last_line": "22",
-   "q2_time": "20230724233516",
+   "q2_time": "20230725210428",
    "q2_mode": "i"
   },
   {
@@ -45,7 +45,7 @@
    "script": "where=\"country like '%land%'\"\r\n\r\ndiver = 1000000\r\n\r\ncu = q2cursor(f\"\"\"\r\n    select  \r\n        sum(round(units_sold*unit_price,2))/{diver} as revenue\r\n        , sum(round(units_sold*unit_cost,2))/{diver} as cost\r\n        , item_type as  country\r\n    from sales \r\n    where {where} \r\n    group by country\r\n    limit 400\r\n    \"\"\")\r\n    \r\ncountries = [x['country'][:10] for x in cu.records()]\r\nprofit = [int(round(num(x['revenue']), 2)- round(num(x['cost']), 2)) for x in cu.records()]\r\n    \r\nimport matplotlib.pyplot as plt\r\n\r\nfig, ax = plt.subplots()\r\n\r\n\r\nax.pie(profit, labels=countries)\r\n\r\nplt.show()\r\n\r\n\r\nimport io\r\nimport base64\r\nmy_stringIObytes = io.BytesIO()\r\nplt.savefig(my_stringIObytes, format='jpg')\r\nmy_stringIObytes.seek(0)\r\nmy_base64_jpgData = base64.b64encode(my_stringIObytes.read()).decode()",
    "comment": "",
    "last_line": "25",
-   "q2_time": "20230724233516",
+   "q2_time": "20230725210428",
    "q2_mode": "i"
   },
   {
@@ -53,7 +53,7 @@
    "script": "def update_from_git(package=\"\"):\r\n    from q2terminal.q2terminal import Q2Terminal\r\n    def callback(data):\r\n        ?data\r\n    trm = Q2Terminal(callback=callback)\r\n    executable = sys.executable.replace(\"w.exe\", \".exe\")\r\n    for x in q2_modules:\r\n        if not x.startswith(\"q2\"):\r\n            continue\r\n        if package and x != package:\r\n            continue\r\n        # trm.run(f\"{executable} -m pip show {x}\")[0]\r\n        # ?trm.run(f\"{executable} -m pip uninstall {x} -y\")\r\n        ?trm.run(f\"{executable} -m pip install  --upgrade --force-reinstall git+https://github.com/AndreiPuchko/{x}.git\")\r\n    ?\"Done\"\r\n            \r\nupdate_from_git(\"q2report\")",
    "comment": "",
    "last_line": "12",
-   "q2_time": "20230724233516",
+   "q2_time": "20230725210428",
    "q2_mode": "i"
   },
   {
@@ -61,7 +61,7 @@
    "script": "class q2plot:\r\n    import matplotlib.pyplot as plt\r\n    import io\r\n    import base64\r\n    self.plt = plt\r\n    self.io = io\r\n    self.base64 = base64\r\n\r\n    def __init__(self, dataset):\r\n        if isinstance(dataset, type((lambda: (yield))())):\r\n            self.dataset = [x for x in dataset]\r\n        else:\r\n            self.dataset = dataset\r\n\r\n    def get_jpg(self):\r\n        plot_bytes = self.io.BytesIO()\r\n        self.plt.savefig(plot_bytes, format='jpg')\r\n        plot_bytes.seek(0)\r\n        return self.base64.b64encode(plot_bytes.read()).decode()\r\n\r\n    def pie(self, show=False):\r\n        labels = [x['x'] for x in self.dataset]\r\n        dataset = [num(x['d']) for x in self.dataset]\r\n\r\n        fig, ax = self.plt.subplots()\r\n        ax.pie(dataset, labels=labels)\r\n\r\n        plot_jpg = self.get_jpg()\r\n        if show:\r\n            self.plt.show()\r\n        else:\r\n            self.plt.close()\r\n        return plot_jpg\r\n\r\n    def bar(self, show=False):\r\n        legend = [x['x'] for x in self.dataset]\r\n        dataset = [num(x['d']) for x in self.dataset]\r\n\r\n        labels = [x+1 for x in range(len(legend))]\r\n\r\n        fig, ax = self.plt.subplots()\r\n        ax.bar(labels, dataset)\r\n        # fig.text(0.2, 0.2 ,\"\\n\".join([f\"{x+1}.{legend[x]}\" for x in range(len(legend))]))\r\n\r\n        plot_jpg = self.get_jpg()\r\n        if show:\r\n            self.plt.show()\r\n        else:\r\n            self.plt.close()\r\n        return plot_jpg\r\n\r\n\r\n\r\nmyapp.heap.q2plot= q2plot\r\n\r\nif __name__ == \"__main__\":\r\n    cu = q2cursor(f\"\"\"\r\n                    select  \r\n                        region as x\r\n                        , round(avg(unit_price),2) as d\r\n                    from sales \r\n                    group by 1\r\n                    \"\"\")\r\n    \r\n    q2plot(cu.records()).pie(1)\r\n    # q2plot(cu.records()).bar(1)",
    "comment": "",
    "last_line": "49",
-   "q2_time": "20230724233516",
+   "q2_time": "20230725210428",
    "q2_mode": "i"
   },
   {
@@ -69,15 +69,15 @@
    "script": "def select_dataset():\r\n    from urllib import request\r\n    from q2rad.q2utils import q2choice\r\n\r\n    url = \"https://excelbianalytics.com/wp/downloads-18-sample-csv-files-data-sets-for-testing-sales/\"\r\n    req = request.Request(url, headers={\"User-Agent\": \"Safari\"})\r\n    data = str(q2working(lambda: request.urlopen(req).read(), \"Loading webpage...\"))\r\n\r\n    links = []\r\n    for x in data.split('<a href=\"'):\r\n        link = x.split('\">')[0]\r\n        if \".zip\" in link:\r\n            links.append({\"link\": link})\r\n    rez = q2choice(links, column_title=\"Dataset links\")\r\n    return rez\r\nif __name__ == \"__main__\":\r\n    print(select_dataset())",
    "comment": "",
    "last_line": "16",
-   "q2_time": "20230724233516",
+   "q2_time": "20230725210428",
    "q2_mode": "i"
   },
   {
    "name": "version",
-   "script": "self.app_version = '2023-07-24 23:37:27'",
+   "script": "self.app_version = '2023-07-26 14:16:17'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20230724233727",
+   "q2_time": "20230726141617",
    "q2_mode": "u"
   }
  ],
@@ -109,11 +109,12 @@
    "after_delete": "",
    "form_valid": "",
    "after_form_closed": "",
-   "q2_time": "20230724233516",
-   "q2_mode": "i",
+   "q2_time": "20230726141322",
+   "q2_mode": "u",
    "no_view_action": "",
    "view_action": "",
-   "form_refresh": ""
+   "form_refresh": "",
+   "menu_icon": "$"
   },
   {
    "name": "dataset_clear",
@@ -142,11 +143,12 @@
    "after_delete": "",
    "form_valid": "",
    "after_form_closed": "",
-   "q2_time": "20230724233516",
-   "q2_mode": "i",
+   "q2_time": "20230726123944",
+   "q2_mode": "u",
    "no_view_action": "",
    "view_action": "",
-   "form_refresh": ""
+   "form_refresh": "",
+   "menu_icon": ""
   },
   {
    "name": "dataset_load",
@@ -175,11 +177,12 @@
    "after_delete": "",
    "form_valid": "",
    "after_form_closed": "",
-   "q2_time": "20230724233516",
-   "q2_mode": "i",
+   "q2_time": "20230726123944",
+   "q2_mode": "u",
    "no_view_action": "",
    "view_action": "",
-   "form_refresh": ""
+   "form_refresh": "",
+   "menu_icon": ""
   },
   {
    "name": "plot",
@@ -208,11 +211,12 @@
    "after_delete": "",
    "form_valid": "",
    "after_form_closed": "",
-   "q2_time": "20230724233516",
-   "q2_mode": "i",
+   "q2_time": "20230726123940",
+   "q2_mode": "u",
    "no_view_action": "",
    "view_action": "",
-   "form_refresh": ""
+   "form_refresh": "",
+   "menu_icon": ""
   },
   {
    "name": "sales",
@@ -241,16 +245,17 @@
    "after_delete": "",
    "form_valid": "",
    "after_form_closed": "",
-   "q2_time": "20230724233516",
-   "q2_mode": "i",
+   "q2_time": "20230726124403",
+   "q2_mode": "u",
    "no_view_action": "",
    "view_action": "*",
-   "form_refresh": ""
+   "form_refresh": "",
+   "menu_icon": ""
   }
  ],
  "lines": [
   {
-   "id": "80",
+   "id": "120",
    "name": "plot",
    "column": "x_column",
    "label": "X-column",
@@ -277,13 +282,13 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "mem.heap.select_data_and_build_chart()",
-   "q2_time": "20230724233516",
+   "q2_time": "20230725210428",
    "q2_mode": "i",
    "toolbar": "",
    "tag": ""
   },
   {
-   "id": "81",
+   "id": "121",
    "name": "plot",
    "column": "/v",
    "label": "",
@@ -310,13 +315,13 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20230724233516",
+   "q2_time": "20230725210428",
    "q2_mode": "i",
    "toolbar": "",
    "tag": ""
   },
   {
-   "id": "82",
+   "id": "122",
    "name": "plot",
    "column": "/",
    "label": "",
@@ -343,13 +348,13 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20230724233516",
+   "q2_time": "20230725210428",
    "q2_mode": "i",
    "toolbar": "",
    "tag": ""
   },
   {
-   "id": "83",
+   "id": "123",
    "name": "plot",
    "column": "/h",
    "label": "",
@@ -376,13 +381,13 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20230724233516",
+   "q2_time": "20230725210428",
    "q2_mode": "i",
    "toolbar": "",
    "tag": ""
   },
   {
-   "id": "84",
+   "id": "124",
    "name": "plot",
    "column": "grid",
    "label": "",
@@ -409,13 +414,13 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20230724233516",
+   "q2_time": "20230725210429",
    "q2_mode": "i",
    "toolbar": "",
    "tag": ""
   },
   {
-   "id": "85",
+   "id": "125",
    "name": "plot",
    "column": "chart",
    "label": "",
@@ -442,13 +447,13 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20230724233516",
+   "q2_time": "20230725210429",
    "q2_mode": "i",
    "toolbar": "",
    "tag": ""
   },
   {
-   "id": "86",
+   "id": "126",
    "name": "plot",
    "column": "d_column",
    "label": "Data column",
@@ -475,13 +480,13 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "mem.heap.select_data_and_build_chart()",
-   "q2_time": "20230724233516",
+   "q2_time": "20230725210429",
    "q2_mode": "i",
    "toolbar": "",
    "tag": ""
   },
   {
-   "id": "87",
+   "id": "127",
    "name": "plot",
    "column": "/",
    "label": "",
@@ -508,13 +513,13 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20230724233516",
+   "q2_time": "20230725210429",
    "q2_mode": "i",
    "toolbar": "",
    "tag": ""
   },
   {
-   "id": "88",
+   "id": "128",
    "name": "plot",
    "column": "/vs",
    "label": "",
@@ -541,13 +546,13 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20230724233516",
+   "q2_time": "20230725210429",
    "q2_mode": "i",
    "toolbar": "",
    "tag": ""
   },
   {
-   "id": "89",
+   "id": "129",
    "name": "plot",
    "column": "plottype",
    "label": "",
@@ -574,13 +579,13 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "mem.heap.build_chart()",
-   "q2_time": "20230724233516",
+   "q2_time": "20230725210429",
    "q2_mode": "i",
    "toolbar": "",
    "tag": ""
   },
   {
-   "id": "90",
+   "id": "130",
    "name": "plot",
    "column": "/s",
    "label": "",
@@ -607,13 +612,13 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20230724233516",
+   "q2_time": "20230725210429",
    "q2_mode": "i",
    "toolbar": "",
    "tag": ""
   },
   {
-   "id": "91",
+   "id": "131",
    "name": "sales",
    "column": "id",
    "label": "",
@@ -640,13 +645,13 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20230724233516",
-   "q2_mode": "i",
+   "q2_time": "20230726123938",
+   "q2_mode": "u",
    "toolbar": "",
    "tag": ""
   },
   {
-   "id": "92",
+   "id": "132",
    "name": "sales",
    "column": "region",
    "label": "Region",
@@ -673,13 +678,13 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20230724233516",
-   "q2_mode": "i",
+   "q2_time": "20230726123938",
+   "q2_mode": "u",
    "toolbar": "",
    "tag": ""
   },
   {
-   "id": "93",
+   "id": "133",
    "name": "sales",
    "column": "country",
    "label": "Country",
@@ -706,13 +711,13 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20230724233516",
-   "q2_mode": "i",
+   "q2_time": "20230726123938",
+   "q2_mode": "u",
    "toolbar": "",
    "tag": ""
   },
   {
-   "id": "94",
+   "id": "134",
    "name": "sales",
    "column": "item_type",
    "label": "Item Type",
@@ -739,13 +744,13 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20230724233516",
-   "q2_mode": "i",
+   "q2_time": "20230726123938",
+   "q2_mode": "u",
    "toolbar": "",
    "tag": ""
   },
   {
-   "id": "95",
+   "id": "135",
    "name": "sales",
    "column": "sales_channel",
    "label": "Sales Channel",
@@ -772,13 +777,13 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20230724233516",
-   "q2_mode": "i",
+   "q2_time": "20230726123938",
+   "q2_mode": "u",
    "toolbar": "",
    "tag": ""
   },
   {
-   "id": "96",
+   "id": "136",
    "name": "sales",
    "column": "order_date",
    "label": "Order Date",
@@ -805,13 +810,13 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20230724233516",
-   "q2_mode": "i",
+   "q2_time": "20230726123938",
+   "q2_mode": "u",
    "toolbar": "",
    "tag": ""
   },
   {
-   "id": "97",
+   "id": "137",
    "name": "sales",
    "column": "units_sold",
    "label": "Units Sold",
@@ -838,13 +843,13 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20230724233516",
-   "q2_mode": "i",
+   "q2_time": "20230726123938",
+   "q2_mode": "u",
    "toolbar": "",
    "tag": ""
   },
   {
-   "id": "98",
+   "id": "138",
    "name": "sales",
    "column": "unit_price",
    "label": "Unit Price",
@@ -871,13 +876,13 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20230724233516",
-   "q2_mode": "i",
+   "q2_time": "20230726123938",
+   "q2_mode": "u",
    "toolbar": "",
    "tag": ""
   },
   {
-   "id": "99",
+   "id": "139",
    "name": "sales",
    "column": "unit_cost",
    "label": "Unit Cost",
@@ -904,8 +909,8 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20230724233516",
-   "q2_mode": "i",
+   "q2_time": "20230726123938",
+   "q2_mode": "u",
    "toolbar": "",
    "tag": ""
   }
@@ -915,13 +920,13 @@
    "name": "",
    "content": "{\n  \"queries\": {\n    \"new_query\": \"select * from sales limit 1000\"\n  },\n  \"params\": {}\n}",
    "comment": "",
-   "q2_time": "20230724233516",
-   "q2_mode": "i"
+   "q2_time": "20230725232833",
+   "q2_mode": "u"
   }
  ],
  "actions": [
   {
-   "id": "14",
+   "id": "18",
    "name": "sales",
    "action_text": "Diagram",
    "seq": "1",
@@ -936,13 +941,13 @@
    "child_copy_mode": "1",
    "action_worker": "form = self.get_form(\"plot\")\r\nform.heap.where = mem.model.cursor.where\r\nform.run()",
    "comment": "",
-   "q2_time": "20230724233516",
-   "q2_mode": "i",
+   "q2_time": "20230725231700",
+   "q2_mode": "u",
    "toolbar": "",
    "tag": ""
   },
   {
-   "id": "15",
+   "id": "19",
    "name": "sales",
    "action_text": "",
    "seq": "0",
@@ -957,7 +962,7 @@
    "child_copy_mode": "1",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20230724233516",
+   "q2_time": "20230725210429",
    "q2_mode": "i",
    "toolbar": "",
    "tag": ""
@@ -968,8 +973,8 @@
    "name": "",
    "content": "{\n  \"queries\": {\n    \"new_query\": \"select * from sales limit 100\"\n  },\n  \"params\": {},\n  \"pages\": [\n    {\n      \"columns\": [\n        {\n          \"rows\": [\n            {\n              \"role\": \"free\",\n              \"data_source\": \"\",\n              \"groupby\": \"\",\n              \"table_groups\": [],\n              \"print_when\": \"\",\n              \"print_after\": \"\",\n              \"new_page_before\": \"\",\n              \"new_page_after\": \"\",\n              \"heights\": [\n                \"0-0\"\n              ],\n              \"cells\": {}\n            }\n          ],\n          \"widths\": [\n            \"50%\",\n            \"2\",\n            \"0\"\n          ]\n        }\n      ],\n      \"page_width\": 21.0,\n      \"page_height\": 29.0,\n      \"page_margin_left\": 2.0,\n      \"page_margin_top\": 2.0,\n      \"page_margin_right\": 1.0,\n      \"page_margin_bottom\": 2.0\n    }\n  ],\n  \"style\": {\n    \"font-family\": \"Arial\",\n    \"font-size\": \"8pt\",\n    \"font-weight\": \"normal\",\n    \"border-width\": \"0 0 0 0\",\n    \"padding\": \"0.05cm 0.05cm 0.05cm 0.05cm\",\n    \"text-align\": \"left\",\n    \"vertical-align\": \"top\"\n  }\n}",
    "comment": "",
-   "q2_time": "20230724233516",
-   "q2_mode": "i"
+   "q2_time": "20230725233037",
+   "q2_mode": "u"
   }
  ],
  "packages": [
