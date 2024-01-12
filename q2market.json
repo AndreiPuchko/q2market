@@ -4,16 +4,6 @@
     "app_version": "2023-07-23 22:51:10",
     "app_description": "First q2RAD demo app!"
   },
-  "https://raw.githubusercontent.com/AndreiPuchko/q2market/main/q2faktura": {
-    "app_title": "q2faktura",
-    "app_version": "2023-02-24 13:04:12",
-    "app_description": "Rechnungen und mehr"
-  },
-  "ttps://raw.githubusercontent.com/AndreiPuchko/q2market/main/rent-the-light": {
-    "app_title": "Rent-The-Light",
-    "app_version": "2023-03-15 03:07:44",
-    "app_description": ""
-  },
   "https://raw.githubusercontent.com/AndreiPuchko/q2market/main/webscrapping_app": {
     "app_title": "q2-WebScrapping DEMO",
     "app_version": "2023-08-24 09:58:09",
