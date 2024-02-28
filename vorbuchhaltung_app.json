@@ -82,10 +82,10 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2024-02-28 15:05:20'",
+   "script": "self.app_version = '2024-02-28 17:15:07'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20240228150520",
+   "q2_time": "20240228171507",
    "q2_mode": "u"
   }
  ],
@@ -188,6 +188,39 @@
    "after_form_closed": "",
    "q2_time": "20240227175038",
    "q2_mode": "i"
+  },
+  {
+   "name": "berichte_sales",
+   "title": "Ums\u00e4tze bericht",
+   "seq": "10",
+   "menu_path": "Berichte",
+   "menu_text": "Ums\u00e4tze",
+   "menu_before": "",
+   "menu_icon": "",
+   "menu_tiptext": "",
+   "menu_separator": "",
+   "toolbar": "",
+   "ok_button": "*",
+   "cancel_button": "*",
+   "view_action": "",
+   "form_table": "",
+   "form_table_sort": "",
+   "comment": "",
+   "before_form_build": "",
+   "before_grid_build": "",
+   "before_grid_show": "",
+   "after_grid_show": "",
+   "before_form_show": "import q2date\r\nmem.s.date1=q2date(today()).first_day_of_month()\r\nmem.s.date2 = q2date(today()).last_day_of_month()",
+   "after_form_show": "",
+   "before_crud_save": "",
+   "after_crud_save": "",
+   "before_delete": "",
+   "after_delete": "",
+   "form_valid": "q2cursor(f\"\"\"\r\n               select shops.name, land, mwst\r\n                    , sum(sales.betrag) as betrag\r\n                    , sum(sales.kosten) as kosten\r\n                from sales, shops\r\n                where sales.shop_id = shops.shop_id\r\n                    and date>= '{mem.s.date1}' and date<= '{mem.s.date2}'\r\n                group by shops.shop_id, land, mwst\r\n            \"\"\").browse()\r\nreturn False",
+   "form_refresh": "",
+   "after_form_closed": "",
+   "q2_time": "20240228171439",
+   "q2_mode": "u"
   },
   {
    "name": "konten",
@@ -384,7 +417,7 @@
    "form_valid": "",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240227214340",
+   "q2_time": "20240228163620",
    "q2_mode": "u"
   }
  ],
@@ -753,6 +786,72 @@
    "q2_mode": "u"
   },
   {
+   "id": "51",
+   "name": "berichte_sales",
+   "column": "date1",
+   "label": "",
+   "gridlabel": "",
+   "seq": "0",
+   "nogrid": "",
+   "noform": "",
+   "check": "",
+   "disabled": "",
+   "readonly": "",
+   "stretch": "0",
+   "tag": "",
+   "control": "line",
+   "pic": "",
+   "datatype": "date",
+   "datalen": "0",
+   "datadec": "0",
+   "migrate": "",
+   "pk": "",
+   "ai": "",
+   "to_table": "",
+   "to_column": "",
+   "related": "",
+   "to_form": "",
+   "comment": "",
+   "code_when": "",
+   "code_show": "",
+   "code_valid": "",
+   "q2_time": "20240228170543",
+   "q2_mode": "i"
+  },
+  {
+   "id": "52",
+   "name": "berichte_sales",
+   "column": "date2",
+   "label": "",
+   "gridlabel": "",
+   "seq": "1",
+   "nogrid": "",
+   "noform": "",
+   "check": "",
+   "disabled": "",
+   "readonly": "",
+   "stretch": "0",
+   "tag": "",
+   "control": "line",
+   "pic": "",
+   "datatype": "date",
+   "datalen": "0",
+   "datadec": "0",
+   "migrate": "",
+   "pk": "",
+   "ai": "",
+   "to_table": "",
+   "to_column": "",
+   "related": "",
+   "to_form": "",
+   "comment": "",
+   "code_when": "",
+   "code_show": "",
+   "code_valid": "",
+   "q2_time": "20240228170553",
+   "q2_mode": "i"
+  },
+  {
    "id": "12",
    "name": "konten",
    "column": "bk",
@@ -779,11 +878,11 @@
    "related": "name",
    "to_form": "banken",
    "comment": "",
-   "code_when": "",
+   "code_when": "mem.heap.labk = mem.s.bk",
    "code_show": "",
-   "code_valid": "",
-   "q2_time": "20240227175038",
-   "q2_mode": "i"
+   "code_valid": "if mem.heap.labk != mem.s.bk:\r\n    mem.s.konto_name = get(\"banken\", f\"bk={mem.s.bk}\", \"name\")",
+   "q2_time": "20240228164000",
+   "q2_mode": "u"
   },
   {
    "id": "13",
@@ -1659,7 +1758,7 @@
    "tag": "",
    "control": "line",
    "pic": "",
-   "datatype": "char",
+   "datatype": "int",
    "datalen": "0",
    "datadec": "0",
    "migrate": "*",
@@ -1673,8 +1772,8 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20240228002911",
-   "q2_mode": "i"
+   "q2_time": "20240228163142",
+   "q2_mode": "u"
   },
   {
    "id": "44",
@@ -1967,10 +2066,10 @@
    "related": "name",
    "to_form": "plattformen",
    "comment": "",
-   "code_when": "",
+   "code_when": "mem.heap.lapl=mem.s.pl",
    "code_show": "",
-   "code_valid": "",
-   "q2_time": "20240227213113",
+   "code_valid": "if mem.heap.lapl != mem.s.pl:\r\n    mem.s.name = get(\"plattformen\", f\"pl={mem.s.pl}\", \"name\")",
+   "q2_time": "20240228163702",
    "q2_mode": "u"
   },
   {
@@ -2003,7 +2102,7 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20240228003028",
+   "q2_time": "20240228163442",
    "q2_mode": "u"
   },
   {
@@ -2043,10 +2142,10 @@
  "queries": [
   {
    "name": "day_stand",
-   "content": "{\n  \"queries\": {\n    \"new_query\": \"SELECT date, \\r\\n        summa ,\\r\\n       round(SUM(summa) OVER (order BY date, id),2) AS cumulative_sum\\r\\nFROM bank\\r\\nORDER BY date;\",\n    \"month\": \"SELECT \\r\\n    substr(date,1,4) AS year\\r\\n    , substr(date,6,2) AS month\\r\\n    , round(SUM(case when summa<0 then summa else 0 end),2) AS summa_minus\\r\\nFROM bank\\r\\nwhere kr <> 25\\r\\nGROUP BY year, month\\r\\n\"\n  },\n  \"params\": {}\n}",
+   "content": "{\n  \"queries\": {\n    \"new_query\": \"SELECT date, \\r\\n        summa ,\\r\\n       round(SUM(summa) OVER (order BY date, id),2) AS cumulative_sum\\r\\nFROM bank\\r\\nORDER BY date;\",\n    \"month\": \"SELECT \\r\\n    substr(date,1,4) AS year\\r\\n    , substr(date,6,2) AS month\\r\\n    , round(SUM(case when summa<0 then summa else 0 end),2) AS summa_minus\\r\\nFROM bank\\r\\nwhere kr <> 25\\r\\nGROUP BY year, month\\r\\n\",\n    \"sales\": \"select shops.name, land, mwst\\r\\n    , sum(sales.betrag) as betrag\\r\\n    , sum(sales.kosten) as kosten\\nfrom sales, shops\\r\\nwhere sales.shop_id = shops.shop_id\\r\\ngroup by shops.shop_id, land, mwst\"\n  },\n  \"params\": {}\n}",
    "comment": "",
-   "q2_time": "20240227175039",
-   "q2_mode": "i"
+   "q2_time": "20240228171101",
+   "q2_mode": "u"
   }
  ],
  "actions": [
@@ -2278,7 +2377,7 @@
    "action_mode": "2",
    "action_mess": "",
    "action_icon": "",
-   "action_key": "",
+   "action_key": "F4",
    "tag": "",
    "eof_disabled": "*",
    "child_form": "",
@@ -2287,8 +2386,8 @@
    "child_copy_mode": "1",
    "action_worker": "import q2date\r\nform_loader = Q2Form(\"Export to Agenda CSV\")\r\nform_loader.add_control(\"date1\", \"From\", datatype=\"date\", data = q2date(today()).first_day_of_month())\r\nform_loader.add_control(\"date2\", \"to\", datatype=\"date\", data = q2date(today()).last_day_of_month())\r\n\r\nform_loader.ok_button =1\r\nform_loader.cancel_button =1\r\n\r\nform_loader.run()\r\n\r\nif form_loader.ok_pressed:\r\n    date1 = form_loader.s.date1\r\n    date2 = form_loader.s.date2\r\n    \r\n    cu = q2cursor(f\"select * from bank where konto_id={mem.r.konto_id} and date>='{date1}' and date<='{date2}'\")\r\n    \r\n    from datetime import datetime\r\n    date1 = datetime.strptime(date1, \"%Y-%m-%d\").strftime(\"%d.%m.%Y\")\r\n    date2 = datetime.strptime(date2, \"%Y-%m-%d\").strftime(\"%d.%m.%Y\")\r\n    \r\n    desktop=os.path.expanduser(\"~/Desktop\")\r\n    filename = f\"{desktop}/{mem.r.konto_name} {date1}-{date2}.csv\"\r\n    filename = q2_app.get_save_file_dialoq(path=filename, filter = \"*.csv\")[0]\r\n    if filename:\r\n        import csv\r\n        fieldnames  = \"Buchungstag;Buchungstext;Beg\u00fcnstigter / Auftraggeber;Verwendungszweck;Betrag;Soll;Haben;Waehrung;Konto;Gegenkonto\".split(\";\")\r\n        with open(filename, 'w', newline='', encoding = \"utf8\") as csvfile:\r\n            writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=';')\r\n            writer.writeheader()\r\n            for row in cu.records():\r\n                csv_row={}\r\n                csv_row[\"Buchungstag\"] = datetime.strptime(row[\"date\"], \"%Y-%m-%d\").strftime(\"%d.%m.%Y\")\r\n                csv_row[\"Buchungstext\"] = row[\"content1\"]\r\n                csv_row[\"Beg\u00fcnstigter / Auftraggeber\"] = row[\"content2\"]\r\n                csv_row[\"Verwendungszweck\"] = row[\"content3\"]\r\n                \r\n                if num(row[\"betrag\"]) >0:\r\n                    default_gegenkonto=mem.r.default_gegenkonto_ein\r\n                else:\r\n                    default_gegenkonto=mem.r.default_gegenkonto_aus\r\n                \r\n                row[\"betrag\"] = row[\"betrag\"].replace(\".\", \",\")\r\n                csv_row[\"Betrag\"] = row[\"betrag\"]\r\n                csv_row[\"Soll\"] = row[\"betrag\"] if num(row[\"betrag\"]) <0 else \"0\"\r\n                csv_row[\"Haben\"] = row[\"betrag\"] if num(row[\"betrag\"]) >0 else \"0\"\r\n                csv_row[\"Waehrung\"] = \"EUR\"\r\n                csv_row[\"Konto\"] = mem.r.buchung_konto\r\n                csv_row[\"Gegenkonto\"] = row[\"gegenkonto\"] if row[\"gegenkonto\"] != \"\" else default_gegenkonto\r\n                writer.writerow(csv_row)",
    "comment": "",
-   "q2_time": "20240227175040",
-   "q2_mode": "i"
+   "q2_time": "20240228162748",
+   "q2_mode": "u"
   },
   {
    "id": "13",
@@ -2434,7 +2533,7 @@
    "id": "21",
    "name": "shops",
    "action_text": "Ums\u00e4tze",
-   "seq": "2",
+   "seq": "3",
    "action_mode": "2",
    "action_mess": "",
    "action_icon": "",
@@ -2447,7 +2546,7 @@
    "child_copy_mode": "1",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20240228011326",
+   "q2_time": "20240228162645",
    "q2_mode": "u"
   },
   {
@@ -2458,7 +2557,7 @@
    "action_mode": "2",
    "action_mess": "",
    "action_icon": "",
-   "action_key": "",
+   "action_key": "F3",
    "tag": "",
    "eof_disabled": "",
    "child_form": "",
@@ -2467,7 +2566,27 @@
    "child_copy_mode": "1",
    "action_worker": "# if not hasattr(form, \"prev_form\"):\r\n    # q2mess('Geh in Ref/Konto, w\u00e4hle eine Konto und mach Actions/Herunterladen!')\r\n    # return\r\n\r\n# run_module(\"load_bank\", import_only=True)\r\nimport load_sales\r\nimport q2date\r\n\r\nform_loader = Q2Form(\"Import sales data \")\r\n# form_loader.add_control(\"/f\", \"Herunterladen Bank Data\")\r\n# form_loader.add_control(\"konto_id\", \"Konto\", datatype=\"int\", to_field=\"konto_id\", to_table=\"konten\", related=\"123\", to_form=\"konten\", data=1 )\r\nform_loader.add_control(\"date1\", \"From\", datatype=\"date\", data = q2date(today()).first_day_of_month())\r\nform_loader.add_control(\"date2\", \"to\", datatype=\"date\", data = q2date(today()).last_day_of_month())\r\n\r\nform_loader.ok_button =1\r\nform_loader.cancel_button =1\r\n\r\nform_loader.run()\r\n\r\nif form_loader.ok_pressed:\r\n    date1 = form_loader.s.date1\r\n    date2 = form_loader.s.date2\r\n    Loader(date1,date2,form.r.shop_id)\r\n    # import set_gegenkonto\r\n    # set_gegenkonto()\r\n    mem.refresh()",
    "comment": "",
-   "q2_time": "20240228093817",
+   "q2_time": "20240228162808",
+   "q2_mode": "u"
+  },
+  {
+   "id": "24",
+   "name": "shops",
+   "action_text": "Export",
+   "seq": "2",
+   "action_mode": "2",
+   "action_mess": "",
+   "action_icon": "",
+   "action_key": "F4",
+   "tag": "",
+   "eof_disabled": "",
+   "child_form": "",
+   "child_where": "",
+   "child_noshow": "",
+   "child_copy_mode": "1",
+   "action_worker": "import q2date\r\nform_loader = Q2Form(\"Export to Agenda CSV\")\r\nform_loader.add_control(\"date1\", \"From\", datatype=\"date\", data = q2date(today()).first_day_of_month())\r\nform_loader.add_control(\"date2\", \"to\", datatype=\"date\", data = q2date(today()).last_day_of_month())\r\n\r\nform_loader.ok_button =1\r\nform_loader.cancel_button =1\r\n\r\nform_loader.run()\r\n\r\nif form_loader.ok_pressed:\r\n    date1 = form_loader.s.date1\r\n    date2 = form_loader.s.date2\r\n    \r\n    cu = q2cursor(f\"select * from sales where shop_id={mem.r.shop_id} and date>='{date1}' and date<='{date2}'\").browse()\r\n    return\r\n    from datetime import datetime\r\n    date1 = datetime.strptime(date1, \"%Y-%m-%d\").strftime(\"%d.%m.%Y\")\r\n    date2 = datetime.strptime(date2, \"%Y-%m-%d\").strftime(\"%d.%m.%Y\")\r\n    \r\n    desktop=os.path.expanduser(\"~/Desktop\")\r\n    filename = f\"{desktop}/{mem.r.konto_name} {date1}-{date2}.csv\"\r\n    filename = q2_app.get_save_file_dialoq(path=filename, filter = \"*.csv\")[0]\r\n    if filename:\r\n        import csv\r\n        fieldnames  = \"Buchungstag;Buchungstext;Beg\u00fcnstigter / Auftraggeber;Verwendungszweck;Betrag;Soll;Haben;Waehrung;Konto;Gegenkonto\".split(\";\")\r\n        with open(filename, 'w', newline='', encoding = \"utf8\") as csvfile:\r\n            writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=';')\r\n            writer.writeheader()\r\n            for row in cu.records():\r\n                csv_row={}\r\n                csv_row[\"Buchungstag\"] = datetime.strptime(row[\"date\"], \"%Y-%m-%d\").strftime(\"%d.%m.%Y\")\r\n                csv_row[\"Buchungstext\"] = row[\"content1\"]\r\n                csv_row[\"Beg\u00fcnstigter / Auftraggeber\"] = row[\"content2\"]\r\n                csv_row[\"Verwendungszweck\"] = row[\"content3\"]\r\n                \r\n                if num(row[\"betrag\"]) >0:\r\n                    default_gegenkonto=mem.r.default_gegenkonto_ein\r\n                else:\r\n                    default_gegenkonto=mem.r.default_gegenkonto_aus\r\n                \r\n                row[\"betrag\"] = row[\"betrag\"].replace(\".\", \",\")\r\n                csv_row[\"Betrag\"] = row[\"betrag\"]\r\n                csv_row[\"Soll\"] = row[\"betrag\"] if num(row[\"betrag\"]) <0 else \"0\"\r\n                csv_row[\"Haben\"] = row[\"betrag\"] if num(row[\"betrag\"]) >0 else \"0\"\r\n                csv_row[\"Waehrung\"] = \"EUR\"\r\n                csv_row[\"Konto\"] = mem.r.buchung_konto\r\n                csv_row[\"Gegenkonto\"] = row[\"gegenkonto\"] if row[\"gegenkonto\"] != \"\" else default_gegenkonto\r\n                writer.writerow(csv_row)",
+   "comment": "",
+   "q2_time": "20240228163111",
    "q2_mode": "u"
   }
  ],
