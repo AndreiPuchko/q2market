@@ -2,10 +2,10 @@
  "modules": [
   {
    "name": "_test_commerz",
-   "script": "import csv\r\nfrom datetime import datetime\r\n\r\npath = r\"C:\\Users\\andre\\Desktop\\Lehrmann GmbH\\Sales\\ebay-Transaction-Feb-27-2024-03_46_09-0700-12156895291.csv\"\r\n\r\ncsvfile = open(path, encoding=\"utf8\")\r\n\r\nreader = csv.reader(csvfile, delimiter=\";\")\r\nrez = [x for x in reader]\r\nrez0=[]\r\nfor x in rez[12:13]:\r\n    \r\n    kosten = num(x[27].replace(\".\", \"\").replace(\",\", \".\"))\r\n    kosten += num(x[28].replace(\".\", \"\").replace(\",\", \".\"))\r\n    kosten += num(x[29].replace(\".\", \"\").replace(\",\", \".\"))\r\n    kosten += num(x[30].replace(\".\", \"\").replace(\",\", \".\"))\r\n    kosten += num(x[31].replace(\".\", \"\").replace(\",\", \".\"))\r\n    kosten  = str(-kosten)\r\n    \r\n    dct={ \r\n            \"shop_id\":  1 ,\r\n            \"date\":  datetime.strptime(x[0], \"%d. %b %Y\").strftime(\"%Y-%m-%d\") ,\r\n            \"content1\": x[19],\r\n            \"betrag\": x[32].replace(\".\", \"\").replace(\",\", \".\"),\r\n            \"kosten\": kosten,\r\n            \"mwst\": x[26].replace(\"%\", \"\"),\r\n            \"land\": x[9],\r\n            }\r\n    rez0.append(dct)\r\n\r\nq2mess(rez0)",
+   "script": "import csv\r\nimport locale\r\nfrom datetime import datetime\r\n\r\npath = r\"C:\\Users\\andre\\Desktop\\Lehrmann GmbH\\Sales\\etsy_statement_2024_2.csv\"\r\n\r\ncsvfile = open(path, encoding=\"utf8\")\r\n\r\nq2mess(csvfile.readline())\r\ncsvfile.seek(0, 0)\r\n\r\n\r\nreader = csv.reader(csvfile, delimiter=\",\")\r\nrez = [x for x in reader]\r\nrez0=[]\r\n\r\nlc = locale.setlocale(locale.LC_TIME)\r\nlocale.setlocale(locale.LC_TIME, \"de_DE\")\r\n\r\nfor x in rez[1:2]:\r\n    if x == []:\r\n        continue\r\n    # q2mess(x[:121])\r\n    dct={ \r\n            \"shop_id\":  1 ,\r\n            \"date\":   datetime.strptime(x[0], \"%d. %B %Y\").strftime(\"%Y-%m-%d\"),\r\n            \"content1\": x[2],\r\n            \"betrag\": str(num(x[5].replace(\"\u20ac\", \"\"))),\r\n            \"kosten\": str(-num(x[6].replace(\"\u20ac\", \"\"))),\r\n            \"mwst\": 0,\r\n            \"land\": \"\"\r\n            }\r\n    rez0.append(dct)\r\nlocale.setlocale(locale.LC_TIME, lc)\r\n\r\nq2mess(rez0)",
    "comment": "",
-   "last_line": "29",
-   "q2_time": "20240228012122",
+   "last_line": "9",
+   "q2_time": "20240228112101",
    "q2_mode": "u"
   },
   {
@@ -34,10 +34,10 @@
   },
   {
    "name": "load_sales",
-   "script": "class Loader():\r\n    def __init__(self, date1, date2, shop_id):\r\n        self.date1=date1\r\n        self.date2=date2\r\n        self.shop_id = int_(shop_id)\r\n        pl = get(\"shops\",  f\"shop_id={shop_id}\", \"pl\")\r\n        self.algo = int_(get(\"plattformen\",  f\"pl={pl}\", \"algo\"))\r\n        q2mess(self.algo)\r\n        self.run()\r\n\r\n    def run(self):\r\n        ext = \"*.csv\"\r\n\r\n        downloads_path = os.path.expanduser(\"~/Downloads\")\r\n        self.filename = q2_app.get_open_file_dialoq(\"Open CSV\", downloads_path, ext)[0]\r\n        # self.filename  = r\"C:\\Users\\andre\\Desktop\\Lehrmann GmbH\\Sales\\ebay-Transaction-Feb-27-2024-03_46_09-0700-12156895291.csv\"\r\n        if not self.filename:\r\n            return\r\n        rez = None\r\n        if self.algo == 1:\r\n            rez = self.algo_1()\r\n        elif self.algo == 2:\r\n            rez = self.algo_2()\r\n        # elif self.algo == 3:\r\n            # rez = self.algo_3()\r\n        # elif self.algo == 4:\r\n            # rez = self.algo_4()\r\n        # elif self.algo == 5:\r\n            # rez = self.algo_5()\r\n        # elif self.algo == 6:\r\n            # rez = self.algo_6()\r\n        # elif self.algo == 7:\r\n            # rez = self.algo_7()\r\n\r\n        if rez is not None:\r\n            self.insert_sales(rez)\r\n\r\n    def insert_sales(self, sales_data):\r\n        sales_data = [row for row in sales_data if row[\"date\"] >= self.date1 or row[\"date\"] <= self.date2]\r\n        if len(sales_data) == 0:\r\n            return\r\n        q2cursor(f\"delete from sales where date>='{self.date1}' and date<='{self.date2}' and shop_id={self.shop_id}\")\r\n        \r\n        w = q2_wait(len(sales_data), \"Inserting rows\")\r\n        transaction()\r\n        for x in sales_data:\r\n            w.step(10)\r\n            if not insert(\"sales\", x):\r\n                q2mess(\"An error occurred while inserting sales data.\")\r\n                ?q2app.q2_app.db_data.last_sql_error\r\n                break\r\n        commit()\r\n        w.close()\r\n\r\n    def algo_1(self): # Sparkasse\r\n        import csv\r\n        from datetime import datetime\r\n\r\n        csvfile = open(self.filename, encoding=\"cp1252\")\r\n        reader = csv.reader(csvfile, delimiter=\";\")\r\n        rez = [x for x in reader]\r\n        rez0=[]\r\n        for x in rez[1:]:\r\n            dct={ \r\n                    \"shop_id\":  self.shop_id ,\r\n                    \"date\":  datetime.strptime(x[1].split(\" \")[0], \"%d.%m.%y\").strftime(\"%Y-%m-%d\") ,\r\n                    \"content1\": x[3],\r\n                    \"content2\": x[4],\r\n                    \"content3\": x[11],\r\n                    \"betrag\": x[14].replace(\".\", \"\").replace(\",\", \".\"),\r\n                    }\r\n            rez0.append(dct)\r\n        return rez0\r\n    \r\n    def algo_2(self): # eBay\r\n        import csv\r\n        from datetime import datetime\r\n\r\n        csvfile = open(self.filename, encoding=\"utf8\")\r\n        reader = csv.reader(csvfile, delimiter=\";\")\r\n        rez = [x for x in reader]\r\n        rez0=[]\r\n        for x in rez[12:]:\r\n            kosten = num(x[27].replace(\".\", \"\").replace(\",\", \".\"))\r\n            kosten += num(x[28].replace(\".\", \"\").replace(\",\", \".\"))\r\n            kosten += num(x[29].replace(\".\", \"\").replace(\",\", \".\"))\r\n            kosten += num(x[30].replace(\".\", \"\").replace(\",\", \".\"))\r\n            kosten += num(x[31].replace(\".\", \"\").replace(\",\", \".\"))\r\n            kosten  = str(-kosten)\r\n            \r\n            dct={ \r\n                    \"shop_id\":  self.shop_id ,\r\n                    \"date\":  datetime.strptime(x[0], \"%d. %b %Y\").strftime(\"%Y-%m-%d\") ,\r\n                    \"content1\": x[19],\r\n                    \"betrag\": x[32].replace(\".\", \"\").replace(\",\", \".\"),\r\n                    \"kosten\": kosten,\r\n                    \"mwst\": x[26].replace(\"%\", \"\"),\r\n                    \"land\": x[9],\r\n                    }\r\n            rez0.append(dct)\r\n        return rez0\r\n    \r\nif __name__ == \"__main__\":\r\n    Loader(\"2024-01-01\", \"2024-01-31\", 1)\r\n    # Loader(\"2023-01-01\", \"2023-12-31\", 2)\r\n    # Loader(\"2023-01-01\", \"2023-12-31\", 2)\r\n    pass",
+   "script": "class Loader():\r\n    def __init__(self, date1, date2, shop_id):\r\n        self.date1=date1\r\n        self.date2=date2\r\n        self.shop_id = int_(shop_id)\r\n        pl = get(\"shops\",  f\"shop_id={shop_id}\", \"pl\")\r\n        self.algo = int_(get(\"plattformen\",  f\"pl={pl}\", \"algo\"))\r\n        self.algo_name = get(\"plattformen\",  f\"pl={pl}\", \"name\")\r\n      \r\n        self.run()\r\n\r\n    def run(self):\r\n        ext = \"*.csv\"\r\n\r\n        downloads_path = os.path.expanduser(\"~/Downloads\")\r\n        self.filename = q2_app.get_open_file_dialoq(f\"Open CSV ({self.algo_name})\", downloads_path, ext)[0]\r\n        # self.filename  = r\"C:\\Users\\andre\\Desktop\\Lehrmann GmbH\\Sales\\EXTF_Easybill_AR_Lehrmann GmbH_20240101-20240131.csv\"\r\n        if not self.filename:\r\n            return\r\n        rez = None\r\n        if self.algo == 1:\r\n            rez = self.algo_1()\r\n        elif self.algo == 2:\r\n            rez = self.algo_2()\r\n        elif self.algo == 3:\r\n            rez = self.algo_3()\r\n        elif self.algo == 4:\r\n            rez = self.algo_4()\r\n        elif self.algo == 5:\r\n            rez = self.algo_5()\r\n        # elif self.algo == 6:\r\n            # rez = self.algo_6()\r\n        # elif self.algo == 7:\r\n            # rez = self.algo_7()\r\n\r\n        if rez is not None:\r\n            self.insert_sales(rez)\r\n\r\n    def insert_sales(self, sales_data):\r\n        sales_data = [row for row in sales_data if row[\"date\"] >= self.date1 or row[\"date\"] <= self.date2]\r\n        if len(sales_data) == 0:\r\n            return\r\n        q2cursor(f\"delete from sales where date>='{self.date1}' and date<='{self.date2}' and shop_id={self.shop_id}\")\r\n        \r\n        w = q2_wait(len(sales_data), \"Inserting rows\")\r\n        transaction()\r\n        for x in sales_data:\r\n            w.step(10)\r\n            if not insert(\"sales\", x):\r\n                q2mess(\"An error occurred while inserting sales data.\")\r\n                ?q2app.q2_app.db_data.last_sql_error\r\n                break\r\n        commit()\r\n        w.close()\r\n\r\n    def algo_1(self): # AMAZON DE\r\n        import csv\r\n        from datetime import datetime\r\n\r\n        csvfile = open(self.filename, encoding=\"utf8\")\r\n\r\n        first_line=csvfile.readline()\r\n        # if not first_line.startswith('\"Einschlie'):\r\n            # q2mess(f\"Falche Datei (nicht <b>{self.algo_name}</b>)<br> {first_line}\")\r\n            # return []\r\n\r\n        csvfile.seek(0, 0)\r\n        reader = csv.reader(csvfile, delimiter=\",\")\r\n        rez = [x for x in reader]\r\n        rez0=[]\r\n        for x in rez[8:]:\r\n            mwst_betrag=0\r\n            mwst=0\r\n            betrag = num(x[13].replace(\".\", \"\").replace(\",\", \".\"))\r\n            betrag += num(x[15].replace(\".\", \"\").replace(\",\", \".\"))\r\n            betrag += num(x[17].replace(\".\", \"\").replace(\",\", \".\"))\r\n            betrag += num(x[19].replace(\".\", \"\").replace(\",\", \".\"))\r\n            \r\n            mwst_betrag = num(x[14].replace(\".\", \"\").replace(\",\", \".\"))\r\n            mwst_betrag += num(x[16].replace(\".\", \"\").replace(\",\", \".\"))\r\n            mwst_betrag += num(x[18].replace(\".\", \"\").replace(\",\", \".\"))\r\n            mwst_betrag += num(x[20].replace(\".\", \"\").replace(\",\", \".\"))\r\n            \r\n            if betrag != 0:\r\n                mwst = round(mwst_betrag*100/betrag,0)\r\n            else:\r\n                mwst = 0\r\n\r\n            # kosten=0\r\n            kosten = num(x[22].replace(\".\", \"\").replace(\",\", \".\"))\r\n            kosten += num(x[23].replace(\".\", \"\").replace(\",\", \".\"))\r\n            kosten += num(x[24].replace(\".\", \"\").replace(\",\", \".\"))\r\n            kosten += num(x[25].replace(\".\", \"\").replace(\",\", \".\"))\r\n            kosten  = str(-kosten)\r\n            \r\n            dct={ \r\n                    \"shop_id\":  self.shop_id ,\r\n                    \"date\":  datetime.strptime(x[0][:10], \"%d.%m.%Y\").strftime(\"%Y-%m-%d\") ,\r\n                    \"content1\": x[5],\r\n                    \"betrag\": str(betrag+mwst_betrag),\r\n                    \"kosten\": kosten,\r\n                    \"mwst\": str(mwst),\r\n                    \"land\": \"DE\" if mwst == 19 else \"AT\",\r\n                    }\r\n            rez0.append(dct)\r\n        return rez0\r\n    \r\n    def algo_2(self): # ebay\r\n        import csv\r\n        from datetime import datetime\r\n\r\n        csvfile = open(self.filename, encoding=\"utf8\")\r\n        first_line=csvfile.readline()\r\n\r\n        first_line=csvfile.readline()\r\n        # if first_line != \"\"\"--,--,--,--,--,--,--,--,--,--,--,--,--\"\"\":\r\n            # q2mess(f\"Falche Datei (nicht <b>{self.algo_name}</b>)\")\r\n            # return []\r\n\r\n        \r\n        csvfile.seek(0, 0)\r\n        reader = csv.reader(csvfile, delimiter=\";\")\r\n        rez = [x for x in reader]\r\n        rez0=[]\r\n        for x in rez[12:]:\r\n            kosten = num(x[27].replace(\".\", \"\").replace(\",\", \".\"))\r\n            kosten += num(x[28].replace(\".\", \"\").replace(\",\", \".\"))\r\n            kosten += num(x[29].replace(\".\", \"\").replace(\",\", \".\"))\r\n            kosten += num(x[30].replace(\".\", \"\").replace(\",\", \".\"))\r\n            kosten += num(x[31].replace(\".\", \"\").replace(\",\", \".\"))\r\n            kosten  = str(-kosten)\r\n            \r\n            dct={ \r\n                    \"shop_id\":  self.shop_id ,\r\n                    \"date\":  datetime.strptime(x[0], \"%d. %b %Y\").strftime(\"%Y-%m-%d\") ,\r\n                    \"content1\": x[19],\r\n                    \"betrag\": x[32].replace(\".\", \"\").replace(\",\", \".\"),\r\n                    \"kosten\": kosten,\r\n                    \"mwst\": x[26].replace(\"%\", \"\"),\r\n                    \"land\": x[9],\r\n                    }\r\n            rez0.append(dct)\r\n        return rez0\r\n\r\n    def algo_3(self): # etsy\r\n        import csv\r\n        import locale\r\n        from datetime import datetime\r\n        \r\n        lc = locale.setlocale(locale.LC_TIME)\r\n        locale.setlocale(locale.LC_TIME, \"de_DE\")\r\n      \r\n        \r\n        csvfile = open(self.filename, encoding=\"utf8\")\r\n\r\n        first_line=csvfile.readline()\r\n        # if first_line != \"\"\"Datum,Art,Titel,Info,W\u00e4hrung,Betrag,\"Geb\u00fchren & Steuern\",Netto,\"Steuerliche Angaben\" \"\"\":\r\n            # q2mess(f\"Falche Datei (nicht <b>{self.algo_name}</b>)\")\r\n            # return []\r\n\r\n        csvfile.seek(0, 0)\r\n        reader = csv.reader(csvfile, delimiter=\",\")\r\n        rez = [x for x in reader]\r\n        rez0=[]\r\n        for x in rez[1:]:\r\n            dct={ \r\n                    \"shop_id\":  self.shop_id ,\r\n                    \"date\":  datetime.strptime(x[0], \"%d. %B %Y\").strftime(\"%Y-%m-%d\") ,\r\n                    \"content1\": x[2],\r\n                    \"betrag\": str(num(x[5].replace(\"\u20ac\", \"\"))),\r\n                    \"kosten\": str(-num(x[6].replace(\"\u20ac\", \"\"))),\r\n                    \"mwst\": 0,\r\n                    \"land\": \"\"\r\n                    }\r\n            rez0.append(dct)\r\n        locale.setlocale(locale.LC_TIME, lc)\r\n        return rez0\r\n    \r\n    def algo_4(self): # shopify\r\n        import csv\r\n        from datetime import datetime\r\n\r\n        csvfile = open(self.filename, encoding=\"utf8\")\r\n        first_line=csvfile.readline()\r\n\r\n        first_line=csvfile.readline()\r\n        # if first_line != \"\"\"Name,Email,Financial Status,Paid at,Fulfillment Status,Fulfilled at,Accepts Marketing,Currency,Subtotal,Shipping,Taxes,Total,Discount Code,Discount Amount,Shipping Method,Created at,Lineitem quantity,Lineitem name,Lineitem price,Lineitem compare at price,Lineitem sku,Lineitem requires shipping,Lineitem taxable,Lineitem fulfillment status,Billing Name,Billing Street,Billing Address1,Billing Address2,Billing Company,Billing City,Billing Zip,Billing Province,Billing Country,Billing Phone,Shipping Name,Shipping Street,Shipping Address1,Shipping Address2,Shipping Company,Shipping City,Shipping Zip,Shipping Province,Shipping Country,Shipping Phone,Notes,Note Attributes,Cancelled at,Payment Method,Payment Reference,Refunded Amount,Vendor,Id,Tags,Risk Level,Source,Lineitem discount,Tax 1 Name,Tax 1 Value,Tax 2 Name,Tax 2 Value,Tax 3 Name,Tax 3 Value,Tax 4 Name,Tax 4 Value,Tax 5 Name,Tax 5 Value,Phone,Receipt Number,Duties,Billing Province Name,Shipping Province Name,Payment ID,Payment Terms Name,Next Payment Due At,Payment References\"\"\":\r\n            # q2mess(f\"Falche Datei (nicht <b>{self.algo_name}</b>)\")\r\n            # return []\r\n        \r\n        csvfile.seek(0, 0)\r\n        reader = csv.reader(csvfile, delimiter=\",\")\r\n        rez = [x for x in reader]\r\n        rez0=[]\r\n        for x in rez[1:]:\r\n            if x[3] == \"\":\r\n                continue\r\n            dct={ \r\n                    \"shop_id\":  self.shop_id ,\r\n                    \"date\":  x[3][:10],\r\n                    \"content1\": x[17],\r\n                    \"betrag\": x[11],\r\n                    \"kosten\": 0,\r\n                    \"mwst\": 19 if x[42] == \"DE\" else 0,\r\n                    \"land\": x[42]\r\n                    }\r\n            rez0.append(dct)\r\n        return rez0\r\n        \r\n    def algo_5(self): # easybill\r\n        import csv\r\n        from datetime import datetime\r\n\r\n        csvfile = open(self.filename, encoding=\"cp1252\")\r\n        first_line=csvfile.readline()\r\n        \r\n        first_line=csvfile.readline()\r\n        # if not first_line.startswith(\"\"\" \"EXTF\";700;21;\"Buchungsstapel\" \"\"\".strip()):\r\n            # q2mess(f\"Falche Datei (nicht <b>{self.algo_name}</b>)\")\r\n            # return []\r\n        \r\n        csvfile.seek(0, 0)\r\n        reader = csv.reader(csvfile, delimiter=\";\")\r\n        rez = [x for x in reader]\r\n        rez0=[]\r\n        for x in rez[3:]:\r\n            if x == []:\r\n                continue\r\n            dct={ \r\n                    \"shop_id\":  self.shop_id ,\r\n                    \"date\":  datetime.strptime(x[116], \"%d%m%Y\").strftime(\"%Y-%m-%d\"),\r\n                    \"content1\": x[13],\r\n                    \"betrag\": x[0].replace(\".\", \"\").replace(\",\", \".\"),\r\n                    \"kosten\": 0,\r\n                    \"mwst\": 19 if x[119] == \"DE\" else 0,\r\n                    \"land\": x[119]\r\n                    }\r\n            rez0.append(dct)\r\n        return rez0\r\n    \r\nif __name__ == \"__main__\":\r\n    # Loader(\"2024-01-01\", \"2024-02-29\", 5)\r\n    # Loader(\"2023-01-01\", \"2023-12-31\", 2)\r\n    # Loader(\"2023-01-01\", \"2023-12-31\", 2)\r\n    pass",
    "comment": "",
-   "last_line": "19",
-   "q2_time": "20240228013210",
+   "last_line": "220",
+   "q2_time": "20240228115608",
    "q2_mode": "u"
   },
   {
@@ -82,10 +82,10 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2024-02-28 01:32:20'",
+   "script": "self.app_version = '2024-02-28 12:06:52'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20240228013220",
+   "q2_time": "20240228120652",
    "q2_mode": "u"
   }
  ],
@@ -298,12 +298,12 @@
    "menu_icon": "\u2655",
    "menu_tiptext": "",
    "menu_separator": "*",
-   "toolbar": "",
+   "toolbar": "*",
    "ok_button": "",
    "cancel_button": "",
    "view_action": "",
    "form_table": "sales",
-   "form_table_sort": "",
+   "form_table_sort": "date",
    "comment": "",
    "before_form_build": "",
    "before_grid_build": "",
@@ -318,7 +318,7 @@
    "form_valid": "",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240228003800",
+   "q2_time": "20240228110335",
    "q2_mode": "u"
   },
   {
@@ -1592,7 +1592,7 @@
    "stretch": "0",
    "tag": "",
    "control": "radio",
-   "pic": "Amazon;eBay;Etsy;Shopify;Easybill",
+   "pic": "Amazon DE;eBay;Etsy;Shopify;Easybill;Amazon FR",
    "datatype": "int",
    "datalen": "0",
    "datadec": "0",
@@ -1607,7 +1607,7 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20240227212349",
+   "q2_time": "20240228085202",
    "q2_mode": "u"
   },
   {
@@ -2358,6 +2358,26 @@
    "q2_mode": "i"
   },
   {
+   "id": "23",
+   "name": "sales",
+   "action_text": "Total",
+   "seq": "1",
+   "action_mode": "2",
+   "action_mess": "",
+   "action_icon": "\u2211",
+   "action_key": "F2",
+   "tag": "",
+   "eof_disabled": "*",
+   "child_form": "",
+   "child_where": "",
+   "child_noshow": "",
+   "child_copy_mode": "1",
+   "action_worker": "selected_rows = mem.get_grid_selected_rows()\r\ntot_betrag = 0\r\ntot_kosten = 0\r\nif len(selected_rows) > 1:\r\n    _range = selected_rows\r\nelse:\r\n    _range = range(mem.model.row_count())\r\n\r\n\r\nfor x in _range:\r\n    tot_betrag += num(mem.model.get_record(x)[\"betrag\"])\r\n    tot_kosten += num(mem.model.get_record(x)[\"kosten\"])\r\n    \r\nq2mess(f\"Betrag: <b>{tot_betrag}</b><br>\" \r\n               f\"Kosten: <b>{tot_kosten}</b><br>\")",
+   "comment": "",
+   "q2_time": "20240228110852",
+   "q2_mode": "u"
+  },
+  {
    "id": "17",
    "name": "shops",
    "action_text": "",
@@ -2412,9 +2432,9 @@
    "child_where": "",
    "child_noshow": "",
    "child_copy_mode": "1",
-   "action_worker": "# if not hasattr(form, \"prev_form\"):\r\n    # q2mess('Geh in Ref/Konto, w\u00e4hle eine Konto und mach Actions/Herunterladen!')\r\n    # return\r\n\r\n# run_module(\"load_bank\", import_only=True)\r\nimport load_sales\r\nimport q2date\r\n\r\nform_loader = Q2Form(\"Import sales data \")\r\n# form_loader.add_control(\"/f\", \"Herunterladen Bank Data\")\r\n# form_loader.add_control(\"konto_id\", \"Konto\", datatype=\"int\", to_field=\"konto_id\", to_table=\"konten\", related=\"123\", to_form=\"konten\", data=1 )\r\nform_loader.add_control(\"date1\", \"From\", datatype=\"date\", data = q2date(today()).first_day_of_month())\r\nform_loader.add_control(\"date2\", \"to\", datatype=\"date\", data = q2date(today()).last_day_of_month())\r\n\r\nform_loader.ok_button =1\r\nform_loader.cancel_button =1\r\n\r\nform_loader.run()\r\n\r\nif form_loader.ok_pressed:\r\n    date1 = form_loader.s.date1\r\n    date2 = form_loader.s.date2\r\n    Loader(date1,date2,form.r.konto_id)\r\n    # import set_gegenkonto\r\n    # set_gegenkonto()\r\n    mem.refresh()",
+   "action_worker": "# if not hasattr(form, \"prev_form\"):\r\n    # q2mess('Geh in Ref/Konto, w\u00e4hle eine Konto und mach Actions/Herunterladen!')\r\n    # return\r\n\r\n# run_module(\"load_bank\", import_only=True)\r\nimport load_sales\r\nimport q2date\r\n\r\nform_loader = Q2Form(\"Import sales data \")\r\n# form_loader.add_control(\"/f\", \"Herunterladen Bank Data\")\r\n# form_loader.add_control(\"konto_id\", \"Konto\", datatype=\"int\", to_field=\"konto_id\", to_table=\"konten\", related=\"123\", to_form=\"konten\", data=1 )\r\nform_loader.add_control(\"date1\", \"From\", datatype=\"date\", data = q2date(today()).first_day_of_month())\r\nform_loader.add_control(\"date2\", \"to\", datatype=\"date\", data = q2date(today()).last_day_of_month())\r\n\r\nform_loader.ok_button =1\r\nform_loader.cancel_button =1\r\n\r\nform_loader.run()\r\n\r\nif form_loader.ok_pressed:\r\n    date1 = form_loader.s.date1\r\n    date2 = form_loader.s.date2\r\n    Loader(date1,date2,form.r.shop_id)\r\n    # import set_gegenkonto\r\n    # set_gegenkonto()\r\n    mem.refresh()",
    "comment": "",
-   "q2_time": "20240228011326",
+   "q2_time": "20240228093817",
    "q2_mode": "u"
   }
  ],
