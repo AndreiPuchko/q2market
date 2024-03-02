@@ -26,10 +26,10 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2024-03-02 20:38:31'",
+   "script": "self.app_version = '2024-03-02 20:54:55'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20240302203831",
+   "q2_time": "20240302205455",
    "q2_mode": "u"
   }
  ],
@@ -1639,9 +1639,9 @@
    "child_where": "",
    "child_noshow": "",
    "child_copy_mode": "1",
-   "action_worker": "from q2utils import q2choice\r\ncu = q2cursor(f\"select gd_name as name, gd_id as id from templates where parent_id={mem.r.parent_id}\")\r\nif cu.row_count() > 1:\r\n    choice = q2choice([x for x in cu.records()],      \r\n            \"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0448\u0430\u0431\u043b\u043e\u043d \u0434\u043b\u044f \u0441\u043b\u0438\u044f\u043d\u0438\u044f\",         \r\n            ['\u0418\u043c\u044f', '\u041a\u043e\u0434'] )\r\nelse:\r\n    choice = cu.record(0)\r\n\r\nif choice:\r\n    \r\n    def worker(choice=choice, mem=mem):\r\n        row = self.heap.gd. load_sheet_row_dict(get(\"datas\", f\"id = {mem.r.parent_id}\", \"gd_id\"), 0,  mem.r.rownumber)\r\n\r\n        if len(row) == 0:\r\n            return\r\n        \r\n        d2d=q2data2docx()\r\n        d2d.setJsonBinary(json.dumps(row))\r\n        d2d.setDocxTemplateBinary(self.heap.gd.load_docs(choice['id']))\r\n        if d2d.merge():\r\n            d2d.saveFile(\"temp/repo.docx\")\r\n    q2working(worker, \"\u0421\u043b\u0438\u044f\u043d\u0438\u0435...\")",
+   "action_worker": "from q2rad.q2utils import q2choice\r\ncu = q2cursor(f\"select gd_name as name, gd_id as id from templates where parent_id={mem.r.parent_id}\")\r\nif cu.row_count() > 1:\r\n    choice = q2choice([x for x in cu.records()],      \r\n            \"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0448\u0430\u0431\u043b\u043e\u043d \u0434\u043b\u044f \u0441\u043b\u0438\u044f\u043d\u0438\u044f\",         \r\n            ['\u0418\u043c\u044f', '\u041a\u043e\u0434'] )\r\nelse:\r\n    choice = cu.record(0)\r\n\r\nif choice:\r\n    \r\n    def worker(choice=choice, mem=mem):\r\n        row = self.heap.gd. load_sheet_row_dict(get(\"datas\", f\"id = {mem.r.parent_id}\", \"gd_id\"), 0,  mem.r.rownumber)\r\n\r\n        if len(row) == 0:\r\n            return\r\n        \r\n        d2d=q2data2docx()\r\n        d2d.setJsonBinary(json.dumps(row))\r\n        d2d.setDocxTemplateBinary(self.heap.gd.load_docs(choice['id']))\r\n        if d2d.merge():\r\n            d2d.saveFile(\"temp/repo.docx\")\r\n    q2working(worker, \"\u0421\u043b\u0438\u044f\u043d\u0438\u0435...\")",
    "comment": "",
-   "q2_time": "20240302160554",
+   "q2_time": "20240302205448",
    "q2_mode": "u"
   },
   {
