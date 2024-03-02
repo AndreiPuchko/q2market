@@ -26,11 +26,11 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2024-03-02 20:07:14'",
+   "script": "self.app_version = '2024-03-02 20:38:31'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20240302200714",
-   "q2_mode": "i"
+   "q2_time": "20240302203831",
+   "q2_mode": "u"
   }
  ],
  "forms": [
@@ -296,8 +296,8 @@
    "comment": "",
    "code_when": "",
    "code_show": "",
-   "code_valid": "from q2utils import q2choice\r\nsheets = myapp.heap.gd.dir(f\"mimeType='application/vnd.google-apps.spreadsheet' and name contains '{mem.s.name}'\")\r\nrez = q2choice(\r\n        [{'name':x['name'], 'id':x['id']} for x in sheets],\r\n        title=\"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0430\u0431\u043b\u0438\u0446\u0443\",\r\n        column_title=[\"\u0418\u043c\u044f\", \"\u041a\u043e\u0434\"],\r\n    )\r\nif rez:\r\n    mem.s.gd_name = rez['name']\r\n    mem.s.gd_id = rez['id']",
-   "q2_time": "20240301235347",
+   "code_valid": "from q2rad.q2utils import q2choice\r\nsheets = myapp.heap.gd.dir(f\"mimeType='application/vnd.google-apps.spreadsheet' and name contains '{mem.s.name}'\")\r\nrez = q2choice(\r\n        [{'name':x['name'], 'id':x['id']} for x in sheets],\r\n        title=\"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0430\u0431\u043b\u0438\u0446\u0443\",\r\n        column_title=[\"\u0418\u043c\u044f\", \"\u041a\u043e\u0434\"],\r\n    )\r\nif rez:\r\n    mem.s.gd_name = rez['name']\r\n    mem.s.gd_id = rez['id']",
+   "q2_time": "20240302203807",
    "q2_mode": "u"
   },
   {
@@ -1319,8 +1319,8 @@
    "comment": "",
    "code_when": "",
    "code_show": "",
-   "code_valid": "from q2utils import q2choice\r\nsheets = myapp.heap.gd.dir(f\"mimeType='application/vnd.google-apps.document' and name contains '{mem.s.name}'\")\r\nrez = q2choice(\r\n        [{'name':x['name'], 'id':x['id']} for x in sheets],\r\n        title=\"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\",\r\n        column_title=[\"\u0418\u043c\u044f\", \"\u041a\u043e\u0434\"],\r\n    )\r\nif rez:\r\n    mem.s.gd_name = rez['name']\r\n    mem.s.gd_id = rez['id']",
-   "q2_time": "20240302161439",
+   "code_valid": "from q2rad.q2utils import q2choice\r\nsheets = myapp.heap.gd.dir(f\"mimeType='application/vnd.google-apps.document' and name contains '{mem.s.name}'\")\r\nrez = q2choice(\r\n        [{'name':x['name'], 'id':x['id']} for x in sheets],\r\n        title=\"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\",\r\n        column_title=[\"\u0418\u043c\u044f\", \"\u041a\u043e\u0434\"],\r\n    )\r\nif rez:\r\n    mem.s.gd_name = rez['name']\r\n    mem.s.gd_id = rez['id']",
+   "q2_time": "20240302203824",
    "q2_mode": "u"
   },
   {
