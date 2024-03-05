@@ -10,10 +10,10 @@
   },
   {
    "name": "autorun",
-   "script": "# run_form(\"bank_af\")\r\n# const.ipath=\"C:\\\\Users\\\\andre\\\\My Drive\\\\Ing\"\r\n# Q2Lines().run()\r\n\r\n\r\nif myapp.db_data.table(\"banken\").row_count() <=0:\r\n    insert(\"banken\", {\"name\": \"-\"})\r\n    insert(\"banken\", {\"name\": \"Sparkasse\", \"algo\": 1})\r\n    insert(\"banken\", {\"name\": \"Postbank\", \"algo\": 2})\r\n    insert(\"banken\", {\"name\": \"ING\", \"algo\": 3})\r\n    insert(\"banken\", {\"name\": \"PayPal\", \"algo\": 4})\r\n    insert(\"banken\", {\"name\": \"Commerzbank\", \"algo\": 5})\r\n    insert(\"banken\", {\"name\": \"Finom\", \"algo\": 6})\r\n    insert(\"banken\", {\"name\": \"HypoVereinsbank\", \"algo\": 7})\r\n    \r\nif myapp.db_data.table(\"plattformen\").row_count() <=0:\r\n    insert(\"plattformen\", {\"name\": \"-\"})\r\n    insert(\"plattformen\", {\"name\": \"Amazon\", \"algo\": 1})\r\n    insert(\"plattformen\", {\"name\": \"eBay\", \"algo\": 2})\r\n    insert(\"plattformen\", {\"name\": \"Etsy\", \"algo\": 3})\r\n    insert(\"plattformen\", {\"name\": \"Shopify\", \"algo\": 4})\r\n    insert(\"plattformen\", {\"name\": \"Easybill\", \"algo\": 5})\r\n    \r\nif myapp.db_data.table(\"konten\").row_count() <=0:\r\n    insert(\"konten\", {\"konto_name\": \"-\", \"bk\":0})\r\n    \r\nif myapp.db_data.table(\"shops\").row_count() <=0:\r\n    insert(\"shops\", {\"name\": \"-\", \"pl\": 0})",
+   "script": "# run_form(\"bank_af\")\r\n# const.ipath=\"C:\\\\Users\\\\andre\\\\My Drive\\\\Ing\"\r\n# Q2Lines().run()\r\nconst.check(\"date1\", \"Beginn der Arbeitsperiode\", \"2024-01-01\")\r\nconst.check(\"date2\", \"Ende der Arbeitsperiode\", \"2024-03-31\")\r\n\r\n\r\nif myapp.db_data.table(\"banken\").row_count() <=0:\r\n    insert(\"banken\", {\"name\": \"-\"})\r\n    insert(\"banken\", {\"name\": \"Sparkasse\", \"algo\": 1})\r\n    insert(\"banken\", {\"name\": \"Postbank\", \"algo\": 2})\r\n    insert(\"banken\", {\"name\": \"ING\", \"algo\": 3})\r\n    insert(\"banken\", {\"name\": \"PayPal\", \"algo\": 4})\r\n    insert(\"banken\", {\"name\": \"Commerzbank\", \"algo\": 5})\r\n    insert(\"banken\", {\"name\": \"Finom\", \"algo\": 6})\r\n    insert(\"banken\", {\"name\": \"HypoVereinsbank\", \"algo\": 7})\r\n    \r\nif myapp.db_data.table(\"plattformen\").row_count() <=0:\r\n    insert(\"plattformen\", {\"name\": \"-\"})\r\n    insert(\"plattformen\", {\"name\": \"Amazon\", \"algo\": 1})\r\n    insert(\"plattformen\", {\"name\": \"eBay\", \"algo\": 2})\r\n    insert(\"plattformen\", {\"name\": \"Etsy\", \"algo\": 3})\r\n    insert(\"plattformen\", {\"name\": \"Shopify\", \"algo\": 4})\r\n    insert(\"plattformen\", {\"name\": \"Easybill\", \"algo\": 5})\r\n    \r\nif myapp.db_data.table(\"konten\").row_count() <=0:\r\n    insert(\"konten\", {\"konto_name\": \"-\", \"bk\":0})\r\n    \r\nif myapp.db_data.table(\"shops\").row_count() <=0:\r\n    insert(\"shops\", {\"name\": \"-\", \"pl\": 0})",
    "comment": "",
-   "last_line": "28",
-   "q2_time": "20240228003506",
+   "last_line": "5",
+   "q2_time": "20240305101343",
    "q2_mode": "u"
   },
   {
@@ -82,10 +82,10 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2024-03-04 20:17:12'",
+   "script": "self.app_version = '2024-03-05 10:49:59'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20240304201712",
+   "q2_time": "20240305104959",
    "q2_mode": "u"
   }
  ],
@@ -144,7 +144,7 @@
    "before_grid_build": "",
    "before_grid_show": "",
    "after_grid_show": "",
-   "before_form_show": "",
+   "before_form_show": "mem.s.date1=const.date1\r\nmem.s.date2 = const.date2",
    "after_form_show": "",
    "before_crud_save": "",
    "after_crud_save": "",
@@ -153,7 +153,7 @@
    "form_valid": "",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240228003552",
+   "q2_time": "20240305101545",
    "q2_mode": "u"
   },
   {
@@ -210,7 +210,7 @@
    "before_grid_build": "",
    "before_grid_show": "",
    "after_grid_show": "",
-   "before_form_show": "import q2date\r\nmem.s.date1=q2date(today()).first_day_of_month()\r\nmem.s.date2 = q2date(today()).last_day_of_month()",
+   "before_form_show": "import q2date\r\nmem.s.date1=const.date1\r\nmem.s.date2 = const.date2",
    "after_form_show": "",
    "before_crud_save": "",
    "after_crud_save": "",
@@ -219,7 +219,7 @@
    "form_valid": "q2cursor(f\"\"\"\r\n               select shops.name, land, mwst\r\n                    , round(sum(sales.betrag),2) as betrag\r\n                    , round(sum(sales.kosten), 2) as kosten\r\n                from sales, shops\r\n                where sales.shop_id = shops.shop_id\r\n                    and date>= '{mem.s.date1}' and date<= '{mem.s.date2}'\r\n                group by shops.shop_id, land, mwst\r\n            \"\"\").browse()\r\nreturn False",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240304201637",
+   "q2_time": "20240305101413",
    "q2_mode": "u"
   },
   {
@@ -232,7 +232,7 @@
    "menu_icon": "",
    "menu_tiptext": "",
    "menu_separator": "",
-   "toolbar": "",
+   "toolbar": "*",
    "ok_button": "",
    "cancel_button": "",
    "view_action": "",
@@ -252,8 +252,8 @@
    "form_valid": "",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240227175038",
-   "q2_mode": "i"
+   "q2_time": "20240305101439",
+   "q2_mode": "u"
   },
   {
    "name": "konten_buchungs_algo",
@@ -375,7 +375,7 @@
    "before_grid_build": "",
    "before_grid_show": "",
    "after_grid_show": "",
-   "before_form_show": "",
+   "before_form_show": "mem.s.date1=const.date1\r\nmem.s.date2 = const.date2",
    "after_form_show": "",
    "before_crud_save": "",
    "after_crud_save": "",
@@ -384,7 +384,7 @@
    "form_valid": "",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240228143317",
+   "q2_time": "20240305101552",
    "q2_mode": "u"
   },
   {
@@ -397,7 +397,7 @@
    "menu_icon": "",
    "menu_tiptext": "",
    "menu_separator": "",
-   "toolbar": "",
+   "toolbar": "*",
    "ok_button": "",
    "cancel_button": "",
    "view_action": "",
@@ -417,7 +417,7 @@
    "form_valid": "",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240228163620",
+   "q2_time": "20240305101425",
    "q2_mode": "u"
   }
  ],
@@ -789,7 +789,7 @@
    "id": "51",
    "name": "berichte_sales",
    "column": "date1",
-   "label": "",
+   "label": "Von",
    "gridlabel": "",
    "seq": "0",
    "nogrid": "",
@@ -815,14 +815,14 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20240228170543",
-   "q2_mode": "i"
+   "q2_time": "20240305101032",
+   "q2_mode": "u"
   },
   {
    "id": "52",
    "name": "berichte_sales",
    "column": "date2",
-   "label": "",
+   "label": "bis",
    "gridlabel": "",
    "seq": "1",
    "nogrid": "",
@@ -848,8 +848,8 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20240228170553",
-   "q2_mode": "i"
+   "q2_time": "20240305101038",
+   "q2_mode": "u"
   },
   {
    "id": "12",
