@@ -10,10 +10,10 @@
   },
   {
    "name": "error_test.",
-   "script": "a=1\r\nb=2\r\n1+\"\"",
+   "script": "a=1\r\nb=2\r\n# 1+\"\"\r\n?self.ws2()",
    "comment": "print(123)",
-   "last_line": "0",
-   "q2_time": "20230725232740",
+   "last_line": "4",
+   "q2_time": "20240108212727",
    "q2_mode": "u"
   },
   {
@@ -49,6 +49,14 @@
    "q2_mode": "i"
   },
   {
+   "name": "on_new_tab",
+   "script": "# run_form(\"af\")",
+   "comment": "",
+   "last_line": "1",
+   "q2_time": "20240314170551",
+   "q2_mode": "u"
+  },
+  {
    "name": "pip_test",
    "script": "def update_from_git(package=\"\"):\r\n    from q2terminal.q2terminal import Q2Terminal\r\n    def callback(data):\r\n        ?data\r\n    trm = Q2Terminal(callback=callback)\r\n    executable = sys.executable.replace(\"w.exe\", \".exe\")\r\n    for x in q2_modules:\r\n        if not x.startswith(\"q2\"):\r\n            continue\r\n        if package and x != package:\r\n            continue\r\n        # trm.run(f\"{executable} -m pip show {x}\")[0]\r\n        # ?trm.run(f\"{executable} -m pip uninstall {x} -y\")\r\n        ?trm.run(f\"{executable} -m pip install  --upgrade --force-reinstall git+https://github.com/AndreiPuchko/{x}.git\")\r\n    ?\"Done\"\r\n            \r\nupdate_from_git(\"q2report\")",
    "comment": "",
@@ -74,10 +82,10 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2023-08-24 09:58:09'",
+   "script": "self.app_version = '2024-03-14 20:26:46'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20230824095809",
+   "q2_time": "20240314202646",
    "q2_mode": "u"
   }
  ],
@@ -169,7 +177,7 @@
    "before_grid_build": "",
    "before_grid_show": "",
    "after_grid_show": "",
-   "before_form_show": "def worker():\r\n    from urllib import request\r\n    from io import BytesIO, TextIOWrapper\r\n    from zipfile import ZipFile\r\n    from q2gui.q2model import Q2CsvModel\r\n    from q2gui.q2dialogs import q2Mess, q2Wait, q2working\r\n    from datetime import datetime\r\n\r\n    from q2rad.q2utils import q2choice\r\n\r\n    url = \"https://excelbianalytics.com/wp/downloads-18-sample-csv-files-data-sets-for-testing-sales/\"\r\n    req = request.Request(url, headers={\"User-Agent\": \"Safari\"})\r\n    data = str(q2working(lambda: request.urlopen(req).read(), \"Loading webpage...\"))\r\n\r\n    links = []\r\n    for x in data.split('<a href=\"'):\r\n        link = x.split('\">')[0]\r\n        if \".zip\" in link:\r\n            links.append({\"link\": link})\r\n    url = q2choice(links)\r\n    if not url:\r\n        return\r\n    # url = \"https://excelbianalytics.com/wp/wp-content/uploads/2017/07/5000-Sales-Records.zip\"\r\n\r\n\r\n\r\n    req = request.Request(url, headers={\"User-Agent\": \"Safari\"})\r\n\r\n    data = q2working(lambda: request.urlopen(req).read(), \"Loading file...\")\r\n\r\n    mem_zip_file_data = BytesIO()\r\n    mem_zip_file_data.write(data)\r\n    zip_file: ZipFile = ZipFile(mem_zip_file_data)\r\n    csv_file_object = TextIOWrapper(zip_file.open(zip_file.namelist()[0]))\r\n    model = q2working(lambda: Q2CsvModel(csv_file_object=csv_file_object), \"Downloading CSV\")\r\n\r\n    q2cursor(\"delete from sales\")\r\n\r\n    keys = list(model.records[0].keys())\r\n    wait=q2wait(len(model.records), \"Inserting records\")\r\n    transaction()\r\n    for rec in model.records:\r\n        wait.step(1000)\r\n        for col in keys:\r\n            rec[col.lower()] = rec[col]\r\n        rec[\"order_date\"] = datetime.strftime(datetime.strptime(rec[\"order_date\"], \"%m/%d/%Y\"), \"%Y-%m-%d\")\r\n        raw_insert(\"sales\", rec)\r\n    commit()\r\n    wait.close()\r\n    return \"Done\"\r\n\r\nworker()\r\nreturn False",
+   "before_form_show": "def worker():\r\n    from urllib import request\r\n    from io import BytesIO, TextIOWrapper\r\n    from zipfile import ZipFile\r\n    from q2gui.q2model import Q2CsvModel\r\n    from q2gui.q2dialogs import q2Mess, q2Wait, q2working\r\n    from datetime import datetime\r\n\r\n    from q2rad.q2utils import q2choice\r\n\r\n    url = \"https://excelbianalytics.com/wp/downloads-18-sample-csv-files-data-sets-for-testing-sales/\"\r\n    req = request.Request(url, headers={\"User-Agent\": \"Safari\"})\r\n    data = str(q2working(lambda: request.urlopen(req).read(), \"Loading webpage...\"))\r\n\r\n    links = []\r\n    for x in data.split('<a href=\"'):\r\n        link = x.split('\">')[0]\r\n        if \".zip\" in link:\r\n            links.append({\"link\": link})\r\n    url = q2choice(links)\r\n    if not url:\r\n        return\r\n    # url = \"https://excelbianalytics.com/wp/wp-content/uploads/2017/07/5000-Sales-Records.zip\"\r\n    req = request.Request(url['link'], headers={\"User-Agent\": \"Safari\"})\r\n\r\n    data = q2working(lambda: request.urlopen(req).read(), \"Loading file...\")\r\n\r\n    mem_zip_file_data = BytesIO()\r\n    mem_zip_file_data.write(data)\r\n    zip_file: ZipFile = ZipFile(mem_zip_file_data)\r\n    csv_file_object = TextIOWrapper(zip_file.open(zip_file.namelist()[0]))\r\n    model = q2working(lambda: Q2CsvModel(csv_file_object=csv_file_object), \"Downloading CSV\")\r\n\r\n    q2cursor(\"delete from sales\")\r\n\r\n    keys = list(model.records[0].keys())\r\n    wait=q2wait(len(model.records), \"Inserting records\")\r\n    transaction()\r\n    for rec in model.records:\r\n        wait.step(1000)\r\n        for col in keys:\r\n            rec[col.lower()] = rec[col]\r\n        rec[\"order_date\"] = datetime.strftime(datetime.strptime(rec[\"order_date\"], \"%m/%d/%Y\"), \"%Y-%m-%d\")\r\n        raw_insert(\"sales\", rec)\r\n    commit()\r\n    wait.close()\r\n    return \"Done\"\r\n\r\nworker()\r\nreturn False",
    "after_form_show": "",
    "before_crud_save": "",
    "after_crud_save": "",
@@ -177,7 +185,7 @@
    "after_delete": "",
    "form_valid": "",
    "after_form_closed": "",
-   "q2_time": "20230726123944",
+   "q2_time": "20240314202126",
    "q2_mode": "u",
    "no_view_action": "",
    "view_action": "",
@@ -285,7 +293,8 @@
    "q2_time": "20230725210428",
    "q2_mode": "i",
    "toolbar": "",
-   "tag": ""
+   "tag": "",
+   "stretch": "0"
   },
   {
    "id": "121",
@@ -318,7 +327,8 @@
    "q2_time": "20230725210428",
    "q2_mode": "i",
    "toolbar": "",
-   "tag": ""
+   "tag": "",
+   "stretch": "0"
   },
   {
    "id": "122",
@@ -351,7 +361,8 @@
    "q2_time": "20230725210428",
    "q2_mode": "i",
    "toolbar": "",
-   "tag": ""
+   "tag": "",
+   "stretch": "0"
   },
   {
    "id": "123",
@@ -384,7 +395,8 @@
    "q2_time": "20230725210428",
    "q2_mode": "i",
    "toolbar": "",
-   "tag": ""
+   "tag": "",
+   "stretch": "0"
   },
   {
    "id": "124",
@@ -417,7 +429,8 @@
    "q2_time": "20230725210429",
    "q2_mode": "i",
    "toolbar": "",
-   "tag": ""
+   "tag": "",
+   "stretch": "0"
   },
   {
    "id": "125",
@@ -450,7 +463,8 @@
    "q2_time": "20230725210429",
    "q2_mode": "i",
    "toolbar": "",
-   "tag": ""
+   "tag": "",
+   "stretch": "0"
   },
   {
    "id": "126",
@@ -483,7 +497,8 @@
    "q2_time": "20230725210429",
    "q2_mode": "i",
    "toolbar": "",
-   "tag": ""
+   "tag": "",
+   "stretch": "0"
   },
   {
    "id": "127",
@@ -516,7 +531,8 @@
    "q2_time": "20230725210429",
    "q2_mode": "i",
    "toolbar": "",
-   "tag": ""
+   "tag": "",
+   "stretch": "0"
   },
   {
    "id": "128",
@@ -549,7 +565,8 @@
    "q2_time": "20230725210429",
    "q2_mode": "i",
    "toolbar": "",
-   "tag": ""
+   "tag": "",
+   "stretch": "0"
   },
   {
    "id": "129",
@@ -582,7 +599,8 @@
    "q2_time": "20230727174705",
    "q2_mode": "u",
    "toolbar": "",
-   "tag": ""
+   "tag": "",
+   "stretch": "0"
   },
   {
    "id": "130",
@@ -615,7 +633,8 @@
    "q2_time": "20230725210429",
    "q2_mode": "i",
    "toolbar": "",
-   "tag": ""
+   "tag": "",
+   "stretch": "0"
   },
   {
    "id": "131",
@@ -648,7 +667,8 @@
    "q2_time": "20230726123938",
    "q2_mode": "u",
    "toolbar": "",
-   "tag": ""
+   "tag": "",
+   "stretch": "0"
   },
   {
    "id": "132",
@@ -678,10 +698,11 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20230726123938",
+   "q2_time": "20231211000638",
    "q2_mode": "u",
    "toolbar": "",
-   "tag": ""
+   "tag": "",
+   "stretch": "0"
   },
   {
    "id": "133",
@@ -714,7 +735,8 @@
    "q2_time": "20230726123938",
    "q2_mode": "u",
    "toolbar": "",
-   "tag": ""
+   "tag": "",
+   "stretch": "0"
   },
   {
    "id": "134",
@@ -747,7 +769,8 @@
    "q2_time": "20230726123938",
    "q2_mode": "u",
    "toolbar": "",
-   "tag": ""
+   "tag": "",
+   "stretch": "0"
   },
   {
    "id": "135",
@@ -780,7 +803,8 @@
    "q2_time": "20230726123938",
    "q2_mode": "u",
    "toolbar": "",
-   "tag": ""
+   "tag": "",
+   "stretch": "0"
   },
   {
    "id": "136",
@@ -813,7 +837,8 @@
    "q2_time": "20230726123938",
    "q2_mode": "u",
    "toolbar": "",
-   "tag": ""
+   "tag": "",
+   "stretch": "0"
   },
   {
    "id": "137",
@@ -846,7 +871,8 @@
    "q2_time": "20230726123938",
    "q2_mode": "u",
    "toolbar": "",
-   "tag": ""
+   "tag": "",
+   "stretch": "0"
   },
   {
    "id": "138",
@@ -879,7 +905,8 @@
    "q2_time": "20230726123938",
    "q2_mode": "u",
    "toolbar": "",
-   "tag": ""
+   "tag": "",
+   "stretch": "0"
   },
   {
    "id": "139",
@@ -912,7 +939,8 @@
    "q2_time": "20230726123938",
    "q2_mode": "u",
    "toolbar": "",
-   "tag": ""
+   "tag": "",
+   "stretch": "0"
   }
  ],
  "queries": [
@@ -980,10 +1008,11 @@
  "packages": [
   {
    "package_name": "matplotlib",
-   "package_version": "",
+   "package_version": "3.8.1",
    "comment": "",
-   "q2_time": "20230629230617",
-   "q2_mode": "i"
+   "q2_time": "20240314190824",
+   "q2_mode": "u",
+   "package_alias": ""
   }
  ]
 }
