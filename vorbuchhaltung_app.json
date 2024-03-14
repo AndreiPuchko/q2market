@@ -114,10 +114,10 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2024-03-14 10:28:39'",
+   "script": "self.app_version = '2024-03-14 10:54:00'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20240314102839",
+   "q2_time": "20240314105400",
    "q2_mode": "u"
   }
  ],
@@ -3705,10 +3705,10 @@
    "child_where": "",
    "child_noshow": "",
    "child_copy_mode": "1",
-   "action_worker": "# if not hasattr(form, \"prev_form\"):\r\n    # q2mess('Geh in Ref/Konto, w\u00e4hle eine Konto und mach Actions/Herunterladen!')\r\n    # return\r\n\r\n# run_module(\"load_bank\", import_only=True)\r\nimport load_sales\r\nimport q2date\r\n\r\nform_loader = Q2Form(\"Import sales data \")\r\n# form_loader.add_control(\"/f\", \"Herunterladen Bank Data\")\r\n# form_loader.add_control(\"konto_id\", \"Konto\", datatype=\"int\", to_field=\"konto_id\", to_table=\"konten\", related=\"123\", to_form=\"konten\", data=1 )\r\nform_loader.add_control(\"date1\", \"From\", datatype=\"date\", data = const.date1)\r\nform_loader.add_control(\"date2\", \"to\", datatype=\"date\", data = const.date2)\r\n\r\nform_loader.ok_button =1\r\nform_loader.cancel_button =1\r\n\r\nform_loader.run()\r\n\r\nif form_loader.ok_pressed:\r\n    date1 = form_loader.s.date1\r\n    date2 = form_loader.s.date2\r\n    Loader(date1,date2,form.r.shop_id)\r\n    # import set_gegenkonto\r\n    # set_gegenkonto()\r\n    mem.refresh()",
+   "action_worker": "# if not hasattr(form, \"prev_form\"):\r\n    # q2mess('Geh in Ref/Konto, w\u00e4hle eine Konto und mach Actions/Herunterladen!')\r\n    # return\r\n\r\n# run_module(\"load_bank\", import_only=True)\r\nimport load_sales\r\nimport q2date\r\n\r\nform_loader = Q2Form(\"Import sales data \")\r\n# form_loader.add_control(\"/f\", \"Herunterladen Bank Data\")\r\n# form_loader.add_control(\"konto_id\", \"Konto\", datatype=\"int\", to_field=\"konto_id\", to_table=\"konten\", related=\"123\", to_form=\"konten\", data=1 )\r\nform_loader.add_control(\"date1\", \"From\", datatype=\"date\", data = const.date1)\r\nform_loader.add_control(\"date2\", \"to\", datatype=\"date\", data = const.date2)\r\n\r\nform_loader.ok_button =1\r\nform_loader.cancel_button =1\r\n\r\nform_loader.run()\r\n\r\nif form_loader.ok_pressed:\r\n    date1 = form_loader.s.date1\r\n    date2 = form_loader.s.date2\r\n    Loader(date1,date2,form.r.shop_id)\r\n    import set_gegenkonto_sales\r\n    set_gegenkonto_sales(mem.r.shop_id)\r\n    mem.refresh()",
    "comment": "",
-   "q2_time": "20240307220937",
-   "q2_mode": "i"
+   "q2_time": "20240314104418",
+   "q2_mode": "u"
   },
   {
    "id": "48",
