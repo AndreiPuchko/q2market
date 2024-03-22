@@ -34,10 +34,10 @@
   },
   {
    "name": "autorun",
-   "script": "from q2googledrive import q2googledrive\r\n\r\nself.heap.gd = q2googledrive(service_account_key=const.servicekey)\r\n# if self.heap.gd is None and len(const.secrets) != 0 and len(const.token) !=0:\r\n    # self.heap.gd = q2googledrive(token=const.token, secrets=const.secrets)\r\n    # if self.heap.gd.drive is None:\r\n        # self.heap.gd = None\r\n        \r\n# run_form(\"datas\")\r\n# run_form(\"sheet_keys\")\r\n# if self.dev_mode:\r\n    # self.run_forms()",
+   "script": "from q2googledrive import q2googledrive\r\n\r\nself.heap.gd = q2googledrive(service_account_key=const.servicekey)\r\n# if self.heap.gd is None and len(const.secrets) != 0 and len(const.token) !=0:\r\n    # self.heap.gd = q2googledrive(token=const.token, secrets=const.secrets)\r\n    # if self.heap.gd.drive is None:\r\n        # self.heap.gd = None\r\n        \r\nrun_form(\"datas\")\r\n# run_form(\"sheet_keys\")\r\n# if self.dev_mode:\r\n    # self.run_forms()",
    "comment": "",
-   "last_line": "12",
-   "q2_time": "20240320230359",
+   "last_line": "9",
+   "q2_time": "20240322153939",
    "q2_mode": "u"
   },
   {
@@ -50,10 +50,10 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2024-03-20 23:04:23'",
+   "script": "self.app_version = '2024-03-22 21:08:07'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20240320230423",
+   "q2_time": "20240322210807",
    "q2_mode": "u"
   }
  ],
@@ -142,7 +142,7 @@
    "form_table_sort": "",
    "comment": "",
    "before_form_build": "",
-   "before_grid_build": "",
+   "before_grid_build": "def load_docs_row(mem=mem):\r\n    def loader_worker(mem=mem):\r\n        return self.heap.gd. load_sheet_row_dict(get(\"datas\", f\"id = {mem.r.parent_id}\", \"gd_id\"), 0,  mem.r.rownumber)\r\n\r\n    sheet = q2working(loader_worker, \"\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430 \u0434\u0430\u043d\u043d\u044b\u0445...\")\r\n    import _row_extender\r\n    data = sheet[list(sheet.keys())[0]][mem.r.rownumber]\r\n    row_extender(data, mem.r.parent_id)\r\n    return data\r\n    \r\nmem.heap.load_docs_row = load_docs_row",
    "before_grid_show": "",
    "after_grid_show": "",
    "before_form_show": "",
@@ -154,7 +154,7 @@
    "form_valid": "",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240301173423",
+   "q2_time": "20240322110923",
    "q2_mode": "u"
   },
   {
@@ -224,7 +224,8 @@
    "code_valid": "",
    "q2_time": "20240319121430",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "4",
@@ -258,7 +259,8 @@
    "code_valid": "",
    "q2_time": "20240320201428",
    "q2_mode": "u",
-   "mess": "\u041d\u043e\u043c\u0435\u0440\u0430 \u0438\u043b\u0438 \u0431\u0443\u043a\u0432\u044b \u0437\u0430\u0433\u0440\u0443\u0436\u0430\u0435\u043c\u044b\u0445 \u043a\u043e\u043b\u043e\u043d\u043e\u043a<br>\u041c\u043e\u0436\u043d\u043e \u0443\u043a\u0430\u0437\u0430\u0442\u044c \u043d\u0435\u0441\u043a\u043e\u043b\u044c\u043a\u043e, \u0440\u0430\u0437\u0434\u0435\u043b\u0438\u0432 \u0441\u0438\u043c\u0432\u043e\u043b\u0430\u043c\u0438 + \u0438\u043b\u0438 , \u0438\u043b\u0438 \u043f\u0440\u043e\u0431\u0435\u043b\u043e\u043c"
+   "mess": "\u041d\u043e\u043c\u0435\u0440\u0430 \u0438\u043b\u0438 \u0431\u0443\u043a\u0432\u044b \u0437\u0430\u0433\u0440\u0443\u0436\u0430\u0435\u043c\u044b\u0445 \u043a\u043e\u043b\u043e\u043d\u043e\u043a<br>\u041c\u043e\u0436\u043d\u043e \u0443\u043a\u0430\u0437\u0430\u0442\u044c \u043d\u0435\u0441\u043a\u043e\u043b\u044c\u043a\u043e, \u0440\u0430\u0437\u0434\u0435\u043b\u0438\u0432 \u0441\u0438\u043c\u0432\u043e\u043b\u0430\u043c\u0438 + \u0438\u043b\u0438 , \u0438\u043b\u0438 \u043f\u0440\u043e\u0431\u0435\u043b\u043e\u043c",
+   "alignment": "0"
   },
   {
    "id": "13",
@@ -292,7 +294,8 @@
    "code_valid": "",
    "q2_time": "20240319121430",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "14",
@@ -326,7 +329,8 @@
    "code_valid": "from q2rad.q2utils import q2choice\r\nsheets = myapp.heap.gd.dir(f\"mimeType='application/vnd.google-apps.spreadsheet' and name contains '{mem.s.name}'\")\r\nrez = q2choice(\r\n        [{'name':x['name'], 'id':x['id']} for x in sheets],\r\n        title=\"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0430\u0431\u043b\u0438\u0446\u0443\",\r\n        column_title=[\"\u0418\u043c\u044f\", \"\u041a\u043e\u0434\"],\r\n    )\r\nif rez:\r\n    mem.s.gd_name = rez['name']\r\n    mem.s.gd_id = rez['id']",
    "q2_time": "20240319121430",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "15",
@@ -360,7 +364,8 @@
    "code_valid": "",
    "q2_time": "20240319121430",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "16",
@@ -394,7 +399,8 @@
    "code_valid": "",
    "q2_time": "20240319121430",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "21",
@@ -428,7 +434,8 @@
    "code_valid": "",
    "q2_time": "20240320191229",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "26",
@@ -462,7 +469,8 @@
    "code_valid": "",
    "q2_time": "20240319121430",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "27",
@@ -496,7 +504,8 @@
    "code_valid": "",
    "q2_time": "20240319121430",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "30",
@@ -530,7 +539,8 @@
    "code_valid": "",
    "q2_time": "20240320191229",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "36",
@@ -564,7 +574,8 @@
    "code_valid": "myapp.heap.gd.open_sheet(mem.s.gd_id)",
    "q2_time": "20240319121430",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "37",
@@ -598,7 +609,8 @@
    "code_valid": "",
    "q2_time": "20240319121430",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "38",
@@ -632,7 +644,8 @@
    "code_valid": "",
    "q2_time": "20240319121430",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "39",
@@ -666,7 +679,8 @@
    "code_valid": "mem.s.gd_name = myapp.heap.gd.get(mem.s.gd_id)['name']",
    "q2_time": "20240319121430",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "44",
@@ -700,7 +714,8 @@
    "code_valid": "",
    "q2_time": "20240320191229",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "5",
@@ -734,7 +749,8 @@
    "code_valid": "",
    "q2_time": "20240310204148",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "6",
@@ -768,7 +784,8 @@
    "code_valid": "",
    "q2_time": "20240301201653",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "8",
@@ -802,7 +819,8 @@
    "code_valid": "self.heap.gd = q2googledrive(service_account_key=mem.s.servicekey)",
    "q2_time": "20240310204147",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "9",
@@ -836,7 +854,8 @@
    "code_valid": "",
    "q2_time": "20240310204147",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "11",
@@ -870,7 +889,8 @@
    "code_valid": "",
    "q2_time": "20240310204147",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "12",
@@ -904,7 +924,8 @@
    "code_valid": "",
    "q2_time": "20240310204147",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "47",
@@ -938,7 +959,8 @@
    "code_valid": "",
    "q2_time": "20240310204148",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "17",
@@ -972,7 +994,8 @@
    "code_valid": "",
    "q2_time": "20240301172241",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "18",
@@ -1006,7 +1029,8 @@
    "code_valid": "",
    "q2_time": "20240301172241",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "19",
@@ -1040,7 +1064,8 @@
    "code_valid": "",
    "q2_time": "20240301172241",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "20",
@@ -1074,7 +1099,8 @@
    "code_valid": "",
    "q2_time": "20240302003328",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "22",
@@ -1108,7 +1134,8 @@
    "code_valid": "",
    "q2_time": "20240302161219",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "23",
@@ -1142,7 +1169,8 @@
    "code_valid": "",
    "q2_time": "20240302161228",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "28",
@@ -1176,7 +1204,8 @@
    "code_valid": "",
    "q2_time": "20240302161228",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "29",
@@ -1210,7 +1239,8 @@
    "code_valid": "",
    "q2_time": "20240302161229",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "31",
@@ -1244,7 +1274,8 @@
    "code_valid": "",
    "q2_time": "20240302161231",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "32",
@@ -1278,7 +1309,8 @@
    "code_valid": "",
    "q2_time": "20240302161230",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "33",
@@ -1312,7 +1344,8 @@
    "code_valid": "",
    "q2_time": "20240302161230",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "34",
@@ -1346,7 +1379,8 @@
    "code_valid": "from q2rad.q2utils import q2choice\r\nsheets = myapp.heap.gd.dir(f\"mimeType='application/vnd.google-apps.document' and name contains '{mem.s.name}'\")\r\nrez = q2choice(\r\n        [{'name':x['name'], 'id':x['id']} for x in sheets],\r\n        title=\"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\",\r\n        column_title=[\"\u0418\u043c\u044f\", \"\u041a\u043e\u0434\"],\r\n    )\r\nif rez:\r\n    mem.s.gd_name = rez['name']\r\n    mem.s.gd_id = rez['id']",
    "q2_time": "20240310135011",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "35",
@@ -1380,7 +1414,8 @@
    "code_valid": "",
    "q2_time": "20240302161230",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "40",
@@ -1414,7 +1449,8 @@
    "code_valid": "",
    "q2_time": "20240302161228",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "41",
@@ -1448,7 +1484,8 @@
    "code_valid": "myapp.heap.gd.open_document(mem.s.gd_id)",
    "q2_time": "20240302161229",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "42",
@@ -1482,7 +1519,8 @@
    "code_valid": "mem.s.gd_name = myapp.heap.gd.get(mem.s.gd_id)['name']",
    "q2_time": "20240302161229",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "43",
@@ -1516,7 +1554,8 @@
    "code_valid": "",
    "q2_time": "20240302161229",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "45",
@@ -1550,7 +1589,8 @@
    "code_valid": "",
    "q2_time": "20240302161231",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   }
  ],
  "queries": [],
@@ -1670,16 +1710,16 @@
    "child_where": "",
    "child_noshow": "",
    "child_copy_mode": "1",
-   "action_worker": "from q2rad.q2utils import q2choice\r\ncu = q2cursor(f\"select gd_name as name, gd_id as id from templates where parent_id={mem.r.parent_id}\")\r\nif cu.row_count() > 1:\r\n    choice = q2choice([x for x in cu.records()],\r\n                                \"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0448\u0430\u0431\u043b\u043e\u043d \u0434\u043b\u044f \u0441\u043b\u0438\u044f\u043d\u0438\u044f\",\r\n                                ['\u0418\u043c\u044f', '\u041a\u043e\u0434'])\r\nelse:\r\n    choice = cu.record(0)\r\n\r\nif choice:\r\n    def loader_worker(choice=choice, mem=mem):\r\n        return self.heap.gd. load_sheet_row_dict(get(\"datas\", f\"id = {mem.r.parent_id}\", \"gd_id\"), 0,  mem.r.rownumber)\r\n\r\n    sheet = q2working(loader_worker, \"\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430 \u0434\u0430\u043d\u043d\u044b\u0445...\")\r\n    import _row_extender\r\n    \r\n    rows = sheet[list(sheet.keys())[0]]\r\n    row_extender(rows[list(rows.keys())[0]], mem.r.parent_id)\r\n   \r\n    def merge_worker(sheet=sheet, choice=choice):\r\n        d2d=q2data2docx()\r\n        d2d.setJsonBinary(json.dumps(sheet))\r\n        d2d.setDocxTemplateBinary(self.heap.gd.load_docs(choice['id']))\r\n        if d2d.merge():\r\n            d2d.saveFile(\"temp/repo.docx\")\r\n    q2working(merge_worker, \"\u0421\u043b\u0438\u044f\u043d\u0438\u0435...\")",
+   "action_worker": "from q2rad.q2utils import q2choice\r\ncu = q2cursor(f\"select gd_name as name, gd_id as id from templates where parent_id={mem.r.parent_id}\")\r\nif cu.row_count() > 1:\r\n    choice = q2choice([x for x in cu.records()],\r\n                                \"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0448\u0430\u0431\u043b\u043e\u043d \u0434\u043b\u044f \u0441\u043b\u0438\u044f\u043d\u0438\u044f\",\r\n                                ['\u0418\u043c\u044f', '\u041a\u043e\u0434'])\r\nelse:\r\n    choice = cu.record(0)\r\n\r\nif choice:\r\n    sheet = mem.heap.load_docs_row()\r\n    def merge_worker(sheet=sheet, choice=choice):\r\n        d2d=q2data2docx()\r\n        d2d.setJsonBinary(json.dumps(sheet))\r\n        d2d.setDocxTemplateBinary(self.heap.gd.load_docs(choice['id']))\r\n        if d2d.merge():\r\n            d2d.saveFile(\"temp/repo.docx\")\r\n    q2working(merge_worker, \"\u0421\u043b\u0438\u044f\u043d\u0438\u0435...\")",
    "comment": "",
-   "q2_time": "20240320230304",
+   "q2_time": "20240322140307",
    "q2_mode": "u"
   },
   {
    "id": "14",
    "name": "sheet_keys",
    "action_text": "",
-   "seq": "2",
+   "seq": "3",
    "action_mode": "1",
    "action_mess": "",
    "action_icon": "",
@@ -1692,8 +1732,28 @@
    "child_copy_mode": "1",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20240309232058",
-   "q2_mode": "i"
+   "q2_time": "20240322110335",
+   "q2_mode": "u"
+  },
+  {
+   "id": "15",
+   "name": "sheet_keys",
+   "action_text": "\u0414\u0430\u043d\u043d\u044b\u0435",
+   "seq": "2",
+   "action_mode": "2",
+   "action_mess": "",
+   "action_icon": "",
+   "action_key": "",
+   "tag": "",
+   "eof_disabled": "",
+   "child_form": "",
+   "child_where": "",
+   "child_noshow": "",
+   "child_copy_mode": "1",
+   "action_worker": "q2mess(mem.heap.load_docs_row())",
+   "comment": "",
+   "q2_time": "20240322140311",
+   "q2_mode": "u"
   },
   {
    "id": "7",
