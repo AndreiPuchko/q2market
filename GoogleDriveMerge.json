@@ -58,10 +58,10 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2024-03-24 20:34:07'",
+   "script": "self.app_version = '2024-03-24 20:39:14'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20240324203407",
+   "q2_time": "20240324203914",
    "q2_mode": "u"
   }
  ],
@@ -684,8 +684,8 @@
    "comment": "",
    "code_when": "",
    "code_show": "",
-   "code_valid": "if self.heap.gd is None:\r\n    q2mess(\"\u0421\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u0435 \u0441 \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043c\u0438 \u0413\u0443\u0433\u043b \u043d\u0435 \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u043e!<br>\u041f\u0440\u043e\u0432\u0435\u0440\u044c\u0442\u0435 \u043d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438\")\r\n    return\r\n\r\nmem.s.gd_name = myapp.heap.gd.get(mem.s.gd_id)['name']",
-   "q2_time": "20240324130144",
+   "code_valid": "if self.heap.gd is None:\r\n    q2mess(\"\u0421\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u0435 \u0441 \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043c\u0438 \u0413\u0443\u0433\u043b \u043d\u0435 \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u043e!<br>\u041f\u0440\u043e\u0432\u0435\u0440\u044c\u0442\u0435 \u043d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438\")\r\n    return\r\nif mem.s.gd_id:\r\n    mem.s.gd_name = myapp.heap.gd.get(mem.s.gd_id)['name']",
+   "q2_time": "20240324203757",
    "q2_mode": "u",
    "mess": "",
    "alignment": "0"
@@ -1769,8 +1769,8 @@
    "comment": "",
    "code_when": "",
    "code_show": "",
-   "code_valid": "if self.heap.gd is None:\r\n    q2mess(\"\u0421\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u0435 \u0441 \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043c\u0438 \u0413\u0443\u0433\u043b \u043d\u0435 \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u043e!<br>\u041f\u0440\u043e\u0432\u0435\u0440\u044c\u0442\u0435 \u043d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438\")\r\n    return\r\n\r\nmem.s.gd_name = myapp.heap.gd.get(mem.s.gd_id)['name']",
-   "q2_time": "20240324130240",
+   "code_valid": "if self.heap.gd is None:\r\n    q2mess(\"\u0421\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u0435 \u0441 \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043c\u0438 \u0413\u0443\u0433\u043b \u043d\u0435 \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u043e!<br>\u041f\u0440\u043e\u0432\u0435\u0440\u044c\u0442\u0435 \u043d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438\")\r\n    return\r\n\r\nif mem.s.gd_id:\r\n    mem.s.gd_name = myapp.heap.gd.get(mem.s.gd_id)['name']",
+   "q2_time": "20240324203833",
    "q2_mode": "u",
    "mess": "",
    "alignment": "0"
