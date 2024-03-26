@@ -18,10 +18,10 @@
   },
   {
    "name": "autorun",
-   "script": "# run_form(\"bank_af\")\r\n# const.ipath=\"C:\\\\Users\\\\andre\\\\My Drive\\\\Ing\"\r\n# Q2Lines().run()\r\nconst.check(\"date1\", \"Beginn der Arbeitsperiode\", \"2024-01-01\")\r\nconst.check(\"date2\", \"Ende der Arbeitsperiode\", \"2024-01-31\")\r\n# run_form(\"berichte_sales\")\r\n# self.run_reports()\r\n# self.run_app_manager()\r\n\r\nif myapp.db_data.table(\"banken\").row_count() <=0:\r\n    insert(\"banken\", {\"name\": \"-\"})\r\n    insert(\"banken\", {\"name\": \"Sparkasse\", \"algo\": 1})\r\n    insert(\"banken\", {\"name\": \"Postbank\", \"algo\": 2})\r\n    insert(\"banken\", {\"name\": \"ING\", \"algo\": 3})\r\n    insert(\"banken\", {\"name\": \"PayPal\", \"algo\": 4})\r\n    insert(\"banken\", {\"name\": \"Commerzbank\", \"algo\": 5})\r\n    insert(\"banken\", {\"name\": \"Finom\", \"algo\": 6})\r\n    insert(\"banken\", {\"name\": \"HypoVereinsbank\", \"algo\": 7})\r\n    \r\nif myapp.db_data.table(\"plattformen\").row_count() <=0:\r\n    insert(\"plattformen\", {\"name\": \"-\"})\r\n    insert(\"plattformen\", {\"name\": \"Amazon\", \"algo\": 1})\r\n    insert(\"plattformen\", {\"name\": \"eBay\", \"algo\": 2})\r\n    insert(\"plattformen\", {\"name\": \"Etsy\", \"algo\": 3})\r\n    insert(\"plattformen\", {\"name\": \"Shopify\", \"algo\": 4})\r\n    insert(\"plattformen\", {\"name\": \"Easybill\", \"algo\": 5})\r\n    \r\nif myapp.db_data.table(\"konten\").row_count() <=0:\r\n    insert(\"konten\", {\"konto_name\": \"-\", \"bk\":0})\r\n    \r\nif myapp.db_data.table(\"shops\").row_count() <=0:\r\n    insert(\"shops\", {\"name\": \"-\", \"pl\": 0})\r\n    \r\nif myapp.db_data.table(\"country\").row_count() <=0:\r\n    insert(\"country\", {\"a2\":\"-\", \"name\": \"-\", \"pl\": 0})\r\n    insert('country', {'a2':'AF', 'a3':'AFG', 'name':'Afghanistan'})\r\n    insert('country', {'a2':'AX', 'a3':'ALA', 'name':'\u00c5land Islands'})\r\n    insert('country', {'a2':'AL', 'a3':'ALB', 'name':'Albania'})\r\n    insert('country', {'a2':'DZ', 'a3':'DZA', 'name':'Algeria'})\r\n    insert('country', {'a2':'AS', 'a3':'ASM', 'name':'American Samoa'})\r\n    insert('country', {'a2':'AD', 'a3':'AND', 'name':'Andorra'})\r\n    insert('country', {'a2':'AO', 'a3':'AGO', 'name':'Angola'})\r\n    insert('country', {'a2':'AI', 'a3':'AIA', 'name':'Anguilla'})\r\n    insert('country', {'a2':'AQ', 'a3':'ATA', 'name':'Antarctica'})\r\n    insert('country', {'a2':'AG', 'a3':'ATG', 'name':'Antigua and Barbuda'})\r\n    insert('country', {'a2':'AR', 'a3':'ARG', 'name':'Argentina'})\r\n    insert('country', {'a2':'AM', 'a3':'ARM', 'name':'Armenia'})\r\n    insert('country', {'a2':'AW', 'a3':'ABW', 'name':'Aruba'})\r\n    insert('country', {'a2':'AU', 'a3':'AUS', 'name':'Australia'})\r\n    insert('country', {'a2':'AT', 'a3':'AUT', 'name':'Austria'})\r\n    insert('country', {'a2':'AZ', 'a3':'AZE', 'name':'Azerbaijan'})\r\n    insert('country', {'a2':'BS', 'a3':'BHS', 'name':'Bahamas'})\r\n    insert('country', {'a2':'BH', 'a3':'BHR', 'name':'Bahrain'})\r\n    insert('country', {'a2':'BD', 'a3':'BGD', 'name':'Bangladesh'})\r\n    insert('country', {'a2':'BB', 'a3':'BRB', 'name':'Barbados'})\r\n    insert('country', {'a2':'BY', 'a3':'BLR', 'name':'Belarus'})\r\n    insert('country', {'a2':'BE', 'a3':'BEL', 'name':'Belgium'})\r\n    insert('country', {'a2':'BZ', 'a3':'BLZ', 'name':'Belize'})\r\n    insert('country', {'a2':'BJ', 'a3':'BEN', 'name':'Benin'})\r\n    insert('country', {'a2':'BM', 'a3':'BMU', 'name':'Bermuda'})\r\n    insert('country', {'a2':'BT', 'a3':'BTN', 'name':'Bhutan'})\r\n    insert('country', {'a2':'BO', 'a3':'BOL', 'name':'Bolivia (Plurinational State of)'})\r\n    insert('country', {'a2':'BQ', 'a3':'BES', 'name':'Bonaire, Sint Eustatius and Saba'})\r\n    insert('country', {'a2':'BA', 'a3':'BIH', 'name':'Bosnia and Herzegovina'})\r\n    insert('country', {'a2':'BW', 'a3':'BWA', 'name':'Botswana'})\r\n    insert('country', {'a2':'BV', 'a3':'BVT', 'name':'Bouvet Island'})\r\n    insert('country', {'a2':'BR', 'a3':'BRA', 'name':'Brazil'})\r\n    insert('country', {'a2':'IO', 'a3':'IOT', 'name':'British Indian Ocean Territory'})\r\n    insert('country', {'a2':'BN', 'a3':'BRN', 'name':'Brunei Darussalam'})\r\n    insert('country', {'a2':'BG', 'a3':'BGR', 'name':'Bulgaria'})\r\n    insert('country', {'a2':'BF', 'a3':'BFA', 'name':'Burkina Faso'})\r\n    insert('country', {'a2':'BI', 'a3':'BDI', 'name':'Burundi'})\r\n    insert('country', {'a2':'CV', 'a3':'CPV', 'name':'Cabo Verde'})\r\n    insert('country', {'a2':'KH', 'a3':'KHM', 'name':'Cambodia'})\r\n    insert('country', {'a2':'CM', 'a3':'CMR', 'name':'Cameroon'})\r\n    insert('country', {'a2':'CA', 'a3':'CAN', 'name':'Canada'})\r\n    insert('country', {'a2':'KY', 'a3':'CYM', 'name':'Cayman Islands'})\r\n    insert('country', {'a2':'CF', 'a3':'CAF', 'name':'Central African Republic'})\r\n    insert('country', {'a2':'TD', 'a3':'TCD', 'name':'Chad'})\r\n    insert('country', {'a2':'CL', 'a3':'CHL', 'name':'Chile'})\r\n    insert('country', {'a2':'CN', 'a3':'CHN', 'name':'China'})\r\n    insert('country', {'a2':'CX', 'a3':'CXR', 'name':'Christmas Island'})\r\n    insert('country', {'a2':'CC', 'a3':'CCK', 'name':'Cocos (Keeling) Islands'})\r\n    insert('country', {'a2':'CO', 'a3':'COL', 'name':'Colombia'})\r\n    insert('country', {'a2':'KM', 'a3':'COM', 'name':'Comoros'})\r\n    insert('country', {'a2':'CG', 'a3':'COG', 'name':'Congo'})\r\n    insert('country', {'a2':'CD', 'a3':'COD', 'name':'Congo, Democratic Republic of the'})\r\n    insert('country', {'a2':'CK', 'a3':'COK', 'name':'Cook Islands'})\r\n    insert('country', {'a2':'CR', 'a3':'CRI', 'name':'Costa Rica'})\r\n    insert('country', {'a2':'CI', 'a3':'CIV', 'name':'C\u00f4te d''Ivoire'})\r\n    insert('country', {'a2':'HR', 'a3':'HRV', 'name':'Croatia'})\r\n    insert('country', {'a2':'CU', 'a3':'CUB', 'name':'Cuba'})\r\n    insert('country', {'a2':'CW', 'a3':'CUW', 'name':'Cura\u00e7ao'})\r\n    insert('country', {'a2':'CY', 'a3':'CYP', 'name':'Cyprus'})\r\n    insert('country', {'a2':'CZ', 'a3':'CZE', 'name':'Czechia'})\r\n    insert('country', {'a2':'DK', 'a3':'DNK', 'name':'Denmark'})\r\n    insert('country', {'a2':'DJ', 'a3':'DJI', 'name':'Djibouti'})\r\n    insert('country', {'a2':'DM', 'a3':'DMA', 'name':'Dominica'})\r\n    insert('country', {'a2':'DO', 'a3':'DOM', 'name':'Dominican Republic'})\r\n    insert('country', {'a2':'EC', 'a3':'ECU', 'name':'Ecuador'})\r\n    insert('country', {'a2':'EG', 'a3':'EGY', 'name':'Egypt'})\r\n    insert('country', {'a2':'SV', 'a3':'SLV', 'name':'El Salvador'})\r\n    insert('country', {'a2':'GQ', 'a3':'GNQ', 'name':'Equatorial Guinea'})\r\n    insert('country', {'a2':'ER', 'a3':'ERI', 'name':'Eritrea'})\r\n    insert('country', {'a2':'EE', 'a3':'EST', 'name':'Estonia'})\r\n    insert('country', {'a2':'SZ', 'a3':'SWZ', 'name':'Eswatini'})\r\n    insert('country', {'a2':'ET', 'a3':'ETH', 'name':'Ethiopia'})\r\n    insert('country', {'a2':'FK', 'a3':'FLK', 'name':'Falkland Islands (Malvinas)'})\r\n    insert('country', {'a2':'FO', 'a3':'FRO', 'name':'Faroe Islands'})\r\n    insert('country', {'a2':'FJ', 'a3':'FJI', 'name':'Fiji'})\r\n    insert('country', {'a2':'FI', 'a3':'FIN', 'name':'Finland'})\r\n    insert('country', {'a2':'FR', 'a3':'FRA', 'name':'France'})\r\n    insert('country', {'a2':'GF', 'a3':'GUF', 'name':'French Guiana'})\r\n    insert('country', {'a2':'PF', 'a3':'PYF', 'name':'French Polynesia'})\r\n    insert('country', {'a2':'TF', 'a3':'ATF', 'name':'French Southern Territories'})\r\n    insert('country', {'a2':'GA', 'a3':'GAB', 'name':'Gabon'})\r\n    insert('country', {'a2':'GM', 'a3':'GMB', 'name':'Gambia'})\r\n    insert('country', {'a2':'GE', 'a3':'GEO', 'name':'Georgia'})\r\n    insert('country', {'a2':'DE', 'a3':'DEU', 'name':'Germany'})\r\n    insert('country', {'a2':'GH', 'a3':'GHA', 'name':'Ghana'})\r\n    insert('country', {'a2':'GI', 'a3':'GIB', 'name':'Gibraltar'})\r\n    insert('country', {'a2':'GR', 'a3':'GRC', 'name':'Greece'})\r\n    insert('country', {'a2':'GL', 'a3':'GRL', 'name':'Greenland'})\r\n    insert('country', {'a2':'GD', 'a3':'GRD', 'name':'Grenada'})\r\n    insert('country', {'a2':'GP', 'a3':'GLP', 'name':'Guadeloupe'})\r\n    insert('country', {'a2':'GU', 'a3':'GUM', 'name':'Guam'})\r\n    insert('country', {'a2':'GT', 'a3':'GTM', 'name':'Guatemala'})\r\n    insert('country', {'a2':'GG', 'a3':'GGY', 'name':'Guernsey'})\r\n    insert('country', {'a2':'GN', 'a3':'GIN', 'name':'Guinea'})\r\n    insert('country', {'a2':'GW', 'a3':'GNB', 'name':'Guinea-Bissau'})\r\n    insert('country', {'a2':'GY', 'a3':'GUY', 'name':'Guyana'})\r\n    insert('country', {'a2':'HT', 'a3':'HTI', 'name':'Haiti'})\r\n    insert('country', {'a2':'HM', 'a3':'HMD', 'name':'Heard Island and McDonald Islands'})\r\n    insert('country', {'a2':'VA', 'a3':'VAT', 'name':'Holy See'})\r\n    insert('country', {'a2':'HN', 'a3':'HND', 'name':'Honduras'})\r\n    insert('country', {'a2':'HK', 'a3':'HKG', 'name':'Hong Kong'})\r\n    insert('country', {'a2':'HU', 'a3':'HUN', 'name':'Hungary'})\r\n    insert('country', {'a2':'IS', 'a3':'ISL', 'name':'Iceland'})\r\n    insert('country', {'a2':'IN', 'a3':'IND', 'name':'India'})\r\n    insert('country', {'a2':'ID', 'a3':'IDN', 'name':'Indonesia'})\r\n    insert('country', {'a2':'IR', 'a3':'IRN', 'name':'Iran (Islamic Republic of)'})\r\n    insert('country', {'a2':'IQ', 'a3':'IRQ', 'name':'Iraq'})\r\n    insert('country', {'a2':'IE', 'a3':'IRL', 'name':'Ireland'})\r\n    insert('country', {'a2':'IM', 'a3':'IMN', 'name':'Isle of Man'})\r\n    insert('country', {'a2':'IL', 'a3':'ISR', 'name':'Israel'})\r\n    insert('country', {'a2':'IT', 'a3':'ITA', 'name':'Italy'})\r\n    insert('country', {'a2':'JM', 'a3':'JAM', 'name':'Jamaica'})\r\n    insert('country', {'a2':'JP', 'a3':'JPN', 'name':'Japan'})\r\n    insert('country', {'a2':'JE', 'a3':'JEY', 'name':'Jersey'})\r\n    insert('country', {'a2':'JO', 'a3':'JOR', 'name':'Jordan'})\r\n    insert('country', {'a2':'KZ', 'a3':'KAZ', 'name':'Kazakhstan'})\r\n    insert('country', {'a2':'KE', 'a3':'KEN', 'name':'Kenya'})\r\n    insert('country', {'a2':'KI', 'a3':'KIR', 'name':'Kiribati'})\r\n    insert('country', {'a2':'KP', 'a3':'PRK', 'name':'Korea (Democratic People''s Republic of)'})\r\n    insert('country', {'a2':'KR', 'a3':'KOR', 'name':'Korea, Republic of'})\r\n    insert('country', {'a2':'KW', 'a3':'KWT', 'name':'Kuwait'})\r\n    insert('country', {'a2':'KG', 'a3':'KGZ', 'name':'Kyrgyzstan'})\r\n    insert('country', {'a2':'LA', 'a3':'LAO', 'name':'Lao People''s Democratic Republic'})\r\n    insert('country', {'a2':'LV', 'a3':'LVA', 'name':'Latvia'})\r\n    insert('country', {'a2':'LB', 'a3':'LBN', 'name':'Lebanon'})\r\n    insert('country', {'a2':'LS', 'a3':'LSO', 'name':'Lesotho'})\r\n    insert('country', {'a2':'LR', 'a3':'LBR', 'name':'Liberia'})\r\n    insert('country', {'a2':'LY', 'a3':'LBY', 'name':'Libya'})\r\n    insert('country', {'a2':'LI', 'a3':'LIE', 'name':'Liechtenstein'})\r\n    insert('country', {'a2':'LT', 'a3':'LTU', 'name':'Lithuania'})\r\n    insert('country', {'a2':'LU', 'a3':'LUX', 'name':'Luxembourg'})\r\n    insert('country', {'a2':'MO', 'a3':'MAC', 'name':'Macao'})\r\n    insert('country', {'a2':'MG', 'a3':'MDG', 'name':'Madagascar'})\r\n    insert('country', {'a2':'MW', 'a3':'MWI', 'name':'Malawi'})\r\n    insert('country', {'a2':'MY', 'a3':'MYS', 'name':'Malaysia'})\r\n    insert('country', {'a2':'MV', 'a3':'MDV', 'name':'Maldives'})\r\n    insert('country', {'a2':'ML', 'a3':'MLI', 'name':'Mali'})\r\n    insert('country', {'a2':'MT', 'a3':'MLT', 'name':'Malta'})\r\n    insert('country', {'a2':'MH', 'a3':'MHL', 'name':'Marshall Islands'})\r\n    insert('country', {'a2':'MQ', 'a3':'MTQ', 'name':'Martinique'})\r\n    insert('country', {'a2':'MR', 'a3':'MRT', 'name':'Mauritania'})\r\n    insert('country', {'a2':'MU', 'a3':'MUS', 'name':'Mauritius'})\r\n    insert('country', {'a2':'YT', 'a3':'MYT', 'name':'Mayotte'})\r\n    insert('country', {'a2':'MX', 'a3':'MEX', 'name':'Mexico'})\r\n    insert('country', {'a2':'FM', 'a3':'FSM', 'name':'Micronesia (Federated States of)'})\r\n    insert('country', {'a2':'MD', 'a3':'MDA', 'name':'Moldova, Republic of'})\r\n    insert('country', {'a2':'MC', 'a3':'MCO', 'name':'Monaco'})\r\n    insert('country', {'a2':'MN', 'a3':'MNG', 'name':'Mongolia'})\r\n    insert('country', {'a2':'ME', 'a3':'MNE', 'name':'Montenegro'})\r\n    insert('country', {'a2':'MS', 'a3':'MSR', 'name':'Montserrat'})\r\n    insert('country', {'a2':'MA', 'a3':'MAR', 'name':'Morocco'})\r\n    insert('country', {'a2':'MZ', 'a3':'MOZ', 'name':'Mozambique'})\r\n    insert('country', {'a2':'MM', 'a3':'MMR', 'name':'Myanmar'})\r\n    insert('country', {'a2':'NA', 'a3':'NAM', 'name':'Namibia'})\r\n    insert('country', {'a2':'NR', 'a3':'NRU', 'name':'Nauru'})\r\n    insert('country', {'a2':'NP', 'a3':'NPL', 'name':'Nepal'})\r\n    insert('country', {'a2':'NL', 'a3':'NLD', 'name':'Netherlands'})\r\n    insert('country', {'a2':'NC', 'a3':'NCL', 'name':'New Caledonia'})\r\n    insert('country', {'a2':'NZ', 'a3':'NZL', 'name':'New Zealand'})\r\n    insert('country', {'a2':'NI', 'a3':'NIC', 'name':'Nicaragua'})\r\n    insert('country', {'a2':'NE', 'a3':'NER', 'name':'Niger'})\r\n    insert('country', {'a2':'NG', 'a3':'NGA', 'name':'Nigeria'})\r\n    insert('country', {'a2':'NU', 'a3':'NIU', 'name':'Niue'})\r\n    insert('country', {'a2':'NF', 'a3':'NFK', 'name':'Norfolk Island'})\r\n    insert('country', {'a2':'MK', 'a3':'MKD', 'name':'North Macedonia'})\r\n    insert('country', {'a2':'MP', 'a3':'MNP', 'name':'Northern Mariana Islands'})\r\n    insert('country', {'a2':'NO', 'a3':'NOR', 'name':'Norway'})\r\n    insert('country', {'a2':'OM', 'a3':'OMN', 'name':'Oman'})\r\n    insert('country', {'a2':'PK', 'a3':'PAK', 'name':'Pakistan'})\r\n    insert('country', {'a2':'PW', 'a3':'PLW', 'name':'Palau'})\r\n    insert('country', {'a2':'PS', 'a3':'PSE', 'name':'Palestine, State of'})\r\n    insert('country', {'a2':'PA', 'a3':'PAN', 'name':'Panama'})\r\n    insert('country', {'a2':'PG', 'a3':'PNG', 'name':'Papua New Guinea'})\r\n    insert('country', {'a2':'PY', 'a3':'PRY', 'name':'Paraguay'})\r\n    insert('country', {'a2':'PE', 'a3':'PER', 'name':'Peru'})\r\n    insert('country', {'a2':'PH', 'a3':'PHL', 'name':'Philippines'})\r\n    insert('country', {'a2':'PN', 'a3':'PCN', 'name':'Pitcairn'})\r\n    insert('country', {'a2':'PL', 'a3':'POL', 'name':'Poland'})\r\n    insert('country', {'a2':'PT', 'a3':'PRT', 'name':'Portugal'})\r\n    insert('country', {'a2':'PR', 'a3':'PRI', 'name':'Puerto Rico'})\r\n    insert('country', {'a2':'QA', 'a3':'QAT', 'name':'Qatar'})\r\n    insert('country', {'a2':'RE', 'a3':'REU', 'name':'R\u00e9union'})\r\n    insert('country', {'a2':'RO', 'a3':'ROU', 'name':'Romania'})\r\n    insert('country', {'a2':'RU', 'a3':'RUS', 'name':'Russian Federation'})\r\n    insert('country', {'a2':'RW', 'a3':'RWA', 'name':'Rwanda'})\r\n    insert('country', {'a2':'BL', 'a3':'BLM', 'name':'Saint Barth\u00e9lemy'})\r\n    insert('country', {'a2':'SH', 'a3':'SHN', 'name':'Saint Helena, Ascension and Tristan da Cunha'})\r\n    insert('country', {'a2':'KN', 'a3':'KNA', 'name':'Saint Kitts and Nevis'})\r\n    insert('country', {'a2':'LC', 'a3':'LCA', 'name':'Saint Lucia'})\r\n    insert('country', {'a2':'MF', 'a3':'MAF', 'name':'Saint Martin (French part)'})\r\n    insert('country', {'a2':'PM', 'a3':'SPM', 'name':'Saint Pierre and Miquelon'})\r\n    insert('country', {'a2':'VC', 'a3':'VCT', 'name':'Saint Vincent and the Grenadines'})\r\n    insert('country', {'a2':'WS', 'a3':'WSM', 'name':'Samoa'})\r\n    insert('country', {'a2':'SM', 'a3':'SMR', 'name':'San Marino'})\r\n    insert('country', {'a2':'ST', 'a3':'STP', 'name':'Sao Tome and Principe'})\r\n    insert('country', {'a2':'SA', 'a3':'SAU', 'name':'Saudi Arabia'})\r\n    insert('country', {'a2':'SN', 'a3':'SEN', 'name':'Senegal'})\r\n    insert('country', {'a2':'RS', 'a3':'SRB', 'name':'Serbia'})\r\n    insert('country', {'a2':'SC', 'a3':'SYC', 'name':'Seychelles'})\r\n    insert('country', {'a2':'SL', 'a3':'SLE', 'name':'Sierra Leone'})\r\n    insert('country', {'a2':'SG', 'a3':'SGP', 'name':'Singapore'})\r\n    insert('country', {'a2':'SX', 'a3':'SXM', 'name':'Sint Maarten (Dutch part)'})\r\n    insert('country', {'a2':'SK', 'a3':'SVK', 'name':'Slovakia'})\r\n    insert('country', {'a2':'SI', 'a3':'SVN', 'name':'Slovenia'})\r\n    insert('country', {'a2':'SB', 'a3':'SLB', 'name':'Solomon Islands'})\r\n    insert('country', {'a2':'SO', 'a3':'SOM', 'name':'Somalia'})\r\n    insert('country', {'a2':'ZA', 'a3':'ZAF', 'name':'South Africa'})\r\n    insert('country', {'a2':'GS', 'a3':'SGS', 'name':'South Georgia and the South Sandwich Islands'})\r\n    insert('country', {'a2':'SS', 'a3':'SSD', 'name':'South Sudan'})\r\n    insert('country', {'a2':'ES', 'a3':'ESP', 'name':'Spain'})\r\n    insert('country', {'a2':'LK', 'a3':'LKA', 'name':'Sri Lanka'})\r\n    insert('country', {'a2':'SD', 'a3':'SDN', 'name':'Sudan'})\r\n    insert('country', {'a2':'SR', 'a3':'SUR', 'name':'Suriname'})\r\n    insert('country', {'a2':'SJ', 'a3':'SJM', 'name':'Svalbard and Jan Mayen'})\r\n    insert('country', {'a2':'SE', 'a3':'SWE', 'name':'Sweden'})\r\n    insert('country', {'a2':'CH', 'a3':'CHE', 'name':'Switzerland'})\r\n    insert('country', {'a2':'SY', 'a3':'SYR', 'name':'Syrian Arab Republic'})\r\n    insert('country', {'a2':'TW', 'a3':'TWN', 'name':'Taiwan, Province of China'})\r\n    insert('country', {'a2':'TJ', 'a3':'TJK', 'name':'Tajikistan'})\r\n    insert('country', {'a2':'TZ', 'a3':'TZA', 'name':'Tanzania, United Republic of'})\r\n    insert('country', {'a2':'TH', 'a3':'THA', 'name':'Thailand'})\r\n    insert('country', {'a2':'TL', 'a3':'TLS', 'name':'Timor-Leste'})\r\n    insert('country', {'a2':'TG', 'a3':'TGO', 'name':'Togo'})\r\n    insert('country', {'a2':'TK', 'a3':'TKL', 'name':'Tokelau'})\r\n    insert('country', {'a2':'TO', 'a3':'TON', 'name':'Tonga'})\r\n    insert('country', {'a2':'TT', 'a3':'TTO', 'name':'Trinidad and Tobago'})\r\n    insert('country', {'a2':'TN', 'a3':'TUN', 'name':'Tunisia'})\r\n    insert('country', {'a2':'TR', 'a3':'TUR', 'name':'Turkey'})\r\n    insert('country', {'a2':'TM', 'a3':'TKM', 'name':'Turkmenistan'})\r\n    insert('country', {'a2':'TC', 'a3':'TCA', 'name':'Turks and Caicos Islands'})\r\n    insert('country', {'a2':'TV', 'a3':'TUV', 'name':'Tuvalu'})\r\n    insert('country', {'a2':'UG', 'a3':'UGA', 'name':'Uganda'})\r\n    insert('country', {'a2':'UA', 'a3':'UKR', 'name':'Ukraine'})\r\n    insert('country', {'a2':'AE', 'a3':'ARE', 'name':'United Arab Emirates'})\r\n    insert('country', {'a2':'GB', 'a3':'GBR', 'name':'United Kingdom of Great Britain and Northern Ireland'})\r\n    insert('country', {'a2':'US', 'a3':'USA', 'name':'United States of America'})\r\n    insert('country', {'a2':'UM', 'a3':'UMI', 'name':'United States Minor Outlying Islands'})\r\n    insert('country', {'a2':'UY', 'a3':'URY', 'name':'Uruguay'})\r\n    insert('country', {'a2':'UZ', 'a3':'UZB', 'name':'Uzbekistan'})\r\n    insert('country', {'a2':'VU', 'a3':'VUT', 'name':'Vanuatu'})\r\n    insert('country', {'a2':'VE', 'a3':'VEN', 'name':'Venezuela (Bolivarian Republic of)'})\r\n    insert('country', {'a2':'VN', 'a3':'VNM', 'name':'Viet Nam'})\r\n    insert('country', {'a2':'VG', 'a3':'VGB', 'name':'Virgin Islands (British)'})\r\n    insert('country', {'a2':'VI', 'a3':'VIR', 'name':'Virgin Islands (U.S.)'})\r\n    insert('country', {'a2':'WF', 'a3':'WLF', 'name':'Wallis and Futuna'})\r\n    insert('country', {'a2':'EH', 'a3':'ESH', 'name':'Western Sahara'})\r\n    insert('country', {'a2':'YE', 'a3':'YEM', 'name':'Yemen'})\r\n    insert('country', {'a2':'ZM', 'a3':'ZMB', 'name':'Zambia'})\r\n    insert('country', {'a2':'ZW', 'a3':'ZWE', 'name':'Zimbabwe'})\r\n    import eu_patch",
+   "script": "# run_form(\"bank_af\")\r\n# const.ipath=\"C:\\\\Users\\\\andre\\\\My Drive\\\\Ing\"\r\n# Q2Lines().run()\r\nconst.check(\"date1\", \"Beginn der Arbeitsperiode\", \"2024-01-01\")\r\nconst.check(\"date2\", \"Ende der Arbeitsperiode\", \"2024-01-31\")\r\n# run_form(\"shops_buchungs_algo\")\r\n# self.run_reports()\r\n# self.run_app_manager()\r\n\r\n\r\nif myapp.db_data.table(\"banken\").row_count() <=0:\r\n    insert(\"banken\", {\"name\": \"-\"})\r\n    insert(\"banken\", {\"name\": \"Sparkasse\", \"algo\": 1})\r\n    insert(\"banken\", {\"name\": \"Postbank\", \"algo\": 2})\r\n    insert(\"banken\", {\"name\": \"ING\", \"algo\": 3})\r\n    insert(\"banken\", {\"name\": \"PayPal\", \"algo\": 4})\r\n    insert(\"banken\", {\"name\": \"Commerzbank\", \"algo\": 5})\r\n    insert(\"banken\", {\"name\": \"Finom\", \"algo\": 6})\r\n    insert(\"banken\", {\"name\": \"HypoVereinsbank\", \"algo\": 7})\r\n    \r\nif myapp.db_data.table(\"plattformen\").row_count() <=0:\r\n    insert(\"plattformen\", {\"name\": \"-\"})\r\n    insert(\"plattformen\", {\"name\": \"Amazon\", \"algo\": 1})\r\n    insert(\"plattformen\", {\"name\": \"eBay\", \"algo\": 2})\r\n    insert(\"plattformen\", {\"name\": \"Etsy\", \"algo\": 3})\r\n    insert(\"plattformen\", {\"name\": \"Shopify\", \"algo\": 4})\r\n    insert(\"plattformen\", {\"name\": \"Easybill\", \"algo\": 5})\r\n    \r\nif myapp.db_data.table(\"konten\").row_count() <=0:\r\n    insert(\"konten\", {\"konto_name\": \"-\", \"bk\":0})\r\n    \r\nif myapp.db_data.table(\"shops\").row_count() <=0:\r\n    insert(\"shops\", {\"name\": \"-\", \"pl\": 0})\r\n    \r\nif myapp.db_data.table(\"country\").row_count() <=0:\r\n    insert(\"country\", {\"a2\":\"-\", \"name\": \"-\", \"pl\": 0})\r\n    insert('country', {'a2':'AF', 'a3':'AFG', 'name':'Afghanistan'})\r\n    insert('country', {'a2':'AX', 'a3':'ALA', 'name':'\u00c5land Islands'})\r\n    insert('country', {'a2':'AL', 'a3':'ALB', 'name':'Albania'})\r\n    insert('country', {'a2':'DZ', 'a3':'DZA', 'name':'Algeria'})\r\n    insert('country', {'a2':'AS', 'a3':'ASM', 'name':'American Samoa'})\r\n    insert('country', {'a2':'AD', 'a3':'AND', 'name':'Andorra'})\r\n    insert('country', {'a2':'AO', 'a3':'AGO', 'name':'Angola'})\r\n    insert('country', {'a2':'AI', 'a3':'AIA', 'name':'Anguilla'})\r\n    insert('country', {'a2':'AQ', 'a3':'ATA', 'name':'Antarctica'})\r\n    insert('country', {'a2':'AG', 'a3':'ATG', 'name':'Antigua and Barbuda'})\r\n    insert('country', {'a2':'AR', 'a3':'ARG', 'name':'Argentina'})\r\n    insert('country', {'a2':'AM', 'a3':'ARM', 'name':'Armenia'})\r\n    insert('country', {'a2':'AW', 'a3':'ABW', 'name':'Aruba'})\r\n    insert('country', {'a2':'AU', 'a3':'AUS', 'name':'Australia'})\r\n    insert('country', {'a2':'AT', 'a3':'AUT', 'name':'Austria'})\r\n    insert('country', {'a2':'AZ', 'a3':'AZE', 'name':'Azerbaijan'})\r\n    insert('country', {'a2':'BS', 'a3':'BHS', 'name':'Bahamas'})\r\n    insert('country', {'a2':'BH', 'a3':'BHR', 'name':'Bahrain'})\r\n    insert('country', {'a2':'BD', 'a3':'BGD', 'name':'Bangladesh'})\r\n    insert('country', {'a2':'BB', 'a3':'BRB', 'name':'Barbados'})\r\n    insert('country', {'a2':'BY', 'a3':'BLR', 'name':'Belarus'})\r\n    insert('country', {'a2':'BE', 'a3':'BEL', 'name':'Belgium'})\r\n    insert('country', {'a2':'BZ', 'a3':'BLZ', 'name':'Belize'})\r\n    insert('country', {'a2':'BJ', 'a3':'BEN', 'name':'Benin'})\r\n    insert('country', {'a2':'BM', 'a3':'BMU', 'name':'Bermuda'})\r\n    insert('country', {'a2':'BT', 'a3':'BTN', 'name':'Bhutan'})\r\n    insert('country', {'a2':'BO', 'a3':'BOL', 'name':'Bolivia (Plurinational State of)'})\r\n    insert('country', {'a2':'BQ', 'a3':'BES', 'name':'Bonaire, Sint Eustatius and Saba'})\r\n    insert('country', {'a2':'BA', 'a3':'BIH', 'name':'Bosnia and Herzegovina'})\r\n    insert('country', {'a2':'BW', 'a3':'BWA', 'name':'Botswana'})\r\n    insert('country', {'a2':'BV', 'a3':'BVT', 'name':'Bouvet Island'})\r\n    insert('country', {'a2':'BR', 'a3':'BRA', 'name':'Brazil'})\r\n    insert('country', {'a2':'IO', 'a3':'IOT', 'name':'British Indian Ocean Territory'})\r\n    insert('country', {'a2':'BN', 'a3':'BRN', 'name':'Brunei Darussalam'})\r\n    insert('country', {'a2':'BG', 'a3':'BGR', 'name':'Bulgaria'})\r\n    insert('country', {'a2':'BF', 'a3':'BFA', 'name':'Burkina Faso'})\r\n    insert('country', {'a2':'BI', 'a3':'BDI', 'name':'Burundi'})\r\n    insert('country', {'a2':'CV', 'a3':'CPV', 'name':'Cabo Verde'})\r\n    insert('country', {'a2':'KH', 'a3':'KHM', 'name':'Cambodia'})\r\n    insert('country', {'a2':'CM', 'a3':'CMR', 'name':'Cameroon'})\r\n    insert('country', {'a2':'CA', 'a3':'CAN', 'name':'Canada'})\r\n    insert('country', {'a2':'KY', 'a3':'CYM', 'name':'Cayman Islands'})\r\n    insert('country', {'a2':'CF', 'a3':'CAF', 'name':'Central African Republic'})\r\n    insert('country', {'a2':'TD', 'a3':'TCD', 'name':'Chad'})\r\n    insert('country', {'a2':'CL', 'a3':'CHL', 'name':'Chile'})\r\n    insert('country', {'a2':'CN', 'a3':'CHN', 'name':'China'})\r\n    insert('country', {'a2':'CX', 'a3':'CXR', 'name':'Christmas Island'})\r\n    insert('country', {'a2':'CC', 'a3':'CCK', 'name':'Cocos (Keeling) Islands'})\r\n    insert('country', {'a2':'CO', 'a3':'COL', 'name':'Colombia'})\r\n    insert('country', {'a2':'KM', 'a3':'COM', 'name':'Comoros'})\r\n    insert('country', {'a2':'CG', 'a3':'COG', 'name':'Congo'})\r\n    insert('country', {'a2':'CD', 'a3':'COD', 'name':'Congo, Democratic Republic of the'})\r\n    insert('country', {'a2':'CK', 'a3':'COK', 'name':'Cook Islands'})\r\n    insert('country', {'a2':'CR', 'a3':'CRI', 'name':'Costa Rica'})\r\n    insert('country', {'a2':'CI', 'a3':'CIV', 'name':'C\u00f4te d''Ivoire'})\r\n    insert('country', {'a2':'HR', 'a3':'HRV', 'name':'Croatia'})\r\n    insert('country', {'a2':'CU', 'a3':'CUB', 'name':'Cuba'})\r\n    insert('country', {'a2':'CW', 'a3':'CUW', 'name':'Cura\u00e7ao'})\r\n    insert('country', {'a2':'CY', 'a3':'CYP', 'name':'Cyprus'})\r\n    insert('country', {'a2':'CZ', 'a3':'CZE', 'name':'Czechia'})\r\n    insert('country', {'a2':'DK', 'a3':'DNK', 'name':'Denmark'})\r\n    insert('country', {'a2':'DJ', 'a3':'DJI', 'name':'Djibouti'})\r\n    insert('country', {'a2':'DM', 'a3':'DMA', 'name':'Dominica'})\r\n    insert('country', {'a2':'DO', 'a3':'DOM', 'name':'Dominican Republic'})\r\n    insert('country', {'a2':'EC', 'a3':'ECU', 'name':'Ecuador'})\r\n    insert('country', {'a2':'EG', 'a3':'EGY', 'name':'Egypt'})\r\n    insert('country', {'a2':'SV', 'a3':'SLV', 'name':'El Salvador'})\r\n    insert('country', {'a2':'GQ', 'a3':'GNQ', 'name':'Equatorial Guinea'})\r\n    insert('country', {'a2':'ER', 'a3':'ERI', 'name':'Eritrea'})\r\n    insert('country', {'a2':'EE', 'a3':'EST', 'name':'Estonia'})\r\n    insert('country', {'a2':'SZ', 'a3':'SWZ', 'name':'Eswatini'})\r\n    insert('country', {'a2':'ET', 'a3':'ETH', 'name':'Ethiopia'})\r\n    insert('country', {'a2':'FK', 'a3':'FLK', 'name':'Falkland Islands (Malvinas)'})\r\n    insert('country', {'a2':'FO', 'a3':'FRO', 'name':'Faroe Islands'})\r\n    insert('country', {'a2':'FJ', 'a3':'FJI', 'name':'Fiji'})\r\n    insert('country', {'a2':'FI', 'a3':'FIN', 'name':'Finland'})\r\n    insert('country', {'a2':'FR', 'a3':'FRA', 'name':'France'})\r\n    insert('country', {'a2':'GF', 'a3':'GUF', 'name':'French Guiana'})\r\n    insert('country', {'a2':'PF', 'a3':'PYF', 'name':'French Polynesia'})\r\n    insert('country', {'a2':'TF', 'a3':'ATF', 'name':'French Southern Territories'})\r\n    insert('country', {'a2':'GA', 'a3':'GAB', 'name':'Gabon'})\r\n    insert('country', {'a2':'GM', 'a3':'GMB', 'name':'Gambia'})\r\n    insert('country', {'a2':'GE', 'a3':'GEO', 'name':'Georgia'})\r\n    insert('country', {'a2':'DE', 'a3':'DEU', 'name':'Germany'})\r\n    insert('country', {'a2':'GH', 'a3':'GHA', 'name':'Ghana'})\r\n    insert('country', {'a2':'GI', 'a3':'GIB', 'name':'Gibraltar'})\r\n    insert('country', {'a2':'GR', 'a3':'GRC', 'name':'Greece'})\r\n    insert('country', {'a2':'GL', 'a3':'GRL', 'name':'Greenland'})\r\n    insert('country', {'a2':'GD', 'a3':'GRD', 'name':'Grenada'})\r\n    insert('country', {'a2':'GP', 'a3':'GLP', 'name':'Guadeloupe'})\r\n    insert('country', {'a2':'GU', 'a3':'GUM', 'name':'Guam'})\r\n    insert('country', {'a2':'GT', 'a3':'GTM', 'name':'Guatemala'})\r\n    insert('country', {'a2':'GG', 'a3':'GGY', 'name':'Guernsey'})\r\n    insert('country', {'a2':'GN', 'a3':'GIN', 'name':'Guinea'})\r\n    insert('country', {'a2':'GW', 'a3':'GNB', 'name':'Guinea-Bissau'})\r\n    insert('country', {'a2':'GY', 'a3':'GUY', 'name':'Guyana'})\r\n    insert('country', {'a2':'HT', 'a3':'HTI', 'name':'Haiti'})\r\n    insert('country', {'a2':'HM', 'a3':'HMD', 'name':'Heard Island and McDonald Islands'})\r\n    insert('country', {'a2':'VA', 'a3':'VAT', 'name':'Holy See'})\r\n    insert('country', {'a2':'HN', 'a3':'HND', 'name':'Honduras'})\r\n    insert('country', {'a2':'HK', 'a3':'HKG', 'name':'Hong Kong'})\r\n    insert('country', {'a2':'HU', 'a3':'HUN', 'name':'Hungary'})\r\n    insert('country', {'a2':'IS', 'a3':'ISL', 'name':'Iceland'})\r\n    insert('country', {'a2':'IN', 'a3':'IND', 'name':'India'})\r\n    insert('country', {'a2':'ID', 'a3':'IDN', 'name':'Indonesia'})\r\n    insert('country', {'a2':'IR', 'a3':'IRN', 'name':'Iran (Islamic Republic of)'})\r\n    insert('country', {'a2':'IQ', 'a3':'IRQ', 'name':'Iraq'})\r\n    insert('country', {'a2':'IE', 'a3':'IRL', 'name':'Ireland'})\r\n    insert('country', {'a2':'IM', 'a3':'IMN', 'name':'Isle of Man'})\r\n    insert('country', {'a2':'IL', 'a3':'ISR', 'name':'Israel'})\r\n    insert('country', {'a2':'IT', 'a3':'ITA', 'name':'Italy'})\r\n    insert('country', {'a2':'JM', 'a3':'JAM', 'name':'Jamaica'})\r\n    insert('country', {'a2':'JP', 'a3':'JPN', 'name':'Japan'})\r\n    insert('country', {'a2':'JE', 'a3':'JEY', 'name':'Jersey'})\r\n    insert('country', {'a2':'JO', 'a3':'JOR', 'name':'Jordan'})\r\n    insert('country', {'a2':'KZ', 'a3':'KAZ', 'name':'Kazakhstan'})\r\n    insert('country', {'a2':'KE', 'a3':'KEN', 'name':'Kenya'})\r\n    insert('country', {'a2':'KI', 'a3':'KIR', 'name':'Kiribati'})\r\n    insert('country', {'a2':'KP', 'a3':'PRK', 'name':'Korea (Democratic People''s Republic of)'})\r\n    insert('country', {'a2':'KR', 'a3':'KOR', 'name':'Korea, Republic of'})\r\n    insert('country', {'a2':'KW', 'a3':'KWT', 'name':'Kuwait'})\r\n    insert('country', {'a2':'KG', 'a3':'KGZ', 'name':'Kyrgyzstan'})\r\n    insert('country', {'a2':'LA', 'a3':'LAO', 'name':'Lao People''s Democratic Republic'})\r\n    insert('country', {'a2':'LV', 'a3':'LVA', 'name':'Latvia'})\r\n    insert('country', {'a2':'LB', 'a3':'LBN', 'name':'Lebanon'})\r\n    insert('country', {'a2':'LS', 'a3':'LSO', 'name':'Lesotho'})\r\n    insert('country', {'a2':'LR', 'a3':'LBR', 'name':'Liberia'})\r\n    insert('country', {'a2':'LY', 'a3':'LBY', 'name':'Libya'})\r\n    insert('country', {'a2':'LI', 'a3':'LIE', 'name':'Liechtenstein'})\r\n    insert('country', {'a2':'LT', 'a3':'LTU', 'name':'Lithuania'})\r\n    insert('country', {'a2':'LU', 'a3':'LUX', 'name':'Luxembourg'})\r\n    insert('country', {'a2':'MO', 'a3':'MAC', 'name':'Macao'})\r\n    insert('country', {'a2':'MG', 'a3':'MDG', 'name':'Madagascar'})\r\n    insert('country', {'a2':'MW', 'a3':'MWI', 'name':'Malawi'})\r\n    insert('country', {'a2':'MY', 'a3':'MYS', 'name':'Malaysia'})\r\n    insert('country', {'a2':'MV', 'a3':'MDV', 'name':'Maldives'})\r\n    insert('country', {'a2':'ML', 'a3':'MLI', 'name':'Mali'})\r\n    insert('country', {'a2':'MT', 'a3':'MLT', 'name':'Malta'})\r\n    insert('country', {'a2':'MH', 'a3':'MHL', 'name':'Marshall Islands'})\r\n    insert('country', {'a2':'MQ', 'a3':'MTQ', 'name':'Martinique'})\r\n    insert('country', {'a2':'MR', 'a3':'MRT', 'name':'Mauritania'})\r\n    insert('country', {'a2':'MU', 'a3':'MUS', 'name':'Mauritius'})\r\n    insert('country', {'a2':'YT', 'a3':'MYT', 'name':'Mayotte'})\r\n    insert('country', {'a2':'MX', 'a3':'MEX', 'name':'Mexico'})\r\n    insert('country', {'a2':'FM', 'a3':'FSM', 'name':'Micronesia (Federated States of)'})\r\n    insert('country', {'a2':'MD', 'a3':'MDA', 'name':'Moldova, Republic of'})\r\n    insert('country', {'a2':'MC', 'a3':'MCO', 'name':'Monaco'})\r\n    insert('country', {'a2':'MN', 'a3':'MNG', 'name':'Mongolia'})\r\n    insert('country', {'a2':'ME', 'a3':'MNE', 'name':'Montenegro'})\r\n    insert('country', {'a2':'MS', 'a3':'MSR', 'name':'Montserrat'})\r\n    insert('country', {'a2':'MA', 'a3':'MAR', 'name':'Morocco'})\r\n    insert('country', {'a2':'MZ', 'a3':'MOZ', 'name':'Mozambique'})\r\n    insert('country', {'a2':'MM', 'a3':'MMR', 'name':'Myanmar'})\r\n    insert('country', {'a2':'NA', 'a3':'NAM', 'name':'Namibia'})\r\n    insert('country', {'a2':'NR', 'a3':'NRU', 'name':'Nauru'})\r\n    insert('country', {'a2':'NP', 'a3':'NPL', 'name':'Nepal'})\r\n    insert('country', {'a2':'NL', 'a3':'NLD', 'name':'Netherlands'})\r\n    insert('country', {'a2':'NC', 'a3':'NCL', 'name':'New Caledonia'})\r\n    insert('country', {'a2':'NZ', 'a3':'NZL', 'name':'New Zealand'})\r\n    insert('country', {'a2':'NI', 'a3':'NIC', 'name':'Nicaragua'})\r\n    insert('country', {'a2':'NE', 'a3':'NER', 'name':'Niger'})\r\n    insert('country', {'a2':'NG', 'a3':'NGA', 'name':'Nigeria'})\r\n    insert('country', {'a2':'NU', 'a3':'NIU', 'name':'Niue'})\r\n    insert('country', {'a2':'NF', 'a3':'NFK', 'name':'Norfolk Island'})\r\n    insert('country', {'a2':'MK', 'a3':'MKD', 'name':'North Macedonia'})\r\n    insert('country', {'a2':'MP', 'a3':'MNP', 'name':'Northern Mariana Islands'})\r\n    insert('country', {'a2':'NO', 'a3':'NOR', 'name':'Norway'})\r\n    insert('country', {'a2':'OM', 'a3':'OMN', 'name':'Oman'})\r\n    insert('country', {'a2':'PK', 'a3':'PAK', 'name':'Pakistan'})\r\n    insert('country', {'a2':'PW', 'a3':'PLW', 'name':'Palau'})\r\n    insert('country', {'a2':'PS', 'a3':'PSE', 'name':'Palestine, State of'})\r\n    insert('country', {'a2':'PA', 'a3':'PAN', 'name':'Panama'})\r\n    insert('country', {'a2':'PG', 'a3':'PNG', 'name':'Papua New Guinea'})\r\n    insert('country', {'a2':'PY', 'a3':'PRY', 'name':'Paraguay'})\r\n    insert('country', {'a2':'PE', 'a3':'PER', 'name':'Peru'})\r\n    insert('country', {'a2':'PH', 'a3':'PHL', 'name':'Philippines'})\r\n    insert('country', {'a2':'PN', 'a3':'PCN', 'name':'Pitcairn'})\r\n    insert('country', {'a2':'PL', 'a3':'POL', 'name':'Poland'})\r\n    insert('country', {'a2':'PT', 'a3':'PRT', 'name':'Portugal'})\r\n    insert('country', {'a2':'PR', 'a3':'PRI', 'name':'Puerto Rico'})\r\n    insert('country', {'a2':'QA', 'a3':'QAT', 'name':'Qatar'})\r\n    insert('country', {'a2':'RE', 'a3':'REU', 'name':'R\u00e9union'})\r\n    insert('country', {'a2':'RO', 'a3':'ROU', 'name':'Romania'})\r\n    insert('country', {'a2':'RU', 'a3':'RUS', 'name':'Russian Federation'})\r\n    insert('country', {'a2':'RW', 'a3':'RWA', 'name':'Rwanda'})\r\n    insert('country', {'a2':'BL', 'a3':'BLM', 'name':'Saint Barth\u00e9lemy'})\r\n    insert('country', {'a2':'SH', 'a3':'SHN', 'name':'Saint Helena, Ascension and Tristan da Cunha'})\r\n    insert('country', {'a2':'KN', 'a3':'KNA', 'name':'Saint Kitts and Nevis'})\r\n    insert('country', {'a2':'LC', 'a3':'LCA', 'name':'Saint Lucia'})\r\n    insert('country', {'a2':'MF', 'a3':'MAF', 'name':'Saint Martin (French part)'})\r\n    insert('country', {'a2':'PM', 'a3':'SPM', 'name':'Saint Pierre and Miquelon'})\r\n    insert('country', {'a2':'VC', 'a3':'VCT', 'name':'Saint Vincent and the Grenadines'})\r\n    insert('country', {'a2':'WS', 'a3':'WSM', 'name':'Samoa'})\r\n    insert('country', {'a2':'SM', 'a3':'SMR', 'name':'San Marino'})\r\n    insert('country', {'a2':'ST', 'a3':'STP', 'name':'Sao Tome and Principe'})\r\n    insert('country', {'a2':'SA', 'a3':'SAU', 'name':'Saudi Arabia'})\r\n    insert('country', {'a2':'SN', 'a3':'SEN', 'name':'Senegal'})\r\n    insert('country', {'a2':'RS', 'a3':'SRB', 'name':'Serbia'})\r\n    insert('country', {'a2':'SC', 'a3':'SYC', 'name':'Seychelles'})\r\n    insert('country', {'a2':'SL', 'a3':'SLE', 'name':'Sierra Leone'})\r\n    insert('country', {'a2':'SG', 'a3':'SGP', 'name':'Singapore'})\r\n    insert('country', {'a2':'SX', 'a3':'SXM', 'name':'Sint Maarten (Dutch part)'})\r\n    insert('country', {'a2':'SK', 'a3':'SVK', 'name':'Slovakia'})\r\n    insert('country', {'a2':'SI', 'a3':'SVN', 'name':'Slovenia'})\r\n    insert('country', {'a2':'SB', 'a3':'SLB', 'name':'Solomon Islands'})\r\n    insert('country', {'a2':'SO', 'a3':'SOM', 'name':'Somalia'})\r\n    insert('country', {'a2':'ZA', 'a3':'ZAF', 'name':'South Africa'})\r\n    insert('country', {'a2':'GS', 'a3':'SGS', 'name':'South Georgia and the South Sandwich Islands'})\r\n    insert('country', {'a2':'SS', 'a3':'SSD', 'name':'South Sudan'})\r\n    insert('country', {'a2':'ES', 'a3':'ESP', 'name':'Spain'})\r\n    insert('country', {'a2':'LK', 'a3':'LKA', 'name':'Sri Lanka'})\r\n    insert('country', {'a2':'SD', 'a3':'SDN', 'name':'Sudan'})\r\n    insert('country', {'a2':'SR', 'a3':'SUR', 'name':'Suriname'})\r\n    insert('country', {'a2':'SJ', 'a3':'SJM', 'name':'Svalbard and Jan Mayen'})\r\n    insert('country', {'a2':'SE', 'a3':'SWE', 'name':'Sweden'})\r\n    insert('country', {'a2':'CH', 'a3':'CHE', 'name':'Switzerland'})\r\n    insert('country', {'a2':'SY', 'a3':'SYR', 'name':'Syrian Arab Republic'})\r\n    insert('country', {'a2':'TW', 'a3':'TWN', 'name':'Taiwan, Province of China'})\r\n    insert('country', {'a2':'TJ', 'a3':'TJK', 'name':'Tajikistan'})\r\n    insert('country', {'a2':'TZ', 'a3':'TZA', 'name':'Tanzania, United Republic of'})\r\n    insert('country', {'a2':'TH', 'a3':'THA', 'name':'Thailand'})\r\n    insert('country', {'a2':'TL', 'a3':'TLS', 'name':'Timor-Leste'})\r\n    insert('country', {'a2':'TG', 'a3':'TGO', 'name':'Togo'})\r\n    insert('country', {'a2':'TK', 'a3':'TKL', 'name':'Tokelau'})\r\n    insert('country', {'a2':'TO', 'a3':'TON', 'name':'Tonga'})\r\n    insert('country', {'a2':'TT', 'a3':'TTO', 'name':'Trinidad and Tobago'})\r\n    insert('country', {'a2':'TN', 'a3':'TUN', 'name':'Tunisia'})\r\n    insert('country', {'a2':'TR', 'a3':'TUR', 'name':'Turkey'})\r\n    insert('country', {'a2':'TM', 'a3':'TKM', 'name':'Turkmenistan'})\r\n    insert('country', {'a2':'TC', 'a3':'TCA', 'name':'Turks and Caicos Islands'})\r\n    insert('country', {'a2':'TV', 'a3':'TUV', 'name':'Tuvalu'})\r\n    insert('country', {'a2':'UG', 'a3':'UGA', 'name':'Uganda'})\r\n    insert('country', {'a2':'UA', 'a3':'UKR', 'name':'Ukraine'})\r\n    insert('country', {'a2':'AE', 'a3':'ARE', 'name':'United Arab Emirates'})\r\n    insert('country', {'a2':'GB', 'a3':'GBR', 'name':'United Kingdom of Great Britain and Northern Ireland'})\r\n    insert('country', {'a2':'US', 'a3':'USA', 'name':'United States of America'})\r\n    insert('country', {'a2':'UM', 'a3':'UMI', 'name':'United States Minor Outlying Islands'})\r\n    insert('country', {'a2':'UY', 'a3':'URY', 'name':'Uruguay'})\r\n    insert('country', {'a2':'UZ', 'a3':'UZB', 'name':'Uzbekistan'})\r\n    insert('country', {'a2':'VU', 'a3':'VUT', 'name':'Vanuatu'})\r\n    insert('country', {'a2':'VE', 'a3':'VEN', 'name':'Venezuela (Bolivarian Republic of)'})\r\n    insert('country', {'a2':'VN', 'a3':'VNM', 'name':'Viet Nam'})\r\n    insert('country', {'a2':'VG', 'a3':'VGB', 'name':'Virgin Islands (British)'})\r\n    insert('country', {'a2':'VI', 'a3':'VIR', 'name':'Virgin Islands (U.S.)'})\r\n    insert('country', {'a2':'WF', 'a3':'WLF', 'name':'Wallis and Futuna'})\r\n    insert('country', {'a2':'EH', 'a3':'ESH', 'name':'Western Sahara'})\r\n    insert('country', {'a2':'YE', 'a3':'YEM', 'name':'Yemen'})\r\n    insert('country', {'a2':'ZM', 'a3':'ZMB', 'name':'Zambia'})\r\n    insert('country', {'a2':'ZW', 'a3':'ZWE', 'name':'Zimbabwe'})\r\n    import eu_patch",
    "comment": "",
    "last_line": "6",
-   "q2_time": "20240318230412",
+   "q2_time": "20240326084543",
    "q2_mode": "u"
   },
   {
@@ -122,10 +122,10 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2024-03-21 17:26:04'",
+   "script": "self.app_version = '2024-03-26 08:48:05'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20240321172604",
+   "q2_time": "20240326084805",
    "q2_mode": "u"
   }
  ],
@@ -593,7 +593,8 @@
    "code_valid": "",
    "q2_time": "20240307220935",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "65",
@@ -627,7 +628,8 @@
    "code_valid": "",
    "q2_time": "20240307220935",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "66",
@@ -643,7 +645,7 @@
    "readonly": "",
    "stretch": "0",
    "tag": "",
-   "control": "line",
+   "control": "text",
    "pic": "",
    "datatype": "char",
    "datalen": "250",
@@ -659,9 +661,10 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20240315101201",
+   "q2_time": "20240326084610",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "67",
@@ -677,7 +680,7 @@
    "readonly": "",
    "stretch": "0",
    "tag": "",
-   "control": "line",
+   "control": "text",
    "pic": "",
    "datatype": "char",
    "datalen": "250",
@@ -693,9 +696,10 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20240307220935",
-   "q2_mode": "i",
-   "mess": ""
+   "q2_time": "20240326084615",
+   "q2_mode": "u",
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "68",
@@ -729,7 +733,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "69",
@@ -745,7 +750,7 @@
    "readonly": "",
    "stretch": "0",
    "tag": "",
-   "control": "line",
+   "control": "text",
    "pic": "",
    "datatype": "char",
    "datalen": "250",
@@ -761,9 +766,10 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20240315101201",
+   "q2_time": "20240326084603",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "70",
@@ -797,7 +803,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "71",
@@ -831,7 +838,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "72",
@@ -865,7 +873,8 @@
    "code_valid": "",
    "q2_time": "20240315114420",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "73",
@@ -899,7 +908,8 @@
    "code_valid": "",
    "q2_time": "20240315114420",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "74",
@@ -933,7 +943,8 @@
    "code_valid": "",
    "q2_time": "20240315114420",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "75",
@@ -967,7 +978,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "76",
@@ -1001,7 +1013,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "77",
@@ -1035,7 +1048,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "78",
@@ -1069,7 +1083,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "79",
@@ -1103,7 +1118,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "80",
@@ -1137,7 +1153,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "162",
@@ -1171,7 +1188,8 @@
    "code_valid": "",
    "q2_time": "20240315084705",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "125",
@@ -1205,7 +1223,8 @@
    "code_valid": "",
    "q2_time": "20240315113419",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "126",
@@ -1239,7 +1258,8 @@
    "code_valid": "",
    "q2_time": "20240315113419",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "127",
@@ -1273,7 +1293,8 @@
    "code_valid": "",
    "q2_time": "20240315113419",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "81",
@@ -1307,7 +1328,8 @@
    "code_valid": "if mem.heap.labk != mem.s.bk:\r\n    mem.s.konto_name = get(\"banken\", f\"bk={mem.s.bk}\", \"name\")",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "82",
@@ -1341,7 +1363,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "83",
@@ -1375,7 +1398,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "84",
@@ -1409,7 +1433,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "85",
@@ -1443,7 +1468,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "86",
@@ -1477,7 +1503,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "87",
@@ -1511,7 +1538,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "88",
@@ -1545,7 +1573,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "89",
@@ -1579,7 +1608,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "90",
@@ -1613,7 +1643,8 @@
    "code_valid": "",
    "q2_time": "20240314084347",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "91",
@@ -1647,7 +1678,8 @@
    "code_valid": "",
    "q2_time": "20240314084341",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "92",
@@ -1681,7 +1713,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "93",
@@ -1715,7 +1748,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "94",
@@ -1749,7 +1783,8 @@
    "code_valid": "",
    "q2_time": "20240314084524",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "95",
@@ -1783,7 +1818,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "96",
@@ -1817,7 +1853,8 @@
    "code_valid": "",
    "q2_time": "20240314084519",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "97",
@@ -1851,7 +1888,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "98",
@@ -1885,7 +1923,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "99",
@@ -1919,7 +1958,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "100",
@@ -1953,7 +1993,8 @@
    "code_valid": "",
    "q2_time": "20240314092448",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "101",
@@ -1987,7 +2028,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "102",
@@ -2021,7 +2063,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "105",
@@ -2055,7 +2098,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "156",
@@ -2089,7 +2133,8 @@
    "code_valid": "",
    "q2_time": "20240314090739",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "157",
@@ -2123,7 +2168,8 @@
    "code_valid": "",
    "q2_time": "20240314090739",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "158",
@@ -2157,7 +2203,8 @@
    "code_valid": "",
    "q2_time": "20240314090745",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "106",
@@ -2191,7 +2238,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "107",
@@ -2225,7 +2273,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "108",
@@ -2259,7 +2308,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "109",
@@ -2293,7 +2343,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "110",
@@ -2327,7 +2378,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "111",
@@ -2361,7 +2413,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "112",
@@ -2395,7 +2448,8 @@
    "code_valid": "",
    "q2_time": "20240314090317",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "113",
@@ -2429,7 +2483,8 @@
    "code_valid": "",
    "q2_time": "20240315151227",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "114",
@@ -2463,7 +2518,8 @@
    "code_valid": "",
    "q2_time": "20240315151226",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "115",
@@ -2497,7 +2553,8 @@
    "code_valid": "",
    "q2_time": "20240315151227",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "116",
@@ -2531,7 +2588,8 @@
    "code_valid": "",
    "q2_time": "20240315151226",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "117",
@@ -2565,7 +2623,8 @@
    "code_valid": "",
    "q2_time": "20240315151226",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "118",
@@ -2599,7 +2658,8 @@
    "code_valid": "",
    "q2_time": "20240314090317",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "119",
@@ -2633,7 +2693,8 @@
    "code_valid": "",
    "q2_time": "20240315151226",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "216",
@@ -2667,7 +2728,8 @@
    "code_valid": "",
    "q2_time": "20240315151227",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "120",
@@ -2701,7 +2763,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "121",
@@ -2735,7 +2798,8 @@
    "code_valid": "if mem.heap.lapl != mem.s.pl:\r\n    mem.s.name = get(\"plattformen\", f\"pl={mem.s.pl}\", \"name\")",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "122",
@@ -2769,7 +2833,8 @@
    "code_valid": "",
    "q2_time": "20240307220936",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "123",
@@ -2803,7 +2868,8 @@
    "code_valid": "",
    "q2_time": "20240315151020",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "124",
@@ -2837,7 +2903,8 @@
    "code_valid": "",
    "q2_time": "20240315151019",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "209",
@@ -2871,7 +2938,8 @@
    "code_valid": "",
    "q2_time": "20240315151024",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "210",
@@ -2905,7 +2973,8 @@
    "code_valid": "",
    "q2_time": "20240315151024",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "211",
@@ -2939,7 +3008,8 @@
    "code_valid": "",
    "q2_time": "20240315151020",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "212",
@@ -2973,7 +3043,8 @@
    "code_valid": "",
    "q2_time": "20240315150958",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "213",
@@ -3007,7 +3078,8 @@
    "code_valid": "",
    "q2_time": "20240315151024",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "214",
@@ -3041,7 +3113,8 @@
    "code_valid": "",
    "q2_time": "20240315150958",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "215",
@@ -3075,7 +3148,8 @@
    "code_valid": "",
    "q2_time": "20240315151020",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "142",
@@ -3109,7 +3183,8 @@
    "code_valid": "",
    "q2_time": "20240315114602",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "143",
@@ -3143,7 +3218,8 @@
    "code_valid": "",
    "q2_time": "20240315114601",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "144",
@@ -3177,7 +3253,8 @@
    "code_valid": "",
    "q2_time": "20240315114601",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "145",
@@ -3211,7 +3288,8 @@
    "code_valid": "",
    "q2_time": "20240315114601",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "146",
@@ -3245,7 +3323,8 @@
    "code_valid": "",
    "q2_time": "20240315114601",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "147",
@@ -3279,7 +3358,8 @@
    "code_valid": "",
    "q2_time": "20240315120444",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "148",
@@ -3313,7 +3393,8 @@
    "code_valid": "",
    "q2_time": "20240315120444",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "149",
@@ -3345,9 +3426,10 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20240315120444",
+   "q2_time": "20240326003018",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "150",
@@ -3381,7 +3463,8 @@
    "code_valid": "",
    "q2_time": "20240315120444",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "151",
@@ -3415,7 +3498,8 @@
    "code_valid": "",
    "q2_time": "20240315121155",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "152",
@@ -3449,7 +3533,8 @@
    "code_valid": "",
    "q2_time": "20240315120444",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "153",
@@ -3483,7 +3568,8 @@
    "code_valid": "",
    "q2_time": "20240315120444",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "154",
@@ -3517,7 +3603,8 @@
    "code_valid": "",
    "q2_time": "20240315120444",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "155",
@@ -3551,7 +3638,8 @@
    "code_valid": "",
    "q2_time": "20240315120444",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "160",
@@ -3585,7 +3673,8 @@
    "code_valid": "",
    "q2_time": "20240315114602",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "163",
@@ -3619,7 +3708,8 @@
    "code_valid": "",
    "q2_time": "20240315121205",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "164",
@@ -3653,7 +3743,8 @@
    "code_valid": "",
    "q2_time": "20240316001319",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "172",
@@ -3687,7 +3778,8 @@
    "code_valid": "",
    "q2_time": "20240316001319",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "173",
@@ -3721,7 +3813,8 @@
    "code_valid": "",
    "q2_time": "20240315120444",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "203",
@@ -3755,7 +3848,8 @@
    "code_valid": "",
    "q2_time": "20240315120724",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "204",
@@ -3789,7 +3883,8 @@
    "code_valid": "",
    "q2_time": "20240316170140",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "205",
@@ -3823,7 +3918,8 @@
    "code_valid": "",
    "q2_time": "20240315120724",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "206",
@@ -3857,7 +3953,8 @@
    "code_valid": "",
    "q2_time": "20240315120450",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "207",
@@ -3891,7 +3988,8 @@
    "code_valid": "",
    "q2_time": "20240315120444",
    "q2_mode": "i",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   },
   {
    "id": "208",
@@ -3925,7 +4023,8 @@
    "code_valid": "",
    "q2_time": "20240315190439",
    "q2_mode": "u",
-   "mess": ""
+   "mess": "",
+   "alignment": "0"
   }
  ],
  "queries": [
