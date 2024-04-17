@@ -58,10 +58,10 @@
   },
   {
    "name": "load_bank",
-   "script": "class Loader():\r\n    def __init__(self, date1, date2, konto_id):\r\n        self.date1=date1\r\n        self.date2=date2\r\n        self.konto_id = int_(konto_id)\r\n        bk = get(\"konten\",  f\"konto_id={konto_id}\", \"bk\")\r\n        self.algo = int_(get(\"banken\",  f\"bk={bk}\", \"banken.algo\"))\r\n        self.algo_name = get(\"banken\",  f\"bk={bk}\", \"name\")\r\n\r\n    def run(self):\r\n        ext = \"*.csv\"\r\n        # downloads_path = os.path.expanduser(\"~/Downloads\")\r\n        downloads_path = \"\"\r\n        # self.filename = q2_app.get_open_file_dialoq(\"Open CSV\", downloads_path, ext)[0]\r\n        self.filename = q2_app.get_open_file_dialoq(f\"Open CSV ({self.algo_name})\", downloads_path, ext)[0]\r\n        if not self.filename:\r\n            return\r\n        rez = None\r\n        if self.algo == 1:\r\n            rez = self.algo_1()\r\n        elif self.algo == 2:\r\n            rez = self.algo_2()\r\n        elif self.algo == 3:\r\n            rez = self.algo_3()\r\n        elif self.algo == 4:\r\n            rez = self.algo_4()\r\n        elif self.algo == 5:\r\n            rez = self.algo_5()\r\n        elif self.algo == 6:\r\n            rez = self.algo_6()\r\n        elif self.algo == 7:\r\n            rez = self.algo_7()\r\n\r\n        if rez:\r\n            self.insert_bank(rez)\r\n            return True\r\n        return None\r\n\r\n    def insert_bank(self, bank_data):\r\n        bank_data = [row for row in bank_data if row[\"date\"] >= self.date1 or row[\"date\"] <= self.date2]\r\n        if len(bank_data) == 0:\r\n            return\r\n        # schon_da = q2cursor(f\"select * from bank where date>='{self.date1}' and date<='{self.date2}' and konto_id={self.konto_id}\").row_count()\r\n        q2cursor(f\"delete from bank where date>='{self.date1}' and date<='{self.date2}' and konto_id={self.konto_id}\")\r\n        \r\n        w = q2_wait(len(bank_data), \"Inserting rows\")\r\n        transaction()\r\n        for x in bank_data:\r\n            w.step(10)\r\n            if not insert(\"bank\", x):\r\n                q2mess(\"An error occurred while inserting bank data.\")\r\n                ?q2app.q2_app.db_data.last_sql_error\r\n                break\r\n        commit()\r\n        w.close()\r\n\r\n\r\n    def open_csv(self, codepage=\"utf8\", key_string=None, delimiter=\",\", callback=None, quotechar='\"'):\r\n        import csv\r\n        try:\r\n            with open(self.filename, encoding=codepage) as csvfile:\r\n                first_line=csvfile.readline()\r\n                if callback is not None:\r\n                    first_line, key_string = callback(first_line, key_string)\r\n                if  key_string not in first_line:\r\n                    q2mess(f\"\"\"<font color=red>Falche Datei </font>\r\n                            <br><b>{self.filename}</b>\r\n                            <br>(nicht <b>{self.algo_name}</b>)\r\n                            <br>kein \"{key_string}\"\r\n                            <br>\r\n                            <br> in der ersten linie\r\n                            <br>\r\n                            <br>{first_line}\"\"\")\r\n                    return []\r\n                csvfile.seek(0, 0)\r\n                reader = csv.reader(csvfile, delimiter=delimiter, quotechar=quotechar)\r\n                return [x for x in reader]\r\n        except Exception as error:\r\n            q2mess(f\"Fehler: {error}\")\r\n            return []\r\n    \r\n\r\n    def algo_1(self): # Sparkasse\r\n        from datetime import datetime\r\n        def prep_first_line(first_line, key_string):\r\n            key_string = key_string.replace('\"', \"\")\r\n            first_line = first_line.replace('\"', \"\")\r\n            return first_line, key_string\r\n        \r\n        rez =self.open_csv(codepage=\"cp1252\"\r\n                        , key_string='\"Auftragskonto\";\"Buchungstag\";\"Valutadatum\";\"Buchungstext\";\"Verwendungszweck\";\"Glaeubiger ID\";\"Mandatsreferenz\";\"Kundenreferenz (End-to-End)\"'\r\n                        , delimiter=\";\"\r\n                        ,callback=prep_first_line\r\n                        ,quotechar=\"~\")\r\n        rez0=[]\r\n        for x in rez[1:]:\r\n            if len(x) < 15:\r\n                continue\r\n            for index, value in enumerate(x):\r\n                x[index] = x[index].replace('\"', '')\r\n            dct={ \r\n                    \"konto_id\":  self.konto_id ,\r\n                    \"date\":  datetime.strptime(x[1].split(\" \")[0], \"%d.%m.%y\").strftime(\"%Y-%m-%d\") ,\r\n                    \"content1\": x[3],\r\n                    \"content2\": x[4],\r\n                    \"content3\": x[11],\r\n                    \"betrag\": x[14].replace(\".\", \"\").replace(\",\", \".\"),\r\n                    }\r\n            rez0.append(dct)\r\n        return rez0\r\n    \r\n    def algo_2(self):  # Postbank\r\n        from datetime import datetime\r\n        rez =self.open_csv(codepage=\"utf8\"\r\n                        , key_string='Ums\u00e4tze'\r\n                        , delimiter=\";\")\r\n        rez0=[]\r\n        for x in rez[8:-1]:\r\n            if len(x) < 12:\r\n                continue\r\n            dct={ \r\n                    \"konto_id\":  self.konto_id ,\r\n                    \"date\":  datetime.strptime(x[0].split(\" \")[0], \"%d.%m.%Y\").strftime(\"%Y-%m-%d\") ,\r\n                    \"content1\": x[2],\r\n                    \"content2\": x[3],\r\n                    \"content3\": x[4],\r\n                    \"betrag\": x[11].replace(\".\", \"\").replace(\",\", \".\"),\r\n                    }\r\n            rez0.append(dct)\r\n        return rez0\r\n\r\n    def algo_3(self):  # ING\r\n        from datetime import datetime\r\n        rez =self.open_csv(codepage=\"cp1252\"\r\n                        , key_string='Umsatzanzeige;Datei erstellt'\r\n                        , delimiter=\";\")\r\n        rez0=[]\r\n\r\n        for x in rez[13:]:\r\n            if len(x) < 6:\r\n                continue\r\n            dct={ \r\n                    \"konto_id\":  self.konto_id,\r\n                    \"date\":  datetime.strptime(x[0], \"%d.%m.%Y\").strftime(\"%Y-%m-%d\") ,\r\n                    \"content1\": x[2]+ \" \" + x[4],\r\n                    \"content2\": x[3],\r\n                    \"content3\": x[2],\r\n                    \"betrag\": x[5].replace(\".\", \"\").replace(\",\", \".\"),\r\n                    }\r\n            rez0.append(dct)\r\n        return rez0\r\n\r\n    def algo_4(self): # PayPal\r\n        from datetime import datetime\r\n        rez =self.open_csv(codepage=\"utf8\"\r\n                        , key_string='\"Datum\",\"Uhrzeit\",\"Zeitzone\",\"Name\",\"Typ\",\"Status\",\"W\u00e4hrung\",\"Brutto\",\"Geb\u00fchr\"'\r\n                        , delimiter=\",\")\r\n        rez0=[]\r\n        for x in rez[1:]:\r\n            if len(x) < 9:\r\n                continue\r\n            if x[5] == \"Ausstehend\":\r\n                continue\r\n            dct={ \r\n                    \"konto_id\":  self.konto_id,\r\n                    \"date\":  datetime.strptime(x[0], \"%d.%m.%Y\").strftime(\"%Y-%m-%d\") ,\r\n                    \"content1\": x[11],\r\n                    \"content2\": x[3] + \" \" + x[4],\r\n                    \"content3\": x[37],\r\n                    \"betrag\": x[7].replace(\".\", \"\").replace(\",\", \".\"),\r\n                    }\r\n            rez0.append(dct)\r\n            gebuhr = num(x[8].replace(\".\", \"\").replace(\",\", \".\"))\r\n            if gebuhr !=0:\r\n                dct0 = dict(dct)\r\n                dct0['betrag'] = str(gebuhr)\r\n                rez0.append(dct0)\r\n        return rez0\r\n\r\n    def algo_5(self): # Kommerz\r\n        from datetime import datetime\r\n        rez =self.open_csv(codepage=\"utf8\"\r\n                        , key_string='Buchungstag;Wertstellung;Umsatzart;Buchungstext;Betrag;W\u00e4hrung;Auftraggeberkonto;Bankleitzahl'\r\n                        , delimiter=\";\")\r\n        rez0=[]\r\n        for x in rez[1:]:\r\n            if len(x) < 5:\r\n                continue\r\n            dct={ \r\n                    \"konto_id\":  self.konto_id,\r\n                    \"date\":  datetime.strptime(x[0], \"%d.%m.%Y\").strftime(\"%Y-%m-%d\") ,\r\n                    \"content1\": x[2],\r\n                    \"content2\": x[3],\r\n                    \"content3\": \"\",\r\n                    \"betrag\": x[4].replace(\".\", \"\").replace(\",\", \".\"),\r\n                    }\r\n            rez0.append(dct)\r\n        return rez0\r\n\r\n    def algo_6(self): # Finom\r\n        from datetime import datetime\r\n        rez =self.open_csv(codepage=\"utf8\"\r\n                        , key_string='Buchungsdatum,Time completed,Status,Transaktionsart,Auftraggeber/Empf\u00e4nger,Counterparty BIC'\r\n                        , delimiter=\",\")\r\n        rez0=[]\r\n        for x in rez[1:]:\r\n            if len(x) < 13:\r\n                continue\r\n            dct={ \r\n                    \"konto_id\":  self.konto_id,\r\n                    \"date\":  datetime.strptime(x[0], \"%d.%m.%Y\").strftime(\"%Y-%m-%d\") ,\r\n                    \"content1\": x[4],\r\n                    \"content2\": x[7],\r\n                    \"content3\": \"\",\r\n                    \"betrag\": x[12].replace(\",\", \"\"),\r\n                    }\r\n            rez0.append(dct)\r\n        return rez0\r\n\r\n    def algo_7(self): # HypoVereinsbank\r\n        from datetime import datetime\r\n        rez =self.open_csv(codepage=\"utf-16-le\"\r\n                        , key_string='Kontonummer;Buchungsdatum;Valuta;Empfaenger 1;Empfaenger 2;Verwendungszweck;Betrag;Waehrung'\r\n                        , delimiter=\";\")\r\n        rez0=[]\r\n        for x in rez[1:]:\r\n            if len(x) < 7:\r\n                continue\r\n            dct={ \r\n                    \"konto_id\":  self.konto_id,\r\n                    \"date\":  datetime.strptime(x[1], \"%d.%m.%Y\").strftime(\"%Y-%m-%d\") ,\r\n                    \"content1\": x[5],\r\n                    \"content2\":  \"\",\r\n                    \"content3\": \"\",\r\n                    \"betrag\": x[6].replace(\".\", \"\").replace(\",\", \".\"),\r\n                    }\r\n            rez0.append(dct)\r\n        return rez0\r\n\r\n            \r\nif __name__ == \"__main__\":\r\n    # Loader(\"2023-01-01\", \"2023-12-31\", 1)\r\n    # Loader(\"2023-01-01\", \"2023-12-31\", 2)\r\n    # Loader(\"2023-01-01\", \"2023-12-31\", 2)\r\n    pass",
+   "script": "class Loader():\r\n    def __init__(self, date1, date2, konto_id):\r\n        self.date1=date1\r\n        self.date2=date2\r\n        self.konto_id = int_(konto_id)\r\n        bk = get(\"konten\",  f\"konto_id={konto_id}\", \"bk\")\r\n        self.algo = int_(get(\"banken\",  f\"bk={bk}\", \"banken.algo\"))\r\n        self.algo_name = get(\"banken\",  f\"bk={bk}\", \"name\")\r\n\r\n    def run(self):\r\n        ext = \"*.csv\"\r\n        # downloads_path = os.path.expanduser(\"~/Downloads\")\r\n        downloads_path = \"\"\r\n        # self.filename = q2_app.get_open_file_dialoq(\"Open CSV\", downloads_path, ext)[0]\r\n        self.filename = q2_app.get_open_file_dialoq(f\"Open CSV ({self.algo_name})\", downloads_path, ext)[0]\r\n        if not self.filename:\r\n            return\r\n        rez = None\r\n        if self.algo == 1:\r\n            rez = self.algo_1()\r\n        elif self.algo == 2:\r\n            rez = self.algo_2()\r\n        elif self.algo == 3:\r\n            rez = self.algo_3()\r\n        elif self.algo == 4:\r\n            rez = self.algo_4()\r\n        elif self.algo == 5:\r\n            rez = self.algo_5()\r\n        elif self.algo == 6:\r\n            rez = self.algo_6()\r\n        elif self.algo == 7:\r\n            rez = self.algo_7()\r\n\r\n        if rez:\r\n            self.insert_bank(rez)\r\n            return True\r\n        return None\r\n\r\n    def insert_bank(self, bank_data):\r\n        bank_data = [row for row in bank_data if row[\"date\"] >= self.date1 or row[\"date\"] <= self.date2]\r\n        if len(bank_data) == 0:\r\n            return\r\n        # schon_da = q2cursor(f\"select * from bank where date>='{self.date1}' and date<='{self.date2}' and konto_id={self.konto_id}\").row_count()\r\n        q2cursor(f\"delete from bank where date>='{self.date1}' and date<='{self.date2}' and konto_id={self.konto_id}\")\r\n        \r\n        w = q2_wait(len(bank_data), \"Inserting rows\")\r\n        transaction()\r\n        for x in bank_data:\r\n            w.step(10)\r\n            if not insert(\"bank\", x):\r\n                q2mess(\"An error occurred while inserting bank data.\")\r\n                ?q2app.q2_app.db_data.last_sql_error\r\n                break\r\n        commit()\r\n        w.close()\r\n\r\n\r\n    def open_csv(self, codepage=\"utf8\", key_string=None, delimiter=\",\", callback=None, quotechar='\"'):\r\n        import csv\r\n        try:\r\n            with open(self.filename, encoding=codepage) as csvfile:\r\n                first_line=csvfile.readline()\r\n                if callback is not None:\r\n                    first_line, key_string = callback(first_line, key_string)\r\n                if  key_string not in first_line:\r\n                    q2mess(f\"\"\"<font color=red>Falche Datei </font>\r\n                            <br><b>{self.filename}</b>\r\n                            <br>(nicht <b>{self.algo_name}</b>)\r\n                            <br>kein \"{key_string}\"\r\n                            <br>\r\n                            <br> in der ersten linie\r\n                            <br>\r\n                            <br>{first_line}\"\"\")\r\n                    return []\r\n                csvfile.seek(0, 0)\r\n                reader = csv.reader(csvfile, delimiter=delimiter, quotechar=quotechar)\r\n                return [x for x in reader]\r\n        except Exception as error:\r\n            q2mess(f\"Fehler: {error}\")\r\n            return []\r\n    \r\n\r\n    def algo_1(self): # Sparkasse\r\n        from datetime import datetime\r\n        def prep_first_line(first_line, key_string):\r\n            key_string = key_string.replace('\"', \"\")\r\n            first_line = first_line.replace('\"', \"\")\r\n            return first_line, key_string\r\n        \r\n        rez =self.open_csv(codepage=\"cp1252\"\r\n                        , key_string='\"Auftragskonto\";\"Buchungstag\";\"Valutadatum\";\"Buchungstext\";\"Verwendungszweck\";\"Glaeubiger ID\";\"Mandatsreferenz\";\"Kundenreferenz (End-to-End)\"'\r\n                        , delimiter=\";\"\r\n                        ,callback=prep_first_line\r\n                        ,quotechar=\"~\")\r\n        rez0=[]\r\n        for x in rez[1:]:\r\n            if len(x) < 15:\r\n                continue\r\n            for index, value in enumerate(x):\r\n                x[index] = x[index].replace('\"', '')\r\n            dct={ \r\n                    \"konto_id\":  self.konto_id ,\r\n                    \"date\":  datetime.strptime(x[1].split(\" \")[0], \"%d.%m.%y\").strftime(\"%Y-%m-%d\") ,\r\n                    \"content1\": x[3],\r\n                    \"content2\": x[4],\r\n                    \"content3\": x[11],\r\n                    \"betrag\": x[14].replace(\".\", \"\").replace(\",\", \".\"),\r\n                    }\r\n            rez0.append(dct)\r\n        return rez0\r\n    \r\n    def algo_2(self):  # Postbank\r\n        from datetime import datetime\r\n        rez =self.open_csv(codepage=\"utf8\"\r\n                        , key_string='Ums\u00e4tze'\r\n                        , delimiter=\";\")\r\n        rez0=[]\r\n        for x in rez[8:-1]:\r\n            if len(x) < 12:\r\n                continue\r\n            dct={ \r\n                    \"konto_id\":  self.konto_id ,\r\n                    \"date\":  datetime.strptime(x[0].split(\" \")[0], \"%d.%m.%Y\").strftime(\"%Y-%m-%d\") ,\r\n                    \"content1\": x[2],\r\n                    \"content2\": x[3],\r\n                    \"content3\": x[4],\r\n                    \"betrag\": x[11].replace(\".\", \"\").replace(\",\", \".\"),\r\n                    }\r\n            rez0.append(dct)\r\n        return rez0\r\n\r\n    def algo_3(self):  # ING\r\n        from datetime import datetime\r\n        rez =self.open_csv(codepage=\"cp1252\"\r\n                        , key_string='Umsatzanzeige;Datei erstellt'\r\n                        , delimiter=\";\")\r\n        rez0=[]\r\n\r\n        for x in rez[13:]:\r\n            if len(x) < 6:\r\n                continue\r\n            dct={ \r\n                    \"konto_id\":  self.konto_id,\r\n                    \"date\":  datetime.strptime(x[0], \"%d.%m.%Y\").strftime(\"%Y-%m-%d\") ,\r\n                    \"content1\": x[2]+ \" \" + x[4],\r\n                    \"content2\": x[3],\r\n                    \"content3\": x[2],\r\n                    \"betrag\": x[5].replace(\".\", \"\").replace(\",\", \".\"),\r\n                    }\r\n            rez0.append(dct)\r\n        return rez0\r\n\r\n    def algo_4(self): # PayPal\r\n        from datetime import datetime\r\n        rez =self.open_csv(codepage=\"utf8\"\r\n                        , key_string='\"Datum\",\"Uhrzeit\",\"Zeitzone\",\"Name\",\"Typ\",\"Status\",\"W\u00e4hrung\",\"Brutto\",\"Geb\u00fchr\"'\r\n                        , delimiter=\",\")\r\n        rez0=[]\r\n        for x in rez[1:]:\r\n            if len(x) < 9:\r\n                continue\r\n            if x[5] == \"Ausstehend\":\r\n                continue\r\n            dct={ \r\n                    \"konto_id\":  self.konto_id,\r\n                    \"date\":  datetime.strptime(x[0], \"%d.%m.%Y\").strftime(\"%Y-%m-%d\") ,\r\n                    \"content1\": x[11],\r\n                    \"content2\": x[3] + \" \" + x[4],\r\n                    \"content3\": x[37],\r\n                    \"betrag\": x[7].replace(\".\", \"\").replace(\",\", \".\"),\r\n                    }\r\n            rez0.append(dct)\r\n            gebuhr = num(x[8].replace(\".\", \"\").replace(\",\", \".\"))\r\n            if gebuhr !=0:\r\n                dct0 = dict(dct)\r\n                dct0['betrag'] = str(gebuhr)\r\n                rez0.append(dct0)\r\n        return rez0\r\n\r\n    def algo_5(self): # Kommerz\r\n        from datetime import datetime\r\n        rez =self.open_csv(codepage=\"utf8\"\r\n                        , key_string='Buchungstag;Wertstellung;Umsatzart;Buchungstext;Betrag;W\u00e4hrung'\r\n                        , delimiter=\";\")\r\n        rez0=[]\r\n        for x in rez[1:]:\r\n            if len(x) < 5:\r\n                continue\r\n            dct={ \r\n                    \"konto_id\":  self.konto_id,\r\n                    \"date\":  datetime.strptime(x[0], \"%d.%m.%Y\").strftime(\"%Y-%m-%d\") ,\r\n                    \"content1\": x[2],\r\n                    \"content2\": x[3],\r\n                    \"content3\": \"\",\r\n                    \"betrag\": x[4].replace(\".\", \"\").replace(\",\", \".\"),\r\n                    }\r\n            rez0.append(dct)\r\n        return rez0\r\n\r\n    def algo_6(self): # Finom\r\n        from datetime import datetime\r\n        rez =self.open_csv(codepage=\"utf8\"\r\n                        , key_string='Buchungsdatum,Time completed,Status,Transaktionsart,Auftraggeber/Empf\u00e4nger,Counterparty BIC'\r\n                        , delimiter=\",\")\r\n        rez0=[]\r\n        for x in rez[1:]:\r\n            if len(x) < 13:\r\n                continue\r\n            dct={ \r\n                    \"konto_id\":  self.konto_id,\r\n                    \"date\":  datetime.strptime(x[0], \"%d.%m.%Y\").strftime(\"%Y-%m-%d\") ,\r\n                    \"content1\": x[4],\r\n                    \"content2\": x[7],\r\n                    \"content3\": \"\",\r\n                    \"betrag\": x[12].replace(\",\", \"\"),\r\n                    }\r\n            rez0.append(dct)\r\n        return rez0\r\n\r\n    def algo_7(self): # HypoVereinsbank\r\n        from datetime import datetime\r\n        rez =self.open_csv(codepage=\"utf-16-le\"\r\n                        , key_string='Kontonummer;Buchungsdatum;Valuta;Empfaenger 1;Empfaenger 2;Verwendungszweck;Betrag;Waehrung'\r\n                        , delimiter=\";\")\r\n        rez0=[]\r\n        for x in rez[1:]:\r\n            if len(x) < 7:\r\n                continue\r\n            dct={ \r\n                    \"konto_id\":  self.konto_id,\r\n                    \"date\":  datetime.strptime(x[1], \"%d.%m.%Y\").strftime(\"%Y-%m-%d\") ,\r\n                    \"content1\": x[5],\r\n                    \"content2\":  \"\",\r\n                    \"content3\": \"\",\r\n                    \"betrag\": x[6].replace(\".\", \"\").replace(\",\", \".\"),\r\n                    }\r\n            rez0.append(dct)\r\n        return rez0\r\n\r\n            \r\nif __name__ == \"__main__\":\r\n    # Loader(\"2023-01-01\", \"2023-12-31\", 1)\r\n    # Loader(\"2023-01-01\", \"2023-12-31\", 2)\r\n    # Loader(\"2023-01-01\", \"2023-12-31\", 2)\r\n    pass",
    "comment": "",
-   "last_line": "168",
-   "q2_time": "20240409215104",
+   "last_line": "183",
+   "q2_time": "20240417143618",
    "q2_mode": "u"
   },
   {
@@ -122,10 +122,10 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2024-04-13 10:08:41'",
+   "script": "self.app_version = '2024-04-17 14:37:27'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20240413100841",
+   "q2_time": "20240417143727",
    "q2_mode": "u"
   }
  ],
@@ -594,7 +594,8 @@
    "q2_time": "20240307220935",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "65",
@@ -629,7 +630,8 @@
    "q2_time": "20240413100720",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "66",
@@ -664,7 +666,8 @@
    "q2_time": "20240413100720",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "67",
@@ -699,7 +702,8 @@
    "q2_time": "20240413100719",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "68",
@@ -734,7 +738,8 @@
    "q2_time": "20240413100738",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "69",
@@ -769,7 +774,8 @@
    "q2_time": "20240413100719",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "70",
@@ -804,7 +810,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "71",
@@ -839,7 +846,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "72",
@@ -874,7 +882,8 @@
    "q2_time": "20240315114420",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "73",
@@ -909,7 +918,8 @@
    "q2_time": "20240315114420",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "74",
@@ -944,7 +954,8 @@
    "q2_time": "20240412133213",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "75",
@@ -979,7 +990,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "76",
@@ -1014,7 +1026,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "77",
@@ -1049,7 +1062,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "78",
@@ -1084,7 +1098,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "79",
@@ -1119,7 +1134,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "80",
@@ -1154,7 +1170,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "162",
@@ -1189,7 +1206,8 @@
    "q2_time": "20240315084705",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "125",
@@ -1224,7 +1242,8 @@
    "q2_time": "20240315113419",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "126",
@@ -1259,7 +1278,8 @@
    "q2_time": "20240315113419",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "127",
@@ -1294,7 +1314,8 @@
    "q2_time": "20240315113419",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "81",
@@ -1329,7 +1350,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "82",
@@ -1364,7 +1386,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "83",
@@ -1399,7 +1422,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "84",
@@ -1434,7 +1458,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "85",
@@ -1469,7 +1494,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "86",
@@ -1504,7 +1530,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "87",
@@ -1539,7 +1566,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "88",
@@ -1574,7 +1602,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "89",
@@ -1609,7 +1638,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "90",
@@ -1644,7 +1674,8 @@
    "q2_time": "20240314084347",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "91",
@@ -1679,7 +1710,8 @@
    "q2_time": "20240314084341",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "92",
@@ -1714,7 +1746,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "93",
@@ -1749,7 +1782,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "94",
@@ -1784,7 +1818,8 @@
    "q2_time": "20240314084524",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "95",
@@ -1819,7 +1854,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "96",
@@ -1854,7 +1890,8 @@
    "q2_time": "20240314084519",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "97",
@@ -1889,7 +1926,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "98",
@@ -1924,7 +1962,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "99",
@@ -1959,7 +1998,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "100",
@@ -1994,7 +2034,8 @@
    "q2_time": "20240314092448",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "101",
@@ -2029,7 +2070,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "102",
@@ -2064,7 +2106,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "105",
@@ -2099,7 +2142,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "156",
@@ -2134,7 +2178,8 @@
    "q2_time": "20240314090739",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "157",
@@ -2169,7 +2214,8 @@
    "q2_time": "20240314090739",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "158",
@@ -2204,7 +2250,8 @@
    "q2_time": "20240314090745",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "106",
@@ -2239,7 +2286,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "107",
@@ -2274,7 +2322,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "108",
@@ -2309,7 +2358,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "109",
@@ -2344,7 +2394,8 @@
    "q2_time": "20240405230258",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "110",
@@ -2379,7 +2430,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "111",
@@ -2414,7 +2466,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "112",
@@ -2449,7 +2502,8 @@
    "q2_time": "20240409215650",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "113",
@@ -2484,7 +2538,8 @@
    "q2_time": "20240409215647",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "114",
@@ -2519,7 +2574,8 @@
    "q2_time": "20240409215645",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "115",
@@ -2554,7 +2610,8 @@
    "q2_time": "20240409215646",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "116",
@@ -2589,7 +2646,8 @@
    "q2_time": "20240403104210",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "117",
@@ -2624,7 +2682,8 @@
    "q2_time": "20240409215645",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "118",
@@ -2659,7 +2718,8 @@
    "q2_time": "20240314090317",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "119",
@@ -2694,7 +2754,8 @@
    "q2_time": "20240409215653",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "216",
@@ -2729,7 +2790,8 @@
    "q2_time": "20240409215650",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "217",
@@ -2764,7 +2826,8 @@
    "q2_time": "20240409215644",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "218",
@@ -2799,7 +2862,8 @@
    "q2_time": "20240403103802",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "219",
@@ -2834,7 +2898,8 @@
    "q2_time": "20240403103802",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "334",
@@ -2869,7 +2934,8 @@
    "q2_time": "20240409215653",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "120",
@@ -2904,7 +2970,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "121",
@@ -2939,7 +3006,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "122",
@@ -2974,7 +3042,8 @@
    "q2_time": "20240307220936",
    "q2_mode": "i",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "123",
@@ -3009,7 +3078,8 @@
    "q2_time": "20240315151020",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "124",
@@ -3044,7 +3114,8 @@
    "q2_time": "20240315151019",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "209",
@@ -3079,7 +3150,8 @@
    "q2_time": "20240315151024",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "210",
@@ -3114,7 +3186,8 @@
    "q2_time": "20240315151024",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "211",
@@ -3149,7 +3222,8 @@
    "q2_time": "20240315151020",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "212",
@@ -3184,7 +3258,8 @@
    "q2_time": "20240315150958",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "213",
@@ -3219,7 +3294,8 @@
    "q2_time": "20240315151024",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "214",
@@ -3254,7 +3330,8 @@
    "q2_time": "20240315150958",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "215",
@@ -3289,7 +3366,8 @@
    "q2_time": "20240315151020",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "142",
@@ -3324,7 +3402,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "143",
@@ -3359,7 +3438,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "144",
@@ -3394,7 +3474,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "145",
@@ -3429,7 +3510,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "146",
@@ -3464,7 +3546,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "147",
@@ -3499,7 +3582,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "148",
@@ -3534,7 +3618,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "149",
@@ -3569,7 +3654,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "150",
@@ -3604,7 +3690,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "151",
@@ -3639,7 +3726,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "152",
@@ -3674,7 +3762,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "153",
@@ -3709,7 +3798,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "154",
@@ -3744,7 +3834,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "155",
@@ -3779,7 +3870,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "160",
@@ -3814,7 +3906,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "163",
@@ -3849,7 +3942,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "164",
@@ -3884,7 +3978,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "203",
@@ -3919,7 +4014,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "204",
@@ -3954,7 +4050,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "205",
@@ -3989,7 +4086,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "206",
@@ -4024,7 +4122,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "208",
@@ -4059,7 +4158,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "220",
@@ -4094,7 +4194,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "225",
@@ -4129,7 +4230,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "226",
@@ -4164,7 +4266,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "227",
@@ -4199,7 +4302,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "228",
@@ -4234,7 +4338,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   },
   {
    "id": "229",
@@ -4269,7 +4374,8 @@
    "q2_time": "20240403155858",
    "q2_mode": "u",
    "mess": "",
-   "alignment": "0"
+   "alignment": "0",
+   "style": ""
   }
  ],
  "queries": [
