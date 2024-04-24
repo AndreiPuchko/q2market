@@ -10,11 +10,11 @@
   },
   {
    "name": "manifest",
-   "script": "self.app_url = \"https://raw.githubusercontent.com/AndreiPuchko/q2market/main/demo_app\"\r\nself.app_title = \"Demo app!\"\r\nself.app_description = \"First q2RAD demo app!\"",
+   "script": "self.app_url = \"https://raw.githubusercontent.com/AndreiPuchko/q2market/main/demo_app\"\r\nself.app_title = \"Demo app\"\r\nself.app_description = \"q2RAD demo app\"",
    "comment": "",
-   "q2_time": "20240424144056",
-   "q2_mode": "i",
-   "last_line": "3"
+   "q2_time": "20240424145256",
+   "q2_mode": "u",
+   "last_line": "2"
   },
   {
    "name": "q2task",
@@ -82,9 +82,9 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2024-04-24 14:49:42'",
+   "script": "self.app_version = '2024-04-24 14:53:25'",
    "comment": "",
-   "q2_time": "20240424144942",
+   "q2_time": "20240424145325",
    "q2_mode": "u",
    "last_line": "0"
   },
@@ -150,7 +150,7 @@
   },
   {
    "name": "invoice_header",
-   "title": "Invoice Header",
+   "title": "Invoice",
    "seq": "3",
    "menu_path": "Documents",
    "menu_text": "Invoices",
@@ -174,8 +174,8 @@
    "before_delete": "",
    "after_delete": "",
    "form_valid": "",
-   "q2_time": "20240424144056",
-   "q2_mode": "i",
+   "q2_time": "20240424145308",
+   "q2_mode": "u",
    "after_close": "",
    "after_form_closed": "",
    "view_action": "",
