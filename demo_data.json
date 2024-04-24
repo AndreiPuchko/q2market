@@ -13,7 +13,7 @@
    "const_text": "",
    "const_value": "123",
    "comment": "",
-   "q2_time": "20230723224443",
+   "q2_time": "20240424141606",
    "q2_mode": "u"
   },
   {
@@ -27,22 +27,36 @@
  ],
  "customers": [
   {
-   "cid": "1",
-   "name": "Software owner",
-   "q2_time": "20220611135203",
-   "q2_mode": "i"
+   "cid": "0",
+   "name": "-",
+   "q2_time": "20240424142739",
+   "q2_mode": "i",
+   "address": "",
+   "comment": ""
   },
   {
    "cid": "2",
    "name": "Customer 1",
-   "q2_time": "20220611135223",
-   "q2_mode": "i"
+   "q2_time": "20240424142052",
+   "q2_mode": "u",
+   "address": "125 New Street Newcity",
+   "comment": ""
   },
   {
    "cid": "3",
    "name": "Customer 2",
-   "q2_time": "20220611232402",
-   "q2_mode": "i"
+   "q2_time": "20240424142113",
+   "q2_mode": "u",
+   "address": "33 Old Street Oldtown",
+   "comment": ""
+  },
+  {
+   "cid": "1",
+   "name": "Software owner",
+   "q2_time": "20240424142131",
+   "q2_mode": "u",
+   "address": "14 Broken Village",
+   "comment": ""
   }
  ],
  "invoice": [
@@ -51,102 +65,152 @@
    "date": "2022-06-11",
    "cid": "1",
    "q2_time": "20230625163211",
-   "q2_mode": "u"
+   "q2_mode": "u",
+   "comment": ""
   },
   {
    "id": "1",
    "date": "2022-06-12",
    "cid": "2",
-   "q2_time": "20220611234435",
-   "q2_mode": "u"
+   "q2_time": "20240424142243",
+   "q2_mode": "u",
+   "comment": "Free delivery"
   },
   {
    "id": "4",
    "date": "2022-06-13",
    "cid": "2",
-   "q2_time": "20220613195047",
-   "q2_mode": "i"
+   "q2_time": "20240424142312",
+   "q2_mode": "u",
+   "comment": "Fast track"
   },
   {
    "id": "2",
    "date": "2022-12-11",
    "cid": "3",
-   "q2_time": "20220613195005",
-   "q2_mode": "u"
+   "q2_time": "20240424142320",
+   "q2_mode": "u",
+   "comment": ""
   }
  ],
  "invoice_lines": [
-  {
-   "id": "4",
-   "parent_id": "0",
-   "price": "23",
-   "qt": "124",
-   "product": "vdfjkvlsjkdfgbsdg",
-   "q2_time": "20220612214104",
-   "q2_mode": "u"
-  },
-  {
-   "id": "5",
-   "parent_id": "0",
-   "price": "23423",
-   "qt": "23",
-   "product": "fsdfgsdgs\ncdsvg;sdlmfg;kldg",
-   "q2_time": "20220612214113",
-   "q2_mode": "u"
-  },
-  {
-   "id": "0",
-   "parent_id": "1",
-   "price": "1",
-   "qt": "2",
-   "product": "rvdfghbdfgh fdh dfgh d",
-   "q2_time": "20220612214124",
-   "q2_mode": "u"
-  },
   {
    "id": "1",
    "parent_id": "1",
    "price": "3",
    "qt": "5",
-   "product": "r234r23r23",
-   "q2_time": "20220701123456",
-   "q2_mode": "u"
+   "product": "Product 2",
+   "q2_time": "20240424143645",
+   "q2_mode": "u",
+   "pid": "1",
+   "comment": ""
   },
   {
-   "id": "2",
-   "parent_id": "2",
-   "price": "23",
-   "qt": "234",
-   "product": "423424  fd gsdg sdg",
-   "q2_time": "20220614095305",
-   "q2_mode": "u"
-  },
-  {
-   "id": "3",
-   "parent_id": "2",
-   "price": "3",
-   "qt": "432",
-   "product": "dfg sdg ds gsdg sd",
-   "q2_time": "20220614095310",
-   "q2_mode": "u"
+   "id": "4",
+   "parent_id": "0",
+   "price": "33",
+   "qt": "124",
+   "product": "vdfjkvlsjkdfgbsdg",
+   "q2_time": "20240424144142",
+   "q2_mode": "u",
+   "pid": "1",
+   "comment": "comment"
   },
   {
    "id": "6",
    "parent_id": "4",
-   "price": "23",
+   "price": "56",
    "qt": "234",
    "product": " fgdhdfhdfg dgf dhgf dfg",
-   "q2_time": "20220612214136",
-   "q2_mode": "u"
+   "q2_time": "20240424143715",
+   "q2_mode": "u",
+   "pid": "1",
+   "comment": ""
+  },
+  {
+   "id": "0",
+   "parent_id": "1",
+   "price": "45",
+   "qt": "2",
+   "product": "Product 1",
+   "q2_time": "20240424143641",
+   "q2_mode": "u",
+   "pid": "2",
+   "comment": ""
+  },
+  {
+   "id": "3",
+   "parent_id": "2",
+   "price": "45",
+   "qt": "432",
+   "product": "dfg sdg ds gsdg sd",
+   "q2_time": "20240424143653",
+   "q2_mode": "u",
+   "pid": "2",
+   "comment": ""
+  },
+  {
+   "id": "2",
+   "parent_id": "2",
+   "price": "10",
+   "qt": "234",
+   "product": "423424  fd gsdg sdg",
+   "q2_time": "20240424143648",
+   "q2_mode": "u",
+   "pid": "3",
+   "comment": ""
+  },
+  {
+   "id": "5",
+   "parent_id": "0",
+   "price": "10",
+   "qt": "23",
+   "product": "fsdfgsdgs\ncdsvg;sdlmfg;kldg",
+   "q2_time": "20240424143701",
+   "q2_mode": "u",
+   "pid": "3",
+   "comment": ""
   },
   {
    "id": "7",
    "parent_id": "4",
-   "price": "5",
+   "price": "10",
    "qt": "3",
    "product": " dfghfh dfgh dgf hdgf",
-   "q2_time": "20220612214141",
-   "q2_mode": "u"
+   "q2_time": "20240424143718",
+   "q2_mode": "u",
+   "pid": "3",
+   "comment": ""
+  }
+ ],
+ "products": [
+  {
+   "pid": "0",
+   "name": "-",
+   "price": "0",
+   "q2_time": "20240424142535",
+   "q2_mode": "i"
+  },
+  {
+   "pid": "1",
+   "name": "Product 1",
+   "price": "56",
+   "q2_time": "20240424142544",
+   "q2_mode": "i"
+  },
+  {
+   "pid": "2",
+   "name": "Product 2",
+   "price": "45",
+   "q2_time": "20240424142552",
+   "q2_mode": "i"
+  },
+  {
+   "pid": "3",
+   "name": "Labor fee",
+   "price": "10",
+   "q2_time": "20240424142624",
+   "q2_mode": "i"
   }
  ]
 }
