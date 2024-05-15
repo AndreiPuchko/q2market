@@ -106,10 +106,10 @@
   },
   {
    "name": "set_gegenkonto_bank",
-   "script": "def set_gegenkonto_bank(konto_id):\r\n    import get_such_bank\r\n    cu = q2cursor(f\"\"\"\r\n                                select * \r\n                                from konten_buchungs_algo\r\n                                where konto_id = {konto_id}\r\n                            \"\"\")\r\n    w = q2_wait(cu.row_count(), \"Gegenkonto suchung\")\r\n    for x in cu.records():\r\n        w.step()\r\n        whr_text = get_such_bank(x['id'])\r\n        if whr_text == \"\":\r\n            return\r\n        cu2 = q2cursor(f\"select * from bank where ({whr_text}) and konto_id={x['konto_id']} and gegenkonto=''\")\r\n        w2 = q2wait(cu2.row_count())\r\n        transaction()\r\n        for row in cu2.records():\r\n            w2.step(1000)\r\n            edit = False\r\n            if row['gegenkonto'] == \"\":\r\n                row['gegenkonto'] = x['gegenkonto']\r\n                edit = True\r\n            if row['taxkey'] == \"\":\r\n                row['taxkey'] = x['taxkey']\r\n                edit = True\r\n            if edit:\r\n                update(\"bank\", row)\r\n        commit()\r\n        w2.close()\r\n    w.close()\r\n\r\nif __name__ == \"__main__\":\r\n    set_gegenkonto_bank(1)",
+   "script": "def set_gegenkonto_bank(konto_id):\r\n    import get_such_bank\r\n    cu = q2cursor(f\"\"\"\r\n                                select * \r\n                                from konten_buchungs_algo\r\n                                where konto_id = {konto_id}\r\n                            \"\"\")\r\n    w = q2_wait(cu.row_count(), \"Gegenkonto suchung\")\r\n    for x in cu.records():\r\n        w.step()\r\n        whr_text = get_such_bank(x['id'])\r\n        if whr_text == \"\":\r\n            return\r\n        cu2 = q2cursor(f\"select * from bank where ({whr_text}) and konto_id={x['konto_id']}\")\r\n        w2 = q2wait(cu2.row_count())\r\n        transaction()\r\n        for row in cu2.records():\r\n            w2.step(1000)\r\n            edit = False\r\n            if row['gegenkonto'] == \"\":\r\n                row['gegenkonto'] = x['gegenkonto']\r\n                edit = True\r\n            if row['taxkey'] == \"\":\r\n                row['taxkey'] = x['taxkey']\r\n                edit = True\r\n            if edit:\r\n                update(\"bank\", row)\r\n        commit()\r\n        w2.close()\r\n    w.close()\r\n\r\nif __name__ == \"__main__\":\r\n    set_gegenkonto_bank(1)",
    "comment": "",
-   "last_line": "26",
-   "q2_time": "20240515100210",
+   "last_line": "27",
+   "q2_time": "20240515100910",
    "q2_mode": "u"
   },
   {
@@ -122,10 +122,10 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2024-05-15 10:04:28'",
+   "script": "self.app_version = '2024-05-15 10:09:36'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20240515100428",
+   "q2_time": "20240515100936",
    "q2_mode": "u"
   }
  ],
