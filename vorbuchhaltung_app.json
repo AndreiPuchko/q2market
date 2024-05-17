@@ -130,10 +130,10 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2024-05-17 11:08:49'",
+   "script": "self.app_version = '2024-05-17 11:27:44'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20240517110849",
+   "q2_time": "20240517112744",
    "q2_mode": "u"
   }
  ],
@@ -5276,6 +5276,26 @@
    "action_worker": "",
    "comment": "",
    "q2_time": "20240509152828",
+   "q2_mode": "u"
+  },
+  {
+   "id": "58",
+   "name": "W\u00e4hrung",
+   "action_text": "BMF",
+   "seq": "2",
+   "action_mode": "2",
+   "action_mess": "\u00d6ffnen Sie die BMF-Seite",
+   "action_icon": "",
+   "action_key": "",
+   "tag": "yellow",
+   "eof_disabled": "",
+   "child_form": "",
+   "child_where": "",
+   "child_noshow": "",
+   "child_copy_mode": "1",
+   "action_worker": "import webbrowser\r\nwebbrowser.open_new_tab(\"https://www.bundesfinanzministerium.de/Web/DE/Themen/Steuern/Steuerarten/Umsatzsteuer/Umsatzsteuer_Umrechnungskurse/umsatzsteuer_umrechnungskurse.html\")",
+   "comment": "",
+   "q2_time": "20240517112719",
    "q2_mode": "u"
   },
   {
