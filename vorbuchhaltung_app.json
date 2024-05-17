@@ -130,10 +130,10 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2024-05-17 11:55:07'",
+   "script": "self.app_version = '2024-05-17 11:56:02'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20240517115507",
+   "q2_time": "20240517115602",
    "q2_mode": "u"
   }
  ],
@@ -713,7 +713,7 @@
    "column": "kurs",
    "label": "",
    "gridlabel": "",
-   "seq": "2",
+   "seq": "4",
    "nogrid": "",
    "noform": "",
    "check": "",
@@ -737,8 +737,8 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20240509150638",
-   "q2_mode": "i",
+   "q2_time": "20240517115546",
+   "q2_mode": "u",
    "mess": "",
    "alignment": "0",
    "style": ""
@@ -749,7 +749,7 @@
    "column": "date",
    "label": "Datum",
    "gridlabel": "",
-   "seq": "4",
+   "seq": "2",
    "nogrid": "",
    "noform": "",
    "check": "",
@@ -773,8 +773,8 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20240509153009",
-   "q2_mode": "i",
+   "q2_time": "20240517115546",
+   "q2_mode": "u",
    "mess": "",
    "alignment": "0",
    "style": ""
