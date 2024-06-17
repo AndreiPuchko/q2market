@@ -2,10 +2,10 @@
  "modules": [
   {
    "name": "_gorod_gdm__row_extender",
-   "script": "def row_extender(data, uid):\r\n    \"v0\"\r\n    data['B'] = \"Row Extender\"",
+   "script": "def row_extender(data, id):\r\n    for index,x in enumerate(data[\"X\"].replace(\" \", \"\")):\r\n        data[f\"{index+1}X\"] = x    \r\n    for index,x in enumerate(data[\"Y\"].replace(\" \", \"\")):\r\n        data[f\"{index+1}Y\"] = x\r\n    # q2mess(data)",
    "comment": "",
-   "last_line": "2",
-   "q2_time": "20240617122718",
+   "last_line": "6",
+   "q2_time": "20240617135533",
    "q2_mode": "u"
   }
  ],
@@ -17,12 +17,11 @@
  "packages": [
   {
    "package_name": "q2googledrive",
+   "package_pipname": "",
    "package_version": "",
    "comment": "",
-   "q2_time": "20240304122315",
-   "q2_mode": "i",
-   "package_alias": "",
-   "package_pipname": ""
+   "q2_time": "20240612154828",
+   "q2_mode": "i"
   }
  ]
 }
