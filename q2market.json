@@ -18,5 +18,10 @@
     "app_title": "GoogleDriveMerge",
     "app_version": "2024-06-14 17:49:48",
     "app_description": "Merges one row from Google Sheet into Google Document template"
+  },
+  "https://raw.githubusercontent.com/AndreiPuchko/q2market/main/_gorod_gdm_": {
+    "ext_title": "_gorod_gdm_",
+    "ext_version": "2024-06-17 12:27:26",
+    "ext_description": ""
   }
 }

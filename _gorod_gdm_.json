@@ -1,0 +1,28 @@
+{
+ "modules": [
+  {
+   "name": "_gorod_gdm__row_extender",
+   "script": "def row_extender(data, uid):\r\n    \"v0\"\r\n    data['B'] = \"Row Extender\"",
+   "comment": "",
+   "last_line": "2",
+   "q2_time": "20240617122718",
+   "q2_mode": "u"
+  }
+ ],
+ "forms": [],
+ "lines": [],
+ "queries": [],
+ "actions": [],
+ "reports": [],
+ "packages": [
+  {
+   "package_name": "q2googledrive",
+   "package_version": "",
+   "comment": "",
+   "q2_time": "20240304122315",
+   "q2_mode": "i",
+   "package_alias": "",
+   "package_pipname": ""
+  }
+ ]
+}
