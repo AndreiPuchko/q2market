@@ -1,20 +1,20 @@
 {
  "modules": [
   {
+   "name": "_autorun",
+   "script": "# run_form(\"datas\")\r\n\r\n?os.path.isdir(self.q2market_path)\r\n?os.path.abspath(self.q2market_path)",
+   "comment": "",
+   "last_line": "4",
+   "q2_time": "20240617135100",
+   "q2_mode": "u"
+  },
+  {
    "name": "_move",
    "script": "binary_name = \"GoogleDriveMerge\"\r\ndist_folder = os.path.abspath(\"make/dist\")\r\nfor x in os.listdir(dist_folder):\r\n    if os.path.isfile(os.path.join(dist_folder, x)):\r\n        shutil.move(os.path.join(dist_folder, x), os.path.join(dist_folder, binary_name)+\"/\")",
    "comment": "",
    "last_line": "5",
    "q2_time": "20240324204711",
    "q2_mode": "i"
-  },
-  {
-   "name": "_row_extender",
-   "script": "def row_extender(data, id):\r\n    q2mess(data)\r\n    data['noqa'] = \"5555555555555\"",
-   "comment": "",
-   "last_line": "3",
-   "q2_time": "20240614164351",
-   "q2_mode": "u"
   },
   {
    "name": "_test_",
@@ -36,9 +36,9 @@
    "name": "autorun",
    "script": "from q2googledrive import q2googledrive\r\nself.heap.gd = None\r\n\r\n\r\ndef gd_connect(servicekey, create_servicekey=True):\r\n    if not const.servicekey:\r\n        q2mess(f\"\"\"\u0421\u0435\u0440\u0432\u0438\u0441\u043d\u044b\u0439 \u043a\u043b\u044e\u0447 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d!!!<br><br>\r\n                        {\"\u0414\u043b\u044f \u0432\u0432\u043e\u0434\u0430 \u0441\u0435\u0440\u0432\u0438\u0441\u043d\u043e\u0433\u043e \u043a\u043b\u044e\u0447\u0430 \u0431\u0443\u0434\u0435\u0442 \u043e\u0442\u043a\u0440\u044b\u0442\u043e \u043e\u043a\u043d\u043e \u043d\u0430\u0441\u0442\u0440\u043e\u0435\u043a.<br>\" if create_servicekey else \"\"}\r\n                        <br>\r\n                        \u0418\u043d\u0441\u0442\u0440\u0443\u043a\u0446\u0438\u044f: \r\n                        <a href=\"https://docs.google.com/document/d/1PDdopxqnmD9iJ7aJ5c2dVEjuYqGZ6Uoq-aqfAiRRac4/edit?usp=sharing\">\r\n                            \u041e\u0442\u043a\u0440\u044b\u0442\u044c\r\n                        </a>\r\n \"\"\")\r\n        if create_servicekey:\r\n            run_form(\"settings\")\r\n            servicekey = const.servicekey\r\n    if not const.servicekey:\r\n        return False\r\n    try:\r\n        self.heap.gd = q2googledrive(service_account_key=const.servicekey)\r\n        return True\r\n    except Exception as error:\r\n        q2mess(\"\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u0438 \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u0438 \u043a \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043c \u0413\u0443\u0433\u043b!\")\r\n    return False\r\n\r\n\r\nself.heap.gd_connect = gd_connect\r\n\r\nself.heap.gd_connect(const.servicekey)",
    "comment": "",
-   "last_line": "20",
-   "q2_time": "20240324204711",
-   "q2_mode": "i"
+   "last_line": "31",
+   "q2_time": "20240616181403",
+   "q2_mode": "u"
   },
   {
    "name": "manifest",
@@ -57,11 +57,19 @@
    "q2_mode": "u"
   },
   {
+   "name": "row_extender",
+   "script": "def row_extender(data, uid):\r\n    data['B'] = \"Row Extender\"",
+   "comment": "",
+   "last_line": "2",
+   "q2_time": "20240616193401",
+   "q2_mode": "u"
+  },
+  {
    "name": "version",
-   "script": "self.app_version = '2024-06-14 17:49:48'",
+   "script": "self.app_version = '2024-06-18 12:18:49'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20240614174948",
+   "q2_time": "20240618121849",
    "q2_mode": "u"
   }
  ],
@@ -129,8 +137,8 @@
    "form_valid": "",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240324204712",
-   "q2_mode": "i"
+   "q2_time": "20240617160122",
+   "q2_mode": "u"
   },
   {
    "name": "settings",
@@ -159,11 +167,11 @@
    "after_crud_save": "",
    "before_delete": "",
    "after_delete": "",
-   "form_valid": "const.servicekey = mem.s.servicekey\r\nconst.service_email = mem.s.service_email",
+   "form_valid": "const.servicekey = mem.s.servicekey\r\nconst.service_email = mem.s.service_email\r\nif not self.heap.gd_connect(mem.s.servicekey, False):\r\n    q2mess(\"\u0421\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u0435 \u043d\u0435 \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u043e!\")",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240324204712",
-   "q2_mode": "i"
+   "q2_time": "20240618121556",
+   "q2_mode": "u"
   },
   {
    "name": "sheet_keys",
@@ -183,7 +191,7 @@
    "form_table_sort": "",
    "comment": "",
    "before_form_build": "",
-   "before_grid_build": "def load_docs_row(mem=mem):\r\n    def loader_worker(mem=mem):\r\n        return self.heap.gd. load_sheet_row_dict(get(\"datas\", f\"id = {mem.r.parent_id}\", \"gd_id\"), 0,  mem.r.rownumber)\r\n\r\n    sheet = q2working(loader_worker, \"\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430 \u0434\u0430\u043d\u043d\u044b\u0445...\")\r\n    data = sheet[list(sheet.keys())[0]][mem.r.rownumber]\r\n    if get(\"modules\", f\"name='_row_extender'\", \"name\", q2_db=self.db_logic) == '_row_extender':\r\n        import _row_extender\r\n        row_extender(data, mem.r.parent_id)\r\n    return data\r\n    \r\nmem.heap.load_docs_row = load_docs_row",
+   "before_grid_build": "def load_docs_row(mem=mem):\r\n    def loader_worker(mem=mem):\r\n        return self.heap.gd. load_sheet_row_dict(get(\"datas\", f\"id = {mem.r.parent_id}\", \"gd_id\"), 0,  mem.r.rownumber)\r\n\r\n    sheet = q2working(loader_worker, \"\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430 \u0434\u0430\u043d\u043d\u044b\u0445...\")\r\n    data = sheet[list(sheet.keys())[0]][mem.r.rownumber]\r\n    # if get(\"modules\", f\"name='_row_extender'\", \"name\", q2_db=self.db_logic) == '_row_extender':\r\n    try:\r\n        import _row_extender\r\n        row_extender(data, mem.r.parent_id)\r\n    except:\r\n        pass\r\n    return data\r\n    \r\nmem.heap.load_docs_row = load_docs_row",
    "before_grid_show": "",
    "after_grid_show": "",
    "before_form_show": "",
@@ -195,7 +203,7 @@
    "form_valid": "",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240614174902",
+   "q2_time": "20240617171653",
    "q2_mode": "u"
   },
   {
@@ -1386,42 +1394,6 @@
    "style": ""
   },
   {
-   "id": "72",
-   "name": "settings",
-   "column": "connect",
-   "label": "Connect",
-   "gridlabel": "",
-   "seq": "12",
-   "nogrid": "",
-   "noform": "",
-   "check": "",
-   "disabled": "",
-   "readonly": "",
-   "stretch": "0",
-   "tag": "",
-   "control": "button",
-   "pic": "",
-   "datatype": "char",
-   "datalen": "20",
-   "datadec": "0",
-   "migrate": "",
-   "pk": "",
-   "ai": "",
-   "to_table": "",
-   "to_column": "",
-   "related": "",
-   "to_form": "",
-   "comment": "",
-   "code_when": "",
-   "code_show": "",
-   "code_valid": "if not self.heap.gd_connect(mem.s.servicekey, False):\r\n    q2mess(\"\u0421\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u0435 \u043d\u0435 \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u043e!\")",
-   "q2_time": "20240324204712",
-   "q2_mode": "i",
-   "mess": "",
-   "alignment": "0",
-   "style": ""
-  },
-  {
    "id": "73",
    "name": "settings",
    "column": "/h",
@@ -1464,42 +1436,6 @@
    "label": "",
    "gridlabel": "",
    "seq": "13",
-   "nogrid": "",
-   "noform": "",
-   "check": "",
-   "disabled": "",
-   "readonly": "",
-   "stretch": "0",
-   "tag": "",
-   "control": "line",
-   "pic": "",
-   "datatype": "char",
-   "datalen": "0",
-   "datadec": "0",
-   "migrate": "",
-   "pk": "",
-   "ai": "",
-   "to_table": "",
-   "to_column": "",
-   "related": "",
-   "to_form": "",
-   "comment": "",
-   "code_when": "",
-   "code_show": "",
-   "code_valid": "",
-   "q2_time": "20240324204712",
-   "q2_mode": "i",
-   "mess": "",
-   "alignment": "0",
-   "style": ""
-  },
-  {
-   "id": "75",
-   "name": "settings",
-   "column": "/s",
-   "label": "",
-   "gridlabel": "",
-   "seq": "11",
    "nogrid": "",
    "noform": "",
    "check": "",
@@ -1749,7 +1685,7 @@
    "id": "82",
    "name": "settings",
    "column": "/v",
-   "label": "!",
+   "label": "\ud83d\udce7",
    "gridlabel": "",
    "seq": "3",
    "nogrid": "",
@@ -1775,8 +1711,8 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "",
-   "q2_time": "20240324204712",
-   "q2_mode": "i",
+   "q2_time": "20240618121812",
+   "q2_mode": "u",
    "mess": "",
    "alignment": "0",
    "style": ""
@@ -2466,7 +2402,15 @@
    "style": ""
   }
  ],
- "queries": [],
+ "queries": [
+  {
+   "name": "3333",
+   "content": "{\n  \"queries\": {\n    \"new_query\": \"select * from \"\n  },\n  \"params\": {}\n}",
+   "comment": "",
+   "q2_time": "20240616203429",
+   "q2_mode": "i"
+  }
+ ],
  "actions": [
   {
    "id": "16",
@@ -2669,7 +2613,15 @@
    "q2_mode": "i"
   }
  ],
- "reports": [],
+ "reports": [
+  {
+   "name": "323",
+   "content": "{\n  \"queries\": {\n    \"new_query\": \"select * from \"\n  },\n  \"params\": {},\n  \"pages\": [\n    {\n      \"columns\": [\n        {\n          \"rows\": [\n            {\n              \"role\": \"free\",\n              \"data_source\": \"\",\n              \"groupby\": \"\",\n              \"table_groups\": [],\n              \"print_when\": \"\",\n              \"print_after\": \"\",\n              \"new_page_before\": \"\",\n              \"new_page_after\": \"\",\n              \"heights\": [\n                \"0-0\"\n              ],\n              \"cells\": {}\n            }\n          ],\n          \"widths\": [\n            \"50%\",\n            \"2\",\n            \"0\"\n          ]\n        }\n      ],\n      \"page_width\": 21.0,\n      \"page_height\": 29.0,\n      \"page_margin_left\": 2.0,\n      \"page_margin_top\": 2.0,\n      \"page_margin_right\": 1.0,\n      \"page_margin_bottom\": 2.0\n    }\n  ],\n  \"style\": {\n    \"font-family\": \"Arial\",\n    \"font-size\": \"8pt\",\n    \"font-weight\": \"normal\",\n    \"border-width\": \"0 0 0 0\",\n    \"padding\": \"0.05cm 0.05cm 0.05cm 0.05cm\",\n    \"text-align\": \"left\",\n    \"vertical-align\": \"top\"\n  }\n}",
+   "comment": "",
+   "q2_time": "20240616203453",
+   "q2_mode": "i"
+  }
+ ],
  "packages": [
   {
    "package_name": "q2googledrive",
