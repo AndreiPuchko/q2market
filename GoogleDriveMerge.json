@@ -66,10 +66,10 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2024-06-18 12:18:49'",
+   "script": "self.app_version = '2024-06-18 14:07:30'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20240618121849",
+   "q2_time": "20240618140730",
    "q2_mode": "u"
   }
  ],
@@ -1603,8 +1603,8 @@
    "code_when": "",
    "code_show": "",
    "code_valid": "self.set_clipboard(mem.s.service_email)",
-   "q2_time": "20240324204712",
-   "q2_mode": "i",
+   "q2_time": "20240618140722",
+   "q2_mode": "u",
    "mess": "",
    "alignment": "0",
    "style": ""
