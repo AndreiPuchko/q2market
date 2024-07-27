@@ -33,6 +33,14 @@
    "q2_mode": "i"
   },
   {
+   "name": "_row_extender",
+   "script": "def row_extender(data, uid):\r\n    data['B'] = \"Row Extender\"\r\n    data['TABLA'] = {\"1\":{\"A\":\"11111111111111111111111\"}, \"2\":{\"A\":\"22222222222222222\"}}",
+   "comment": "",
+   "last_line": "3",
+   "q2_time": "20240727143115",
+   "q2_mode": "u"
+  },
+  {
    "name": "_test_",
    "script": "id = \"19xpPvbIqVZ2ITveS-DUI3vwSBnSWPXc3qWc1NYtRREs\"\r\n\r\nself.heap.gd.open_sheets()\r\n\r\nsh = self.heap.gd.google_sheets.open_by_key(id)\r\n\r\nworksheet = sh.get_worksheet(0)\r\n\r\nallrows = worksheet.get_all_values()\r\n\r\n\r\nfor x in allrows:\r\n    ?x",
    "comment": "",
@@ -97,19 +105,11 @@
    "q2_mode": "u"
   },
   {
-   "name": "row_extender",
-   "script": "def row_extender(data, uid):\r\n    data['B'] = \"Row Extender\"",
-   "comment": "",
-   "last_line": "2",
-   "q2_time": "20240616193401",
-   "q2_mode": "u"
-  },
-  {
    "name": "version",
-   "script": "self.app_version = '2024-06-25 22:23:31'",
+   "script": "self.app_version = '2024-07-27 14:31:38'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20240625222331",
+   "q2_time": "20240727143138",
    "q2_mode": "u"
   }
  ],
@@ -297,7 +297,7 @@
    "form_table_sort": "",
    "comment": "",
    "before_form_build": "",
-   "before_grid_build": "def load_docs_row(mem=mem):\r\n    def loader_worker(mem=mem):\r\n        return self.heap.gd. load_sheet_row_dict(get(\"datas\", f\"id = {mem.r.parent_id}\", \"gd_id\"), 0,  mem.r.rownumber)\r\n\r\n    sheet = q2working(loader_worker, \"\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430 \u0434\u0430\u043d\u043d\u044b\u0445...\")\r\n    data = sheet[list(sheet.keys())[0]][mem.r.rownumber]\r\n    # if get(\"modules\", f\"name='_row_extender'\", \"name\", q2_db=self.db_logic) == '_row_extender':\r\n    try:\r\n        import _row_extender\r\n        row_extender(data, mem.r.parent_id)\r\n    except:\r\n        pass\r\n    return data\r\n    \r\nmem.heap.load_docs_row = load_docs_row",
+   "before_grid_build": "def load_docs_row(mem=mem):\r\n    def loader_worker(mem=mem):\r\n        return self.heap.gd. load_sheet_row_dict(get(\"datas\", f\"id = {mem.r.parent_id}\", \"gd_id\"), 0,  mem.r.rownumber)\r\n\r\n    sheet = q2working(loader_worker, \"\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430 \u0434\u0430\u043d\u043d\u044b\u0445...\")\r\n    data = sheet[list(sheet.keys())[0]][mem.r.rownumber]\r\n    # if get(\"modules\", f\"name='_row_extender'\", \"name\", q2_db=self.db_logic) == '_row_extender':\r\n    try:\r\n        import _row_extender\r\n        row_extender(data, mem.prev_form.r.gd_id)\r\n    except:\r\n        pass\r\n    return data\r\n    \r\nmem.heap.load_docs_row = load_docs_row",
    "before_grid_show": "",
    "after_grid_show": "",
    "before_form_show": "",
@@ -309,7 +309,7 @@
    "form_valid": "",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240617171653",
+   "q2_time": "20240720234035",
    "q2_mode": "u"
   },
   {
