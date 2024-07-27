@@ -37,7 +37,7 @@
    "script": "def row_extender(data, uid):\r\n    data['B'] = \"Row Extender\"\r\n    data['TABLA'] = {\"1\":{\"A\":\"11111111111111111111111\"}, \"2\":{\"A\":\"22222222222222222\"}}",
    "comment": "",
    "last_line": "3",
-   "q2_time": "20240727143115",
+   "q2_time": "20240727143610",
    "q2_mode": "u"
   },
   {
@@ -106,10 +106,10 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2024-07-27 14:31:38'",
+   "script": "self.app_version = '2024-07-27 14:36:22'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20240727143138",
+   "q2_time": "20240727143622",
    "q2_mode": "u"
   }
  ],
