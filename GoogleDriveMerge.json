@@ -98,18 +98,18 @@
   },
   {
    "name": "on_new_tab",
-   "script": "while not myapp.dev_mode:\r\n    run_form(\"datas\")",
+   "script": "# while not myapp.dev_mode:\r\n    # run_form(\"datas\")",
    "comment": "",
    "last_line": "2",
-   "q2_time": "20240331110906",
+   "q2_time": "20240727143910",
    "q2_mode": "u"
   },
   {
    "name": "version",
-   "script": "self.app_version = '2024-07-27 14:36:22'",
+   "script": "self.app_version = '2024-07-27 14:39:25'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20240727143622",
+   "q2_time": "20240727143925",
    "q2_mode": "u"
   }
  ],
