@@ -106,10 +106,10 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2024-07-27 14:39:25'",
+   "script": "self.app_version = '2024-08-05 22:06:25'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20240727143925",
+   "q2_time": "20240805220625",
    "q2_mode": "u"
   }
  ],
@@ -2841,8 +2841,8 @@
   {
    "id": "21",
    "name": "sheet_keys",
-   "action_text": "\u0421\u043b\u0438\u044f\u043d\u0438\u0435",
-   "seq": "1",
+   "action_text": "\u041f\u0435\u0447\u0430\u0442\u044c",
+   "seq": "2",
    "action_mode": "2",
    "action_mess": "",
    "action_icon": "",
@@ -2853,16 +2853,16 @@
    "child_where": "",
    "child_noshow": "",
    "child_copy_mode": "1",
-   "action_worker": "if self.heap.gd is None:\r\n    q2mess(\"\u0421\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u0435 \u0441 \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043c\u0438 \u0413\u0443\u0433\u043b \u043d\u0435 \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u043e!<br>\u041f\u0440\u043e\u0432\u0435\u0440\u044c\u0442\u0435 \u043d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438\")\r\n    return\r\n\r\n\r\nfrom q2rad.q2utils import q2choice\r\ncu = q2cursor(f\"select gd_name as name, gd_id as id from templates where parent_id={mem.r.parent_id}\")\r\nif cu.row_count() > 1:\r\n    choice = q2choice([x for x in cu.records()],\r\n                                \"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0448\u0430\u0431\u043b\u043e\u043d \u0434\u043b\u044f \u0441\u043b\u0438\u044f\u043d\u0438\u044f\",\r\n                                ['\u0418\u043c\u044f', '\u041a\u043e\u0434'])\r\nelse:\r\n    choice = cu.record(0)\r\n\r\nif choice:\r\n    sheet = mem.heap.load_docs_row()\r\n    def merge_worker(sheet=sheet, choice=choice):\r\n        d2d=q2data2docx()\r\n        d2d.setJsonBinary(json.dumps(sheet))\r\n        d2d.setDocxTemplateBinary(self.heap.gd.load_docs(choice['id']))\r\n        if d2d.merge():\r\n            d2d.saveFile(\"temp/repo.docx\")\r\n    q2working(merge_worker, \"\u0421\u043b\u0438\u044f\u043d\u0438\u0435...\")",
+   "action_worker": "if self.heap.gd is None:\r\n    q2mess(\"\u0421\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u0435 \u0441 \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043c\u0438 \u0413\u0443\u0433\u043b \u043d\u0435 \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u043e!<br>\u041f\u0440\u043e\u0432\u0435\u0440\u044c\u0442\u0435 \u043d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438\")\r\n    return\r\n\r\n\r\nfrom q2rad.q2utils import q2choice\r\ncu = q2cursor(f\"select gd_name as name, gd_id as id from templates where parent_id={mem.r.parent_id}\")\r\nif cu.row_count() > 1:\r\n    choice = q2choice([x for x in cu.records()],\r\n                                \"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0448\u0430\u0431\u043b\u043e\u043d \u0434\u043b\u044f \u043f\u0435\u0447\u0430\u0442\u0438\",\r\n                                ['\u0418\u043c\u044f', '\u041a\u043e\u0434'])\r\nelse:\r\n    choice = cu.record(0)\r\n\r\nif choice:\r\n    sheet = mem.heap.load_docs_row()\r\n    def merge_worker(sheet=sheet, choice=choice):\r\n        d2d=q2data2docx()\r\n        d2d.setJsonBinary(json.dumps(sheet))\r\n        d2d.setDocxTemplateBinary(self.heap.gd.load_docs(choice['id']))\r\n        if d2d.merge():\r\n            d2d.saveFile(\"temp/repo.docx\")\r\n    q2working(merge_worker, \"\u0413\u043e\u0442\u043e\u0432\u043b\u044e \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442...\")",
    "comment": "",
-   "q2_time": "20240324204712",
-   "q2_mode": "i"
+   "q2_time": "20240805220451",
+   "q2_mode": "u"
   },
   {
    "id": "22",
    "name": "sheet_keys",
    "action_text": "",
-   "seq": "3",
+   "seq": "1",
    "action_mode": "1",
    "action_mess": "",
    "action_icon": "",
@@ -2875,14 +2875,14 @@
    "child_copy_mode": "1",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20240324204712",
-   "q2_mode": "i"
+   "q2_time": "20240805220404",
+   "q2_mode": "u"
   },
   {
    "id": "23",
    "name": "sheet_keys",
    "action_text": "\u0414\u0430\u043d\u043d\u044b\u0435",
-   "seq": "2",
+   "seq": "3",
    "action_mode": "2",
    "action_mess": "",
    "action_icon": "",
@@ -2895,8 +2895,8 @@
    "child_copy_mode": "1",
    "action_worker": "if self.heap.gd is None:\r\n    q2mess(\"\u0421\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u0435 \u0441 \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043c\u0438 \u0413\u0443\u0433\u043b \u043d\u0435 \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u043e!<br>\u041f\u0440\u043e\u0432\u0435\u0440\u044c\u0442\u0435 \u043d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438\")\r\n    return\r\n\r\nq2mess(mem.heap.load_docs_row())",
    "comment": "",
-   "q2_time": "20240324204712",
-   "q2_mode": "i"
+   "q2_time": "20240805220459",
+   "q2_mode": "u"
   },
   {
    "id": "24",
