@@ -5,15 +5,15 @@
    "script": "ensure_empty_pk(\"subjects_groups\")\r\nensure_empty_pk(\"students\")\r\nensure_empty_pk(\"subjects\")\r\nensure_empty_pk(\"teachers\")\r\nensure_empty_pk(\"timesheet\")\r\nensure_empty_pk(\"rooms\")",
    "comment": "",
    "last_line": "6",
-   "q2_time": "20240803225722",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
    "name": "_school_checkin",
-   "script": "def checkin(row={\"name\":\"-\"}):\r\n\r\n    q2mess(row)\r\n\r\n\r\nif __name__ == \"__main__\":\r\n    data = {\r\n                \"name\": \"Ivan Ivanov\",\r\n                \"date_of_birth\": \"2017-06-13\",\r\n                }\r\n    checkin(data)",
+   "script": "def checkin(row={\"name\":\"-\"}):\r\n    cu = q2cursor(\"select * from students where name='{name}' and date_of_birth='{date_of_birth}'\".format(**row))\r\n    if cu.row_count() <= 0:\r\n        insert(\"students\", row)\r\n    else:\r\n        row[\"std\"] = cu.r.std\r\n    return row[\"std\"]\r\n\r\nif __name__ == \"__main__\":\r\n    data = {\r\n                \"name\": \"Ivan Ivanov\",\r\n                \"date_of_birth\": \"2017-06-13\",\r\n                }\r\n    ?checkin(data)",
    "comment": "",
-   "last_line": "11",
-   "q2_time": "20240805221753",
+   "last_line": "14",
+   "q2_time": "20240806120610",
    "q2_mode": "u"
   }
  ],
@@ -48,8 +48,8 @@
    "form_valid": "",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240803230210",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
    "name": "_school_sheet_keys",
@@ -81,7 +81,7 @@
    "form_valid": "",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240805222014",
+   "q2_time": "20240806100854",
    "q2_mode": "i"
   },
   {
@@ -114,8 +114,8 @@
    "form_valid": "",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240805161426",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
    "name": "_school_students_subjects",
@@ -147,8 +147,8 @@
    "form_valid": "",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240803224243",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
    "name": "_school_subjects",
@@ -180,8 +180,8 @@
    "form_valid": "",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240802231219",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
    "name": "_school_subjects_groups",
@@ -213,8 +213,8 @@
    "form_valid": "",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240803225730",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
    "name": "_school_teachers",
@@ -246,8 +246,8 @@
    "form_valid": "",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240805164544",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
    "name": "_school_timesheet",
@@ -279,8 +279,8 @@
    "form_valid": "",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240805161958",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
    "name": "_school_timesheet_slots",
@@ -312,13 +312,13 @@
    "form_valid": "",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240803230210",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   }
  ],
  "lines": [
   {
-   "id": "475",
+   "id": "540",
    "column": "room",
    "label": "\u041a\u043e\u0434",
    "gridlabel": "",
@@ -350,11 +350,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803225836",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "476",
+   "id": "541",
    "column": "name",
    "label": "\u041d\u0430\u0438\u043c\u0435\u043d\u043e\u0432\u0430\u043d\u0438\u0435",
    "gridlabel": "",
@@ -386,11 +386,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803225813",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "281",
+   "id": "542",
    "column": "std",
    "label": "\u041a\u043e\u0434",
    "gridlabel": "",
@@ -422,11 +422,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240802212548",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "284",
+   "id": "543",
    "column": "date_of_birth",
    "label": "\u0414\u0430\u0442\u0430 \u0440\u043e\u0436\u0434\u0435\u043d\u0438\u044f",
    "gridlabel": "",
@@ -445,7 +445,7 @@
    "datatype": "date",
    "datalen": "0",
    "datadec": "0",
-   "migrate": "",
+   "migrate": "*",
    "pk": "",
    "ai": "",
    "to_table": "",
@@ -458,11 +458,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240801094101",
+   "q2_time": "20240806120428",
    "q2_mode": "u"
   },
   {
-   "id": "285",
+   "id": "544",
    "column": "comments",
    "label": "\u041a\u043e\u043c\u043c\u0435\u043d\u0442\u0430\u0440\u0438\u0438",
    "gridlabel": "",
@@ -494,11 +494,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240801100400",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "363",
+   "id": "545",
    "column": "name",
    "label": "\u0418\u043c\u044f, \u0424\u0430\u043c\u0438\u043b\u0438\u044f",
    "gridlabel": "",
@@ -530,11 +530,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240802212723",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "364",
+   "id": "546",
    "column": "address",
    "label": "\u0410\u0434\u0440\u0435\u0441",
    "gridlabel": "",
@@ -566,11 +566,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240801094100",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "365",
+   "id": "547",
    "column": "email",
    "label": "E-mail",
    "gridlabel": "",
@@ -602,11 +602,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240801100418",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "366",
+   "id": "548",
    "column": "phone",
    "label": "\u0422\u0435\u043b\u0435\u0444\u043e\u043d",
    "gridlabel": "",
@@ -638,11 +638,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240801094219",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "368",
+   "id": "549",
    "column": "/h",
    "label": "",
    "gridlabel": "",
@@ -674,11 +674,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240801094220",
+   "q2_time": "20240806100854",
    "q2_mode": "i"
   },
   {
-   "id": "369",
+   "id": "550",
    "column": "/",
    "label": "",
    "gridlabel": "",
@@ -710,11 +710,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240801100400",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "370",
+   "id": "551",
    "column": "account_owner_name",
    "label": "\u0412\u043b\u0430\u0434\u0435\u043b\u0435\u0446 \u0441\u0447\u0435\u0442\u0430",
    "gridlabel": "",
@@ -746,11 +746,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240801100400",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "371",
+   "id": "552",
    "column": "account_owner_address",
    "label": "\u0410\u0434\u0440\u0435\u0441",
    "gridlabel": "\u0410\u0434\u0440\u0435\u0441 \u0432\u043b\u0430\u0434\u0435\u043b\u044c\u0446\u0430 \u0441\u0447\u0435\u0442\u0430",
@@ -782,11 +782,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240801100400",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "372",
+   "id": "553",
    "column": "/f",
    "label": "\u0411\u0430\u043d\u043a",
    "gridlabel": "",
@@ -818,11 +818,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240801100400",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "373",
+   "id": "554",
    "column": "/",
    "label": "",
    "gridlabel": "",
@@ -854,11 +854,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240801100400",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "374",
+   "id": "555",
    "column": "bank",
    "label": "\u041d\u0430\u0438\u043c\u0435\u043d\u043e\u0432\u0430\u0435\u043d\u0438 \u0431\u0430\u043d\u043a\u0430",
    "gridlabel": "",
@@ -890,11 +890,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240801100400",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "375",
+   "id": "556",
    "column": "iban",
    "label": "IBAN",
    "gridlabel": "",
@@ -926,11 +926,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240801100400",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "376",
+   "id": "557",
    "column": "bic",
    "label": "BIC",
    "gridlabel": "",
@@ -962,11 +962,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240801100400",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "379",
+   "id": "558",
    "column": "/",
    "label": "",
    "gridlabel": "",
@@ -998,11 +998,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240801100400",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "380",
+   "id": "559",
    "column": "/s",
    "label": "",
    "gridlabel": "",
@@ -1034,11 +1034,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240801100405",
+   "q2_time": "20240806100854",
    "q2_mode": "i"
   },
   {
-   "id": "361",
+   "id": "560",
    "column": "id",
    "label": "",
    "gridlabel": "",
@@ -1070,11 +1070,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240731230256",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "362",
+   "id": "561",
    "column": "std",
    "label": "\u0423\u0447\u0435\u043d\u0438\u043a",
    "gridlabel": "",
@@ -1106,11 +1106,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240802214359",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "454",
+   "id": "562",
    "column": "subj",
    "label": "\u041f\u0440\u0435\u0434\u043c\u0435\u0442",
    "gridlabel": "",
@@ -1142,11 +1142,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240802220614",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "455",
+   "id": "563",
    "column": "date1",
    "label": "\u0414\u0430\u0442\u0430 \u0441",
    "gridlabel": "",
@@ -1178,11 +1178,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803224351",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "456",
+   "id": "564",
    "column": "date2",
    "label": "\u0414\u0430\u0442\u0430 \u043f\u043e",
    "gridlabel": "",
@@ -1214,11 +1214,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803224350",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "458",
+   "id": "565",
    "column": "comments",
    "label": "\u041a\u043e\u043c\u043c\u0435\u043d\u0442\u0430\u0440\u0438\u0438",
    "gridlabel": "",
@@ -1250,11 +1250,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803224344",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "459",
+   "id": "566",
    "column": "price",
    "label": "\u0426\u0435\u043d\u0430",
    "gridlabel": "",
@@ -1286,11 +1286,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803224345",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "474",
+   "id": "567",
    "column": "tmsh",
    "label": "\u0420\u0430\u0441\u043f\u0438\u0441\u0430\u043d\u0438\u0435",
    "gridlabel": "",
@@ -1322,11 +1322,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240805165348",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "347",
+   "id": "568",
    "column": "subj",
    "label": "\u041a\u043e\u0434",
    "gridlabel": "",
@@ -1358,11 +1358,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803214808",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "348",
+   "id": "569",
    "column": "name",
    "label": "\u041d\u0430\u0438\u043c\u0435\u043d\u043e\u0432\u0430\u043d\u0438\u0435",
    "gridlabel": "",
@@ -1394,11 +1394,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803214808",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "349",
+   "id": "570",
    "column": "discount1",
    "label": "\u041f\u0440\u0430\u0432\u043e \u043d\u0430 \u0441\u043a\u0438\u0434\u043a\u0443",
    "gridlabel": "",
@@ -1430,11 +1430,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803214808",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "441",
+   "id": "571",
    "column": "code",
    "label": "\u041e\u0431\u043e\u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435",
    "gridlabel": "",
@@ -1466,11 +1466,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803214808",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "443",
+   "id": "572",
    "column": "price",
    "label": "\u0426\u0435\u043d\u0430",
    "gridlabel": "",
@@ -1502,11 +1502,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803214814",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "444",
+   "id": "573",
    "column": "price1",
    "label": "\u0426\u0435\u043d\u0430 \u0441\u043e \u0441\u043a\u0438\u0434\u043a\u043e\u0439",
    "gridlabel": "",
@@ -1538,11 +1538,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803214808",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "445",
+   "id": "574",
    "column": "price_per_hour",
    "label": "\u0426\u0435\u043d\u0430 \u0437\u0430 1 \u0437\u0430\u043d\u044f\u0442\u0438\u0435",
    "gridlabel": "",
@@ -1574,11 +1574,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803214811",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "446",
+   "id": "575",
    "column": "comments",
    "label": "\u041a\u043e\u043c\u043c\u0435\u043d\u0442\u0430\u0440\u0438\u0438",
    "gridlabel": "",
@@ -1610,11 +1610,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803214808",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "447",
+   "id": "576",
    "column": "lasting",
    "label": "\u0414\u043b\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u044c (\u043c\u0438\u043d)",
    "gridlabel": "",
@@ -1646,11 +1646,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803214808",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "448",
+   "id": "577",
    "column": "sgrp",
    "label": "\u0413\u0440\u0443\u043f\u043f\u0430",
    "gridlabel": "",
@@ -1682,11 +1682,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803214808",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "464",
+   "id": "578",
    "column": "/h",
    "label": "",
    "gridlabel": "",
@@ -1718,11 +1718,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803214811",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "465",
+   "id": "579",
    "column": "/",
    "label": "",
    "gridlabel": "",
@@ -1754,11 +1754,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803214814",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "450",
+   "id": "580",
    "column": "sgrp",
    "label": "\u041a\u043e\u0434",
    "gridlabel": "",
@@ -1790,11 +1790,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240802192524",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "451",
+   "id": "581",
    "column": "name",
    "label": "\u041d\u0430\u0438\u043c\u0435\u043d\u043e\u0432\u0430\u043d\u0438\u0435",
    "gridlabel": "",
@@ -1826,11 +1826,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240802163624",
+   "q2_time": "20240806100854",
    "q2_mode": "i"
   },
   {
-   "id": "452",
+   "id": "582",
    "column": "tch",
    "label": "\u041a\u043e\u0434",
    "gridlabel": "",
@@ -1862,11 +1862,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240802212341",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "453",
+   "id": "583",
    "column": "name",
    "label": "\u0418\u043c\u044f, \u0424\u0430\u043c\u0438\u043b\u0438\u044f",
    "gridlabel": "",
@@ -1898,11 +1898,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240802212224",
+   "q2_time": "20240806100854",
    "q2_mode": "i"
   },
   {
-   "id": "539",
+   "id": "584",
    "column": "comments",
    "label": "\u041a\u043e\u043c\u043c\u0435\u043d\u0442\u0430\u0440\u0438\u0438",
    "gridlabel": "",
@@ -1934,11 +1934,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240806100734",
+   "q2_time": "20240806100854",
    "q2_mode": "i"
   },
   {
-   "id": "457",
+   "id": "585",
    "column": "tch",
    "label": "\u0423\u0447\u0438\u0442\u0435\u043b\u044c",
    "gridlabel": "",
@@ -1970,11 +1970,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240805162242",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "466",
+   "id": "586",
    "column": "tmsh",
    "label": "\u041a\u043e\u0434",
    "gridlabel": "",
@@ -2006,11 +2006,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803224048",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "467",
+   "id": "587",
    "column": "name",
    "label": "\u041d\u0430\u0438\u043c\u0435\u043d\u043e\u0432\u0430\u043d\u0438\u0435",
    "gridlabel": "",
@@ -2042,11 +2042,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803222640",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "468",
+   "id": "588",
    "column": "comment",
    "label": "\u041a\u043e\u043c\u043c\u0435\u043d\u0442\u0430\u0440\u0438\u0439",
    "gridlabel": "",
@@ -2078,11 +2078,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240805162242",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "469",
+   "id": "589",
    "column": "id",
    "label": "",
    "gridlabel": "",
@@ -2114,11 +2114,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803222852",
+   "q2_time": "20240806100854",
    "q2_mode": "i"
   },
   {
-   "id": "470",
+   "id": "590",
    "column": "time1",
    "label": "\u0412\u0440\u0435\u043c\u044f \u043d\u0430\u0447\u0430\u043b\u0430",
    "gridlabel": "",
@@ -2150,11 +2150,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803223350",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "471",
+   "id": "591",
    "column": "time2",
    "label": "\u0412\u0440\u0435\u043c\u044f \u043e\u043a\u043e\u043d\u0447\u0430\u043d\u0438\u044f",
    "gridlabel": "",
@@ -2186,11 +2186,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803223349",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "472",
+   "id": "592",
    "column": "room",
    "label": "\u041f\u043e\u043c\u0435\u0449\u0435\u043d\u0438\u0435",
    "gridlabel": "",
@@ -2222,11 +2222,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803230553",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "473",
+   "id": "593",
    "column": "tmsh",
    "label": "\u0420\u0430\u0441\u043f\u0438\u0441\u0430\u043d\u0438\u0435",
    "gridlabel": "",
@@ -2258,11 +2258,11 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803224856",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "477",
+   "id": "594",
    "column": "dow",
    "label": "\u0414\u0435\u043d\u044c \u043d\u0435\u0434\u0435\u043b\u0438",
    "gridlabel": "",
@@ -2294,14 +2294,14 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20240803230603",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   }
  ],
  "queries": [],
  "actions": [
   {
-   "id": "92",
+   "id": "107",
    "action_text": "",
    "seq": "0",
    "action_mode": "1",
@@ -2317,11 +2317,11 @@
    "name": "_school_rooms",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20240803225657",
+   "q2_time": "20240806100854",
    "q2_mode": "i"
   },
   {
-   "id": "93",
+   "id": "108",
    "action_text": "\u0421\u043b\u043e\u0442\u044b",
    "seq": "1",
    "action_mode": "2",
@@ -2337,11 +2337,11 @@
    "name": "_school_rooms",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20240803230241",
+   "q2_time": "20240806100854",
    "q2_mode": "i"
   },
   {
-   "id": "106",
+   "id": "109",
    "action_text": "\u041f\u0440\u0438\u043d\u044f\u0442\u044c",
    "seq": "0",
    "action_mode": "2",
@@ -2357,11 +2357,11 @@
    "name": "_school_sheet_keys",
    "action_worker": "if self.heap.gd is None:\r\n    q2mess(\"\u0421\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u0435 \u0441 \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043c\u0438 \u0413\u0443\u0433\u043b \u043d\u0435 \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u043e!<br>\u041f\u0440\u043e\u0432\u0435\u0440\u044c\u0442\u0435 \u043d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438\")\r\n    return\r\n\r\nsheet = mem.heap.load_docs_row()\r\nimport _school_checkin\r\ncheckin(sheet)",
    "comment": "",
-   "q2_time": "20240805222133",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "53",
+   "id": "110",
    "action_text": "",
    "seq": "0",
    "action_mode": "1",
@@ -2377,11 +2377,11 @@
    "name": "_school_students",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20240731224722",
+   "q2_time": "20240806100854",
    "q2_mode": "i"
   },
   {
-   "id": "84",
+   "id": "111",
    "action_text": "\u041f\u0440\u0435\u0434\u043c\u0435\u0442\u044b",
    "seq": "1",
    "action_mode": "2",
@@ -2397,11 +2397,11 @@
    "name": "_school_students",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20240805165048",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "70",
+   "id": "112",
    "action_text": "",
    "seq": "0",
    "action_mode": "1",
@@ -2417,11 +2417,11 @@
    "name": "_school_students_subjects",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20240731230303",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "91",
+   "id": "113",
    "action_text": "\u0420\u0430\u0441\u043f\u0438\u0441\u0430\u043d\u0438\u0435",
    "seq": "1",
    "action_mode": "2",
@@ -2437,11 +2437,11 @@
    "name": "_school_students_subjects",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20240803225430",
+   "q2_time": "20240806100854",
    "q2_mode": "i"
   },
   {
-   "id": "65",
+   "id": "114",
    "action_text": "",
    "seq": "0",
    "action_mode": "1",
@@ -2457,11 +2457,11 @@
    "name": "_school_subjects",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20240731225639",
+   "q2_time": "20240806100854",
    "q2_mode": "i"
   },
   {
-   "id": "86",
+   "id": "115",
    "action_text": "\u0423\u0447\u0438\u0442\u0435\u043b\u044f, \u0423\u0447\u0435\u043d\u0438\u043a\u0438",
    "seq": "1",
    "action_mode": "2",
@@ -2477,11 +2477,11 @@
    "name": "_school_subjects",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20240802220106",
+   "q2_time": "20240806100854",
    "q2_mode": "i"
   },
   {
-   "id": "81",
+   "id": "116",
    "action_text": "",
    "seq": "0",
    "action_mode": "1",
@@ -2497,11 +2497,11 @@
    "name": "_school_subjects_groups",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20240802163603",
+   "q2_time": "20240806100854",
    "q2_mode": "i"
   },
   {
-   "id": "82",
+   "id": "117",
    "action_text": "\u041f\u0440\u0435\u0434\u043c\u0435\u0442\u044b",
    "seq": "1",
    "action_mode": "2",
@@ -2517,11 +2517,11 @@
    "name": "_school_subjects_groups",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20240802193629",
+   "q2_time": "20240806100854",
    "q2_mode": "i"
   },
   {
-   "id": "83",
+   "id": "118",
    "action_text": "",
    "seq": "0",
    "action_mode": "1",
@@ -2537,11 +2537,11 @@
    "name": "_school_teachers",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20240802212105",
+   "q2_time": "20240806100854",
    "q2_mode": "i"
   },
   {
-   "id": "85",
+   "id": "119",
    "action_text": "\u0420\u0430\u0441\u043f\u0438\u0441\u0430\u043d\u0438\u0435",
    "seq": "1",
    "action_mode": "2",
@@ -2557,11 +2557,11 @@
    "name": "_school_teachers",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20240805164612",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "88",
+   "id": "120",
    "action_text": "",
    "seq": "0",
    "action_mode": "1",
@@ -2577,11 +2577,11 @@
    "name": "_school_timesheet",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20240803222409",
+   "q2_time": "20240806100854",
    "q2_mode": "i"
   },
   {
-   "id": "90",
+   "id": "121",
    "action_text": "\u0418\u043d\u0442\u0435\u0440\u0432\u0430\u043b\u044b",
    "seq": "1",
    "action_mode": "2",
@@ -2597,11 +2597,11 @@
    "name": "_school_timesheet",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20240803224004",
-   "q2_mode": "u"
+   "q2_time": "20240806100854",
+   "q2_mode": "i"
   },
   {
-   "id": "95",
+   "id": "122",
    "action_text": "\u0423\u0447\u0435\u043d\u0438\u043a\u0438",
    "seq": "2",
    "action_mode": "2",
@@ -2617,11 +2617,11 @@
    "name": "_school_timesheet",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20240805164726",
+   "q2_time": "20240806100854",
    "q2_mode": "i"
   },
   {
-   "id": "89",
+   "id": "123",
    "action_text": "",
    "seq": "0",
    "action_mode": "1",
@@ -2637,11 +2637,11 @@
    "name": "_school_timesheet_slots",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20240803222853",
+   "q2_time": "20240806100854",
    "q2_mode": "i"
   },
   {
-   "id": "94",
+   "id": "124",
    "action_text": "\u0423\u0447\u0435\u043d\u0438\u043a\u0438",
    "seq": "1",
    "action_mode": "2",
@@ -2657,7 +2657,7 @@
    "name": "_school_timesheet_slots",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20240805161839",
+   "q2_time": "20240806100854",
    "q2_mode": "i"
   }
  ],
