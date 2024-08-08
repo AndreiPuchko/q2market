@@ -683,7 +683,7 @@
    "action_icon": "",
    "action_key": "F3",
    "tag": "yellow",
-   "eof_disabled": "",
+   "eof_disabled": "*",
    "child_form": "",
    "child_where": "",
    "child_noshow": "",
@@ -691,7 +691,7 @@
    "name": "_dbanken_konten",
    "action_worker": "import _dbanken_loader\r\n\r\nform_loader = Q2Form(\"\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430 \u0434\u0432\u0438\u0436\u0435\u043d\u0438\u044f \u043f\u043e \u0441\u0447\u0435\u0442\u0443\")\r\nform_loader.add_control(\"date1\", \"From\", datatype=\"date\", data = const.bank_date1)\r\nform_loader.add_control(\"date2\", \"to\", datatype=\"date\", data = const.bank_date2)\r\nform_loader.ok_button =1\r\nform_loader.cancel_button =1\r\n\r\nform_loader.run()\r\n\r\nif form_loader.ok_pressed:\r\n    date1 = form_loader.s.date1\r\n    date2 = form_loader.s.date2\r\n    if Konto_loader(date1,date2,form.r.konto_id).run():\r\n        mem.refresh()",
    "comment": "",
-   "q2_time": "20240807121533",
+   "q2_time": "20240808180136",
    "q2_mode": "u"
   },
   {
@@ -703,7 +703,7 @@
    "action_icon": "",
    "action_key": "",
    "tag": "",
-   "eof_disabled": "",
+   "eof_disabled": "*",
    "child_form": "",
    "child_where": "",
    "child_noshow": "",
@@ -711,7 +711,7 @@
    "name": "_dbanken_konten",
    "action_worker": "cu=q2cursor(f\"\"\"\r\n                    select date\r\n                        , (select saldo from konten where konto_id={mem.r.konto_id}) +saldo as saldo\r\n                        , (select round(sum(case when betrag>0 then betrag else 0 end ),2)\r\n                            from kontobewegung\r\n                            where konto_id = {mem.r.konto_id} and date=qq.date\r\n                            )  as ein\r\n                        , (select round(sum(case when betrag<0 then -betrag else 0 end ),2)\r\n                            from kontobewegung\r\n                            where konto_id = {mem.r.konto_id} and date=qq.date\r\n                            )  as aus\r\n                    from\r\n                        (\r\n                        SELECT date, \r\n                               round(   SUM(betrag) OVER (order BY date)    ,2) AS saldo\r\n                        FROM kontobewegung\r\n                        where konto_id = {mem.r.konto_id}\r\n                        ORDER BY date\r\n                        ) qq\r\n                    where date >='{const.bank_date1}' and date <='{const.bank_date2}'\r\n                    group by date\r\n                    \r\n\"\"\")\r\n\r\nform=Q2Form(\"\u0418\u0442\u043e\u0433\u0438 \u043f\u043e \u0434\u043d\u044f\u043c\")\r\nform.add_control(\"date\", \"\u0414\u0430\u0442\u0430\", datatype=\"date\", datalen=12)\r\nform.add_control(\"ein\", \"\u041f\u0440\u0438\u0445\u043e\u0434\", datatype=\"dec\", datalen=15, datadec=2, pic=\"F\")\r\nform.add_control(\"aus\", \"\u0420\u0430\u0441\u0445\u043e\u0434\", datatype=\"dec\", datalen=15, datadec=2, pic=\"F\")\r\nform.add_control(\"saldo\", \"\u041e\u0441\u0442\u0430\u0442\u043e\u043a \u043d\u0430 \u043a\u043e\u043d\u0435\u0446\", datatype=\"dec\", datalen=15, datadec=2, pic=\"F\")\r\nform.set_model(Q2CursorModel(cu))\r\nform.run()",
    "comment": "",
-   "q2_time": "20240807122834",
+   "q2_time": "20240808180150",
    "q2_mode": "u"
   },
   {
