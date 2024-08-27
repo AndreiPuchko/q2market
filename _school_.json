@@ -81,7 +81,8 @@
    "form_refresh": "",
    "after_form_closed": "",
    "q2_time": "20240814110919",
-   "q2_mode": "u"
+   "q2_mode": "u",
+   "after_form_load": ""
   },
   {
    "name": "_school_rooms",
@@ -114,7 +115,8 @@
    "form_refresh": "",
    "after_form_closed": "",
    "q2_time": "20240812201937",
-   "q2_mode": "u"
+   "q2_mode": "u",
+   "after_form_load": ""
   },
   {
    "name": "_school_settings",
@@ -147,7 +149,8 @@
    "form_refresh": "",
    "after_form_closed": "",
    "q2_time": "20240814130536",
-   "q2_mode": "u"
+   "q2_mode": "u",
+   "after_form_load": ""
   },
   {
    "name": "_school_sheet_keys",
@@ -180,7 +183,8 @@
    "form_refresh": "",
    "after_form_closed": "",
    "q2_time": "20240814110922",
-   "q2_mode": "u"
+   "q2_mode": "u",
+   "after_form_load": ""
   },
   {
    "name": "_school_students",
@@ -200,7 +204,7 @@
    "form_table_sort": "std",
    "comment": "",
    "before_form_build": "",
-   "before_grid_build": "form.max_child_level = 2",
+   "before_grid_build": "",
    "before_grid_show": "",
    "after_grid_show": "",
    "before_form_show": "",
@@ -212,8 +216,9 @@
    "form_valid": "",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240807111641",
-   "q2_mode": "u"
+   "q2_time": "20240827151424",
+   "q2_mode": "u",
+   "after_form_load": "form.max_child_level = 2"
   },
   {
    "name": "_school_students_debts",
@@ -246,7 +251,8 @@
    "form_refresh": "",
    "after_form_closed": "",
    "q2_time": "20240812202013",
-   "q2_mode": "u"
+   "q2_mode": "u",
+   "after_form_load": ""
   },
   {
    "name": "_school_students_subjects",
@@ -279,7 +285,8 @@
    "form_refresh": "",
    "after_form_closed": "",
    "q2_time": "20240806100854",
-   "q2_mode": "i"
+   "q2_mode": "i",
+   "after_form_load": ""
   },
   {
    "name": "_school_subjects",
@@ -299,7 +306,7 @@
    "form_table_sort": "subj",
    "comment": "",
    "before_form_build": "",
-   "before_grid_build": "form.max_child_level = 2",
+   "before_grid_build": "",
    "before_grid_show": "",
    "after_grid_show": "",
    "before_form_show": "if form.crud_mode==\"NEW\":\r\n    code = form.r.code\r\n\r\n    while get(form.model.get_table_name(), f\"code='{code}'\", \"code\") == code:\r\n        code= self.db_data.get_uniq_value(form.model.cursor.table_name, \"code\", code)\r\n\r\n    form.s.code = code",
@@ -311,8 +318,9 @@
    "form_valid": "",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240812192911",
-   "q2_mode": "u"
+   "q2_time": "20240827151405",
+   "q2_mode": "u",
+   "after_form_load": "form.max_child_level = 2"
   },
   {
    "name": "_school_subjects_groups",
@@ -345,7 +353,8 @@
    "form_refresh": "",
    "after_form_closed": "",
    "q2_time": "20240812201937",
-   "q2_mode": "u"
+   "q2_mode": "u",
+   "after_form_load": ""
   },
   {
    "name": "_school_teachers",
@@ -365,7 +374,7 @@
    "form_table_sort": "tch",
    "comment": "",
    "before_form_build": "",
-   "before_grid_build": "form.max_child_level = 2",
+   "before_grid_build": "",
    "before_grid_show": "",
    "after_grid_show": "",
    "before_form_show": "",
@@ -377,8 +386,9 @@
    "form_valid": "",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20240807111635",
-   "q2_mode": "u"
+   "q2_time": "20240827151414",
+   "q2_mode": "u",
+   "after_form_load": "form.max_child_level = 2"
   },
   {
    "name": "_school_timesheet",
@@ -411,7 +421,8 @@
    "form_refresh": "",
    "after_form_closed": "",
    "q2_time": "20240812201938",
-   "q2_mode": "u"
+   "q2_mode": "u",
+   "after_form_load": ""
   },
   {
    "name": "_school_timesheet_slots",
@@ -444,7 +455,8 @@
    "form_refresh": "",
    "after_form_closed": "",
    "q2_time": "20240812201938",
-   "q2_mode": "u"
+   "q2_mode": "u",
+   "after_form_load": ""
   }
  ],
  "lines": [
@@ -3988,11 +4000,11 @@
    "child_form": "_school_students_subjects",
    "child_where": "subj={subj}",
    "child_noshow": "",
-   "child_copy_mode": "1",
+   "child_copy_mode": "3",
    "name": "_school_subjects",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20240812192328",
+   "q2_time": "20240827152412",
    "q2_mode": "u"
   },
   {
@@ -4008,12 +4020,12 @@
    "child_form": "_school_timesheet",
    "child_where": "subj={subj}",
    "child_noshow": "",
-   "child_copy_mode": "1",
+   "child_copy_mode": "3",
    "name": "_school_subjects",
    "action_worker": "",
    "comment": "",
-   "q2_time": "20240812192620",
-   "q2_mode": "i"
+   "q2_time": "20240827152416",
+   "q2_mode": "u"
   },
   {
    "id": "116",
