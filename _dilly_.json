@@ -1,0 +1,43 @@
+{
+ "modules": [
+  {
+   "name": "_dilly__bank_extender",
+   "script": "def bank_extender(row):\r\n    row[\"std\"] = 0\r\n    return True",
+   "comment": "",
+   "last_line": "1",
+   "q2_time": "20240826223310",
+   "q2_mode": "u"
+  },
+  {
+   "name": "_dilly__print_contract_extender",
+   "script": "def print_contract_extender(data):\r\n    q2mess(data)",
+   "comment": "",
+   "last_line": "2",
+   "q2_time": "20240828124643",
+   "q2_mode": "u"
+  },
+  {
+   "name": "_dilly__row_extender",
+   "script": "def row_extender(data, key):\r\n    import _school_default_row_extender\r\n    default_row_extender(data, id)\r\n    # q2mess(data)\r\n    lasting = 0\r\n    for tkey, tvalue in data[\"TABLA\"].items():\r\n        lasting +=num(tvalue[\"lasting\"])\r\n    data[\"TL\"] = str(lasting)\r\n    price_row = get(\"subjects\", f\" {lasting} <= lasting and code like 'ZP%' order by lasting limit 1\")\r\n    data[\"TS\"] = price_row[\"price\"]\r\n    tabla_index = len(data[\"TABLA\"]) + 1\r\n    data[\"TABLA\"][f\"{tabla_index }\"] = {'subj': price_row[\"subj\"],  'rprice': data[\"TS\"], \"name\": \"Zeitpreis\", \"date1\": data[\"date1\"]}\r\n    data[\"TOTAL\"] = str(num(data[\"TOTAL\"]) + num(data[\"TS\"]))\r\n    import _school_checkin\r\n    get_std(data)",
+   "comment": "",
+   "last_line": "13",
+   "q2_time": "20240829142931",
+   "q2_mode": "u"
+  }
+ ],
+ "forms": [],
+ "lines": [],
+ "queries": [],
+ "actions": [],
+ "reports": [],
+ "packages": [
+  {
+   "package_name": "q2googledrive",
+   "package_pipname": "",
+   "package_version": "",
+   "comment": "",
+   "q2_time": "20240802221205",
+   "q2_mode": "i"
+  }
+ ]
+}
