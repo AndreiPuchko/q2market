@@ -18,10 +18,10 @@
   },
   {
    "name": "_dilly__row_extender",
-   "script": "def row_extender(data, key):\r\n    import _school_default_row_extender\r\n    default_row_extender(data, id)\r\n    # q2mess(data)\r\n    lasting = 0\r\n    for tkey, tvalue in data[\"TABLA\"].items():\r\n        lasting +=num(tvalue[\"lasting\"])\r\n    data[\"TL\"] = str(lasting)\r\n    price_row = get(\"subjects\", f\" {lasting} <= lasting and code like 'ZP%' order by lasting limit 1\")\r\n    data[\"TS\"] = price_row[\"price\"]\r\n    tabla_index = len(data[\"TABLA\"]) + 1\r\n    data[\"TABLA\"][f\"{tabla_index }\"] = {'subj': price_row[\"subj\"],  'rprice': data[\"TS\"], \"name\": \"Zeitpreis\", \"date1\": data[\"date1\"]}\r\n    data[\"TOTAL\"] = str(num(data[\"TOTAL\"]) + num(data[\"TS\"]))\r\n    import _school_checkin\r\n    get_std(data)",
+   "script": "def row_extender(data, key):\r\n    import _school_default_row_extender\r\n    default_row_extender(data, id)\r\n    # q2mess(data)\r\n    lasting = 0\r\n    for tkey, tvalue in data[\"TABLA\"].items():\r\n        lasting +=num(tvalue[\"lasting\"])\r\n    data[\"TL\"] = str(lasting)\r\n    price_row = get(\"subjects\", f\" {lasting} <= lasting and code like 'ZP%' order by lasting limit 1\")\r\n    data[\"TS\"] = price_row[\"price\"]\r\n    tabla_index = len(data[\"TABLA\"]) + 1\r\n    data[\"TABLA\"][f\"{tabla_index }\"] = {'subj': price_row[\"subj\"],  'rprice': data[\"TS\"], \"name\": \"Zeitpreis\", \"date1\": data[\"date1\"], \"date2\":  data[\"date2\"]}\r\n    data[\"TOTAL\"] = str(num(data[\"TOTAL\"]) + num(data[\"TS\"]))\r\n    import _school_checkin\r\n    get_std(data)",
    "comment": "",
-   "last_line": "13",
-   "q2_time": "20240829142931",
+   "last_line": "12",
+   "q2_time": "20241118095700",
    "q2_mode": "u"
   }
  ],
