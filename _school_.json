@@ -10,10 +10,10 @@
   },
   {
    "name": "_school__e_control",
-   "script": "if name == \"_dbanken_kontobewegung\":\r\n    if control[\"column\"] == \"date\":\r\n        cu = q2cursor(\"\"\"\r\n                                select * \r\n                                from `lines` \r\n                                where name == '_school__dbanken_kontobewegung'\r\n                            \"\"\", myapp.db_logic)\r\n        for x in cu.records():\r\n            form.add_control(**x)\r\nelif name == \"datas\":\r\n    if control[\"column\"] == \"id\":\r\n        form.add_control(column=\"/t\", label=\"\u0422\u0430\u0431\u043b\u0438\u0446\u0430\")\r\n    if control[\"column\"] == \"comments\":\r\n        cu = q2cursor(\"\"\"\r\n                                select * \r\n                                from `lines` \r\n                                where name == '_school_datas'\r\n                            \"\"\", myapp.db_logic)\r\n        for x in cu.records():\r\n            form.add_control(**x)",
+   "script": "if name == \"_dbanken_kontobewegung\":\r\n    if control[\"column\"] == \"date\":\r\n        cu = q2cursor(\"\"\"\r\n                                select * \r\n                                from `lines` \r\n                                where name == '_school__dbanken_kontobewegung'\r\n                                order by seq\r\n                            \"\"\", myapp.db_logic)\r\n        for x in cu.records():\r\n            form.add_control(**x)\r\nelif name == \"datas\":\r\n    if control[\"column\"] == \"id\":\r\n        form.add_control(column=\"/t\", label=\"\u0422\u0430\u0431\u043b\u0438\u0446\u0430\")\r\n    if control[\"column\"] == \"comments\":\r\n        cu = q2cursor(\"\"\"\r\n                                select * \r\n                                from `lines` \r\n                                where name == '_school_datas'\r\n                                order by seq\r\n                            \"\"\", myapp.db_logic)\r\n        for x in cu.records():\r\n            form.add_control(**x)",
    "comment": "",
-   "last_line": "12",
-   "q2_time": "20250824164239",
+   "last_line": "8",
+   "q2_time": "20250829111122",
    "q2_mode": "u"
   },
   {
@@ -3442,7 +3442,7 @@
    "control": "line",
    "pic": "",
    "datatype": "char",
-   "datalen": "5",
+   "datalen": "255",
    "datadec": "0",
    "migrate": "*",
    "pk": "",
@@ -3457,7 +3457,7 @@
    "code_show": "",
    "code_valid": "",
    "style": "",
-   "q2_time": "20250829110540",
+   "q2_time": "20250829111302",
    "q2_mode": "u"
   },
   {
