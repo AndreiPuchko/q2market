@@ -38,5 +38,10 @@
     "ext_title": "_dilly_",
     "ext_version": "2024-11-18 10:01:10",
     "ext_description": ""
+  },
+  "https://raw.githubusercontent.com/AndreiPuchko/q2market/main/q2re": {
+    "app_title": "q2-REchnungen",
+    "app_version": "2025-12-09 19:30:31",
+    "app_description": "q2-REchnungen ist ein leistungsstarkes Tool zur einfachen \nund professionellen Erstellung von Rechnungen.\nDie Anwendung unterst\u00fctzt den gesamten Prozess \u2013 von der Vorbereitung \nder Daten bis zur Ausgabe in verschiedenen Formaten wie PDF, DOCX, XLSX und HTML.\nZus\u00e4tzlich bietet q2-Rechnungen eine vollst\u00e4ndige Unterst\u00fctzung des elektronischen \nRechnungsstandards ZUGFeRD, sodass Sie rechtssichere und strukturierte Rechnungen erstellen k\u00f6nnen."
   }
 }
