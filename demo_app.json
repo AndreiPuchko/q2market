@@ -6,7 +6,10 @@
    "comment": "",
    "q2_time": "20240424144056",
    "q2_mode": "i",
-   "last_line": "0"
+   "last_line": "0",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   },
   {
    "name": "manifest",
@@ -14,15 +17,21 @@
    "comment": "",
    "q2_time": "20240424145256",
    "q2_mode": "u",
-   "last_line": "2"
+   "last_line": "2",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   },
   {
    "name": "q2task",
    "script": "class Q2Task():\r\n    def __init__(self):\r\n        self.rez = {}\r\n        self.threads = {}\r\n\r\n    def _worker(self, name):\r\n        self.rez[name] = self.threads[name]['worker'](*self.threads[name]['args'])\r\n    \r\n    def add(self, worker, *args, name=\"\"):\r\n        import random, string, threading\r\n        if name == \"\" or name in self.threads:\r\n            name = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(5))\r\n        self.threads[name] = {'worker':  worker, 'args':  args}\r\n        self.threads[name]['thread'] = threading.Thread(target=self._worker, args=(name,))\r\n        self.threads[name]['thread'].start()\r\n\r\n    def wait(self):\r\n        for name in self.threads:\r\n            self.threads[name]['thread'].join()\r\n        return self.rez\r\n\r\n\r\ntask = Q2Task()\r\nfor x in q2_modules:\r\n    task.add(q2_app.get_package_versions, x, name=x)\r\nprint(task.wait())",
    "comment": "",
-   "q2_time": "20240424144056",
-   "q2_mode": "i",
-   "last_line": "25"
+   "q2_time": "20241008123129",
+   "q2_mode": "u",
+   "last_line": "26",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   },
   {
    "name": "run_mod",
@@ -30,7 +39,10 @@
    "comment": "run module \"run_report\"",
    "q2_time": "20240424144056",
    "q2_mode": "i",
-   "last_line": "0"
+   "last_line": "0",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   },
   {
    "name": "run_report",
@@ -38,7 +50,10 @@
    "comment": "",
    "q2_time": "20240424144056",
    "q2_mode": "i",
-   "last_line": "0"
+   "last_line": "0",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   },
   {
    "name": "show me q2App version",
@@ -46,7 +61,10 @@
    "comment": "",
    "q2_time": "20240424144056",
    "q2_mode": "i",
-   "last_line": "0"
+   "last_line": "0",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   },
   {
    "name": "show me some message",
@@ -54,7 +72,10 @@
    "comment": "",
    "q2_time": "20240424144056",
    "q2_mode": "i",
-   "last_line": "0"
+   "last_line": "0",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   },
   {
    "name": "stdout_window",
@@ -62,7 +83,10 @@
    "comment": "",
    "q2_time": "20240424144056",
    "q2_mode": "i",
-   "last_line": "16"
+   "last_line": "16",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   },
   {
    "name": "threads",
@@ -70,7 +94,10 @@
    "comment": "",
    "q2_time": "20240424144056",
    "q2_mode": "i",
-   "last_line": "22"
+   "last_line": "22",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   },
   {
    "name": "tmp",
@@ -78,39 +105,109 @@
    "comment": "",
    "q2_time": "20240424144056",
    "q2_mode": "i",
-   "last_line": "0"
+   "last_line": "0",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   },
   {
    "name": "version",
-   "script": "self.app_version = '2024-04-24 14:53:25'",
+   "script": "self.app_version = '2026-02-09 07:02:07'",
    "comment": "",
-   "q2_time": "20240424145325",
+   "q2_time": "20260209070207",
    "q2_mode": "u",
-   "last_line": "0"
+   "last_line": "0",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   },
   {
    "name": "w1",
-   "script": "def w1():\r\n    return 122\r\n\r\nreturn w1()",
+   "script": "def w1():\r\n    return 122\r\n\r\na=2\r\n\r\n\r\ndef w2():\r\n    ?w1()\r\n    pass\r\n\r\n\r\n# w2()\r\nreturn w1()",
    "comment": "",
-   "q2_time": "20240424144056",
-   "q2_mode": "i",
-   "last_line": "0"
+   "q2_time": "20251126213628",
+   "q2_mode": "u",
+   "last_line": "13",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   },
   {
    "name": "w2",
-   "script": "q2Mess(run_module(\"w1\"))",
+   "script": "lo={\"a\":3}\r\n# lo={}\r\nq2Mess(run_module(\"w1\", _locals=lo))\r\n?lo[\"w1\"]()\r\n# ?lo",
    "comment": "",
-   "q2_time": "20240424144056",
-   "q2_mode": "i",
-   "last_line": "0"
+   "q2_time": "20251126211244",
+   "q2_mode": "u",
+   "last_line": "5",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   },
   {
    "name": "wait",
    "script": "def worker():\r\n    import time\r\n    for x in range(10):\r\n        time.sleep(1)\r\n\r\nq2Wait(worker, \"222\")",
    "comment": "",
-   "q2_time": "20240424144056",
+   "q2_time": "20251126213644",
+   "q2_mode": "u",
+   "last_line": "6",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
+  },
+  {
+   "name": "w3",
+   "script": "import w1\r\n\r\nw1()\r\nw2()",
+   "comment": "",
+   "q2_time": "20251126211255",
+   "q2_mode": "u",
+   "last_line": "4",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
+  },
+  {
+   "name": "w4",
+   "script": "def x():\r\n    pass\r\n?__name__",
+   "comment": "",
+   "q2_time": "20251126213638",
+   "q2_mode": "u",
+   "last_line": "3",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
+  },
+  {
+   "name": "_finder",
+   "script": "class Q2Finder():\r\n    def __init__(self, find_string):\r\n        self.find_string = find_string\r\n\r\n    def get_columns_sql(self,table):\r\n        return \"select {{}} from {} where concat({}) like\".format(table,\r\n            \", \".join([f\"`{x}`\" for x in myapp.db_logic.get_database_columns(table).keys()]))\r\n    \r\n    def show_lines(self, table=\"lines\"):\r\n        sql = self.get_columns_sql(table).format(\"id\") + \" '%{}%'\".format(self.find_string)\r\n        where = \"id in ({})\".format(\", \".join([x['id'] for x in q2cursor(sql, myapp.db_logic).records()]))\r\n        {\"actions\": Q2Actions, \"lines\": Q2Lines}[table]().run(where=where)\r\n\r\n    def show_other(self, table):\r\n        sql = self.get_columns_sql(table).format(\"name\") + \" '%{}%'\".format(self.find_string)\r\n        where = \"name in ({})\".format(\", \".join(['\"'+x['name']+'\"' for x in q2cursor(sql, myapp.db_logic).records()]))\r\n        {\"forms\":Q2Forms, \"reports\": Q2Reports, \"modules\": Q2Modules, \"queries\": Q2Queries}[table]().run(where=where)\r\n\r\n\r\nfinder = Q2Form(\"Find\")\r\n\r\nfinder.add_control(\"find_string\", \"Find string\", datalen=150)\r\nfinder.add_control(\"/\")\r\nfinder.add_control(\"/h\", \"in\")\r\nfinder.add_control(\"button\", \"Forms\", control=\"button\", valid=lambda: Q2Finder(finder.s.find_string).show_other(\"forms\"))\r\nfinder.add_control(\"button\", \"Lines\", control=\"button\", valid=lambda: Q2Finder(finder.s.find_string).show_lines(\"lines\"))\r\nfinder.add_control(\"button\", \"Actions\", control=\"button\", valid=lambda: Q2Finder(finder.s.find_string).show_lines(\"actions\"))\r\nfinder.add_control(\"button\", \"Modules\", control=\"button\", valid=lambda: Q2Finder(finder.s.find_string).show_other(\"modules\"))\r\nfinder.add_control(\"button\", \"Queries\", control=\"button\", valid=lambda: Q2Finder(finder.s.find_string).show_other(\"queries\"))\r\nfinder.cancel_button=1\r\nfinder.run()\r\n\r\n# Q2Finder(\"address\").show_lines()\r\n# Q2Finder(\"head\").show_other(\"forms\")\r\n# Q2Finder(\"s\").show_other(\"reports\")\r\n# Q2Finder(\"s\").show_other(\"queries\")\r\n# Q2Finder(\"w\").show_other(\"modules\")",
+   "comment": "",
+   "q2_time": "20240808133541",
+   "q2_mode": "u",
+   "last_line": "13",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
+  },
+  {
+   "name": "_finder1",
+   "script": "run_module(\"w1\", import_only=True)\r\n?globals().get(\"w1\")\r\n?locals().get(\"w1\")",
+   "comment": "",
+   "q2_time": "20241101141107",
    "q2_mode": "i",
-   "last_line": "5"
+   "last_line": "3",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
+  },
+  {
+   "name": "_autorun",
+   "script": "# self.run_reports()",
+   "comment": "",
+   "q2_time": "20251023194834",
+   "q2_mode": "u",
+   "last_line": "1",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   }
  ],
  "forms": [
@@ -140,13 +237,18 @@
    "before_delete": "",
    "after_delete": "",
    "form_valid": "",
-   "q2_time": "20240424144056",
-   "q2_mode": "i",
+   "q2_time": "20251024115518",
+   "q2_mode": "u",
    "after_close": "",
-   "after_form_closed": "print(123)",
+   "after_form_closed": "",
    "view_action": "",
    "form_refresh": "",
-   "menu_icon": ""
+   "menu_icon": "",
+   "after_form_load": "",
+   "q2_hidden": "",
+   "q2_bcolor": "16299943",
+   "q2_fcolor": "0",
+   "grid_index_changed": ""
   },
   {
    "name": "invoice_header",
@@ -180,7 +282,12 @@
    "after_form_closed": "",
    "view_action": "",
    "form_refresh": "",
-   "menu_icon": ""
+   "menu_icon": "",
+   "after_form_load": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0",
+   "grid_index_changed": ""
   },
   {
    "name": "invoice_lines",
@@ -214,7 +321,12 @@
    "after_form_closed": "",
    "view_action": "",
    "form_refresh": "",
-   "menu_icon": ""
+   "menu_icon": "",
+   "after_form_load": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0",
+   "grid_index_changed": ""
   },
   {
    "name": "products",
@@ -242,13 +354,18 @@
    "before_delete": "",
    "after_delete": "",
    "form_valid": "",
-   "q2_time": "20240424144056",
-   "q2_mode": "i",
+   "q2_time": "20251024104839",
+   "q2_mode": "u",
    "after_close": "",
    "after_form_closed": "",
    "view_action": "",
    "form_refresh": "",
-   "menu_icon": ""
+   "menu_icon": "",
+   "after_form_load": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0",
+   "grid_index_changed": ""
   }
  ],
  "lines": [
@@ -286,7 +403,11 @@
    "stretch": "0",
    "mess": "",
    "alignment": "0",
-   "style": ""
+   "style": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0",
+   "index": ""
   },
   {
    "id": "27",
@@ -322,7 +443,11 @@
    "stretch": "0",
    "mess": "",
    "alignment": "0",
-   "style": ""
+   "style": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0",
+   "index": ""
   },
   {
    "id": "28",
@@ -358,7 +483,11 @@
    "stretch": "0",
    "mess": "",
    "alignment": "0",
-   "style": ""
+   "style": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0",
+   "index": ""
   },
   {
    "id": "29",
@@ -394,7 +523,11 @@
    "stretch": "0",
    "mess": "",
    "alignment": "0",
-   "style": ""
+   "style": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0",
+   "index": ""
   },
   {
    "id": "30",
@@ -430,7 +563,11 @@
    "stretch": "0",
    "mess": "",
    "alignment": "0",
-   "style": ""
+   "style": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0",
+   "index": ""
   },
   {
    "id": "31",
@@ -466,7 +603,11 @@
    "stretch": "0",
    "mess": "",
    "alignment": "0",
-   "style": ""
+   "style": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0",
+   "index": ""
   },
   {
    "id": "32",
@@ -502,7 +643,11 @@
    "stretch": "0",
    "mess": "",
    "alignment": "0",
-   "style": ""
+   "style": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0",
+   "index": ""
   },
   {
    "id": "33",
@@ -538,7 +683,11 @@
    "stretch": "0",
    "mess": "",
    "alignment": "0",
-   "style": ""
+   "style": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0",
+   "index": ""
   },
   {
    "id": "34",
@@ -574,7 +723,11 @@
    "stretch": "0",
    "mess": "",
    "alignment": "0",
-   "style": ""
+   "style": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0",
+   "index": ""
   },
   {
    "id": "35",
@@ -610,7 +763,11 @@
    "stretch": "0",
    "mess": "",
    "alignment": "0",
-   "style": ""
+   "style": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0",
+   "index": ""
   },
   {
    "id": "36",
@@ -646,7 +803,11 @@
    "stretch": "0",
    "mess": "",
    "alignment": "0",
-   "style": ""
+   "style": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0",
+   "index": ""
   },
   {
    "id": "37",
@@ -682,7 +843,11 @@
    "stretch": "0",
    "mess": "",
    "alignment": "0",
-   "style": ""
+   "style": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0",
+   "index": ""
   },
   {
    "id": "38",
@@ -718,7 +883,11 @@
    "stretch": "0",
    "mess": "",
    "alignment": "0",
-   "style": ""
+   "style": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0",
+   "index": ""
   },
   {
    "id": "39",
@@ -754,7 +923,11 @@
    "stretch": "0",
    "mess": "",
    "alignment": "0",
-   "style": ""
+   "style": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0",
+   "index": ""
   },
   {
    "id": "40",
@@ -790,7 +963,11 @@
    "stretch": "0",
    "mess": "",
    "alignment": "0",
-   "style": ""
+   "style": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0",
+   "index": ""
   },
   {
    "id": "41",
@@ -826,7 +1003,11 @@
    "stretch": "0",
    "mess": "",
    "alignment": "0",
-   "style": ""
+   "style": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0",
+   "index": ""
   }
  ],
  "queries": [
@@ -835,7 +1016,10 @@
    "content": "{\n  \"queries\": {\n    \"new_query\": \"select * \\nfrom invoice\\nwhere id = :id\",\n    \"cust\": \"select *\\nfrom customers\"\n  },\n  \"params\": {\n    \"id\": \"1\"\n  }\n}",
    "comment": "",
    "q2_time": "20240424144057",
-   "q2_mode": "i"
+   "q2_mode": "i",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   }
  ],
  "actions": [
@@ -857,7 +1041,10 @@
    "comment": "",
    "q2_time": "20240424144057",
    "q2_mode": "i",
-   "tag": ""
+   "tag": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   },
   {
    "id": "27",
@@ -877,7 +1064,10 @@
    "comment": "",
    "q2_time": "20240424144057",
    "q2_mode": "i",
-   "tag": "#45dffa"
+   "tag": "#45dffa",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   },
   {
    "id": "28",
@@ -897,7 +1087,10 @@
    "comment": "",
    "q2_time": "20240424144057",
    "q2_mode": "i",
-   "tag": ""
+   "tag": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   },
   {
    "id": "29",
@@ -917,7 +1110,10 @@
    "comment": "",
    "q2_time": "20240424144057",
    "q2_mode": "i",
-   "tag": ""
+   "tag": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   },
   {
    "id": "30",
@@ -926,7 +1122,7 @@
    "seq": "2",
    "action_mode": "2",
    "action_mess": "",
-   "action_icon": "\u2399",
+   "action_icon": "print",
    "action_key": "F4",
    "eof_disabled": "*",
    "child_form": "",
@@ -935,9 +1131,12 @@
    "child_copy_mode": "1",
    "action_worker": "rep = get_report(\"Invoice\")\nrep.params[\"id\"] = form.r.id\nrep.run()",
    "comment": "",
-   "q2_time": "20240424144057",
-   "q2_mode": "i",
-   "tag": ""
+   "q2_time": "20251031165443",
+   "q2_mode": "u",
+   "tag": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   },
   {
    "id": "31",
@@ -957,7 +1156,10 @@
    "comment": "",
    "q2_time": "20240424144057",
    "q2_mode": "i",
-   "tag": ""
+   "tag": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   },
   {
    "id": "32",
@@ -977,17 +1179,58 @@
    "comment": "",
    "q2_time": "20240424144057",
    "q2_mode": "i",
-   "tag": ""
+   "tag": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
+  },
+  {
+   "id": "33",
+   "name": "customer",
+   "action_text": "test",
+   "seq": "12",
+   "action_mode": "2",
+   "action_mess": "",
+   "action_icon": "",
+   "action_key": "",
+   "eof_disabled": "",
+   "child_form": "",
+   "child_where": "",
+   "child_noshow": "",
+   "child_copy_mode": "1",
+   "action_worker": "run_module(\"w1\", import_only=True)\r\n?globals().get(\"w1\")",
+   "comment": "",
+   "q2_time": "20241101141037",
+   "q2_mode": "u",
+   "tag": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   }
  ],
  "reports": [
   {
    "name": "Invoice",
-   "content": "{\n  \"queries\": {\n    \"header\": \"select invoice.* , customers.name, customers.address\\nfrom invoice\\nleft join customers on invoice.cid = customers.cid\\nwhere invoice.id = :id \\n\",\n    \"lines\": \"select invoice_lines.*\\nfrom invoice_lines\\nwhere parent_id = :id\\norder by id\"\n  },\n  \"params\": {\n    \"id\": \"1\"\n  },\n  \"pages\": [\n    {\n      \"columns\": [\n        {\n          \"rows\": [\n            {\n              \"role\": \"table\",\n              \"data_source\": \"header\",\n              \"groupby\": \"\",\n              \"table_groups\": [],\n              \"print_when\": \"\",\n              \"print_after\": \"\",\n              \"new_page_before\": \"\",\n              \"new_page_after\": \"\",\n              \"heights\": [\n                \"0-0\",\n                \"0-0\",\n                \"0-0\"\n              ],\n              \"cells\": {\n                \"0,0\": {\n                  \"data\": \"Invoice number <b>{id}</b><br>{date}\",\n                  \"style\": {\n                    \"text-align\": \"center\",\n                    \"font-size\": \"17pt\",\n                    \"border-width\": \"8 0 1 0\",\n                    \"border-color\": \"black\"\n                  },\n                  \"rowspan\": 1,\n                  \"colspan\": 5,\n                  \"format\": \"D\"\n                },\n                \"1,0\": {\n                  \"data\": \"Customer\",\n                  \"style\": {\n                    \"text-align\": \"right\",\n                    \"border-color\": \"black\"\n                  }\n                },\n                \"1,2\": {\n                  \"style\": {\n                    \"text-align\": \"left\",\n                    \"border-color\": \"black\"\n                  }\n                },\n                \"1,1\": {\n                  \"data\": \"{name}\",\n                  \"style\": {\n                    \"text-align\": \"left\",\n                    \"font-weight\": \"bold\",\n                    \"border-color\": \"black\"\n                  },\n                  \"rowspan\": 1,\n                  \"colspan\": 4\n                },\n                \"2,0\": {\n                  \"data\": \"Address\",\n                  \"style\": {\n                    \"border-color\": \"black\"\n                  }\n                },\n                \"2,4\": {\n                  \"style\": {\n                    \"border-color\": \"black\"\n                  }\n                },\n                \"2,2\": {\n                  \"style\": {\n                    \"border-color\": \"black\"\n                  }\n                },\n                \"2,1\": {\n                  \"data\": \"{address}\",\n                  \"style\": {\n                    \"border-color\": \"black\",\n                    \"text-align\": \"left\"\n                  },\n                  \"rowspan\": 1,\n                  \"colspan\": 4\n                },\n                \"2,3\": {\n                  \"style\": {\n                    \"border-color\": \"black\"\n                  }\n                }\n              },\n              \"style\": {\n                \"text-align\": \"center\",\n                \"vertical-align\": \"middle\",\n                \"font-size\": \"13pt\",\n                \"border-width\": \"0 0 0 0\"\n              }\n            },\n            {\n              \"role\": \"table\",\n              \"data_source\": \"lines\",\n              \"groupby\": \"\",\n              \"table_groups\": [],\n              \"print_when\": \"\",\n              \"print_after\": \"\",\n              \"new_page_before\": \"\",\n              \"new_page_after\": \"\",\n              \"heights\": [\n                \"0-0\"\n              ],\n              \"cells\": {\n                \"0,2\": {\n                  \"data\": \"{qt}\",\n                  \"style\": {\n                    \"text-align\": \"right\",\n                    \"border-color\": \"black\"\n                  }\n                },\n                \"0,0\": {\n                  \"data\": \"{product}\",\n                  \"rowspan\": 1,\n                  \"colspan\": 2\n                },\n                \"0,3\": {\n                  \"data\": \"{price}\",\n                  \"style\": {\n                    \"text-align\": \"right\",\n                    \"border-color\": \"black\"\n                  }\n                },\n                \"0,4\": {\n                  \"style\": {\n                    \"text-align\": \"right\",\n                    \"border-color\": \"black\"\n                  },\n                  \"data\": \"{num(qt)*num(price)}\"\n                }\n              },\n              \"table_header\": {\n                \"role\": \"table_header\",\n                \"data_source\": \"\",\n                \"groupby\": \"\",\n                \"table_groups\": [],\n                \"print_when\": \"\",\n                \"print_after\": \"\",\n                \"new_page_before\": \"\",\n                \"new_page_after\": \"\",\n                \"heights\": [\n                  \"0-0\"\n                ],\n                \"cells\": {\n                  \"0,0\": {\n                    \"data\": \"Product\",\n                    \"rowspan\": 1,\n                    \"colspan\": 2\n                  },\n                  \"0,2\": {\n                    \"data\": \"Quantity\"\n                  },\n                  \"0,3\": {\n                    \"data\": \"Price\"\n                  },\n                  \"0,4\": {\n                    \"data\": \"Total\"\n                  }\n                },\n                \"style\": {\n                  \"text-align\": \"center\",\n                  \"vertical-align\": \"middle\",\n                  \"font-size\": \"13pt\"\n                }\n              },\n              \"table_footer\": {\n                \"role\": \"table_footer\",\n                \"data_source\": \"\",\n                \"groupby\": \"\",\n                \"table_groups\": [],\n                \"print_when\": \"\",\n                \"print_after\": \"\",\n                \"new_page_before\": \"\",\n                \"new_page_after\": \"\",\n                \"heights\": [\n                  \"0-0\",\n                  \"0-0\"\n                ],\n                \"cells\": {\n                  \"1,0\": {\n                    \"style\": {\n                      \"border-width\": \"1 0 0 0\",\n                      \"border-color\": \"black\"\n                    }\n                  },\n                  \"1,1\": {\n                    \"style\": {\n                      \"border-width\": \"1 0 0 0\",\n                      \"border-color\": \"black\"\n                    }\n                  },\n                  \"1,3\": {\n                    \"style\": {\n                      \"border-width\": \"0 0 0 0\",\n                      \"font-weight\": \"bold\",\n                      \"font-size\": \"11pt\",\n                      \"border-color\": \"black\"\n                    }\n                  },\n                  \"1,4\": {\n                    \"style\": {\n                      \"text-align\": \"right\",\n                      \"font-weight\": \"bold\",\n                      \"border-color\": \"black\"\n                    },\n                    \"data\": \"{sum:num(qt)*num(price)}\"\n                  },\n                  \"1,2\": {\n                    \"data\": \"{sum:qt}\",\n                    \"style\": {\n                      \"text-align\": \"right\",\n                      \"vertical-align\": \"bottom\",\n                      \"font-weight\": \"bold\",\n                      \"border-color\": \"black\"\n                    }\n                  },\n                  \"0,0\": {\n                    \"rowspan\": 1,\n                    \"colspan\": 5,\n                    \"style\": {\n                      \"font-size\": \"2pt\",\n                      \"border-width\": \"1 0 1 0\",\n                      \"border-color\": \"black\"\n                    }\n                  }\n                },\n                \"style\": {\n                  \"font-size\": \"10pt\"\n                }\n              }\n            }\n          ],\n          \"widths\": [\n            \"0.00\",\n            \"0.00\",\n            \"3.00\",\n            \"3.00\",\n            \"3.00\"\n          ]\n        }\n      ],\n      \"page_width\": 21.0,\n      \"page_height\": 29.0,\n      \"page_margin_left\": 2.0,\n      \"page_margin_top\": 2.0,\n      \"page_margin_right\": 1.0,\n      \"page_margin_bottom\": 2.0\n    }\n  ],\n  \"style\": {\n    \"font-family\": \"Arial\",\n    \"font-size\": \"8pt\",\n    \"font-weight\": \"normal\",\n    \"border-width\": \"1 1 1 1\",\n    \"padding\": \"0.05cm 0.05cm 0.05cm 0.05cm\",\n    \"text-align\": \"left\",\n    \"vertical-align\": \"top\"\n  }\n}",
+   "content": "{\n  \"queries\": {\n    \"header\": \"select invoice.* , customers.name, customers.address\\nfrom invoice\\nleft join customers on invoice.cid = customers.cid\\nwhere invoice.id = :id \\n\",\n    \"lines\": \"select invoice_lines.*\\nfrom invoice_lines\\nwhere parent_id = :id\\norder by id\"\n  },\n  \"params\": {\n    \"id\": \"1\"\n  },\n  \"pages\": [\n    {\n      \"columns\": [\n        {\n          \"rows\": [\n            {\n              \"role\": \"table\",\n              \"data_source\": \"header\",\n              \"groupby\": \"\",\n              \"table_groups\": [],\n              \"print_when\": \"\",\n              \"print_after\": \"\",\n              \"new_page_before\": \"\",\n              \"new_page_after\": \"\",\n              \"heights\": [\n                \"2.00-0\",\n                \"0-0\",\n                \"0-0\"\n              ],\n              \"cells\": {\n                \"0,0\": {\n                  \"data\": \"Invoice number <b><i>{id}</i></b><br>{date:D}\",\n                  \"style\": {\n                    \"text-align\": \"center\",\n                    \"font-size\": \"17pt\",\n                    \"border-width\": \"8 0 1 0\"\n                  },\n                  \"rowspan\": 1,\n                  \"colspan\": 5,\n                  \"format\": \"D\"\n                },\n                \"1,0\": {\n                  \"data\": \"Customer\",\n                  \"style\": {\n                    \"text-align\": \"right\"\n                  }\n                },\n                \"1,2\": {\n                  \"style\": {\n                    \"text-align\": \"left\",\n                    \"border-color\": \"black\"\n                  }\n                },\n                \"1,1\": {\n                  \"data\": \"{name}\",\n                  \"style\": {\n                    \"text-align\": \"left\",\n                    \"font-weight\": \"bold\"\n                  },\n                  \"rowspan\": 1,\n                  \"colspan\": 4\n                },\n                \"2,0\": {\n                  \"data\": \"Address\"\n                },\n                \"2,4\": {\n                  \"style\": {\n                    \"border-color\": \"black\"\n                  }\n                },\n                \"2,2\": {\n                  \"style\": {\n                    \"border-color\": \"black\"\n                  }\n                },\n                \"2,1\": {\n                  \"data\": \"{address}\",\n                  \"style\": {\n                    \"text-align\": \"left\"\n                  },\n                  \"rowspan\": 1,\n                  \"colspan\": 4\n                },\n                \"2,3\": {\n                  \"style\": {\n                    \"border-color\": \"black\"\n                  }\n                }\n              },\n              \"style\": {\n                \"text-align\": \"center\",\n                \"vertical-align\": \"middle\",\n                \"font-size\": \"13pt\",\n                \"border-width\": \"0 0 0 0\"\n              }\n            },\n            {\n              \"role\": \"table\",\n              \"data_source\": \"lines\",\n              \"groupby\": \"\",\n              \"table_groups\": [],\n              \"print_when\": \"\",\n              \"print_after\": \"\",\n              \"new_page_before\": \"\",\n              \"new_page_after\": \"\",\n              \"heights\": [\n                \"0-0\"\n              ],\n              \"cells\": {\n                \"0,2\": {\n                  \"data\": \"{qt}\",\n                  \"style\": {\n                    \"text-align\": \"right\"\n                  }\n                },\n                \"0,0\": {\n                  \"data\": \"{product}\",\n                  \"rowspan\": 1,\n                  \"colspan\": 2\n                },\n                \"0,3\": {\n                  \"data\": \"{price}\",\n                  \"style\": {\n                    \"text-align\": \"right\"\n                  }\n                },\n                \"0,4\": {\n                  \"style\": {\n                    \"text-align\": \"right\"\n                  },\n                  \"data\": \"{num(qt)*num(price)}\"\n                }\n              },\n              \"table_header\": {\n                \"role\": \"table_header\",\n                \"data_source\": \"\",\n                \"groupby\": \"\",\n                \"table_groups\": [],\n                \"print_when\": \"\",\n                \"print_after\": \"\",\n                \"new_page_before\": \"\",\n                \"new_page_after\": \"\",\n                \"heights\": [\n                  \"0-0\"\n                ],\n                \"cells\": {\n                  \"0,0\": {\n                    \"data\": \"Product\",\n                    \"rowspan\": 1,\n                    \"colspan\": 2\n                  },\n                  \"0,2\": {\n                    \"data\": \"Quantity\"\n                  },\n                  \"0,3\": {\n                    \"data\": \"Price\"\n                  },\n                  \"0,4\": {\n                    \"data\": \"Total\"\n                  }\n                },\n                \"style\": {\n                  \"text-align\": \"center\",\n                  \"vertical-align\": \"middle\",\n                  \"font-size\": \"13pt\"\n                }\n              },\n              \"table_footer\": {\n                \"role\": \"table_footer\",\n                \"data_source\": \"\",\n                \"groupby\": \"\",\n                \"table_groups\": [],\n                \"print_when\": \"\",\n                \"print_after\": \"\",\n                \"new_page_before\": \"\",\n                \"new_page_after\": \"\",\n                \"heights\": [\n                  \"0-0\",\n                  \"0-0\",\n                  \"1.00-0\",\n                  \"0-0\",\n                  \"0-0\"\n                ],\n                \"cells\": {\n                  \"1,0\": {\n                    \"style\": {\n                      \"border-width\": \"0 0 0 0\"\n                    }\n                  },\n                  \"1,1\": {\n                    \"style\": {\n                      \"border-width\": \"0 0 0 0\"\n                    }\n                  },\n                  \"1,3\": {\n                    \"style\": {\n                      \"border-width\": \"0 0 0 0\",\n                      \"font-weight\": \"bold\",\n                      \"font-size\": \"11pt\",\n                      \"background\": \"#ffff00\"\n                    }\n                  },\n                  \"1,4\": {\n                    \"style\": {\n                      \"text-align\": \"right\",\n                      \"font-weight\": \"bold\",\n                      \"background\": \"#ff0000\"\n                    },\n                    \"data\": \"{sum:num(qt)*num(price)}\"\n                  },\n                  \"1,2\": {\n                    \"data\": \"{sum:qt}\",\n                    \"style\": {\n                      \"text-align\": \"right\",\n                      \"vertical-align\": \"bottom\",\n                      \"font-weight\": \"bold\",\n                      \"background\": \"#aaffff\"\n                    }\n                  },\n                  \"0,0\": {\n                    \"rowspan\": 1,\n                    \"colspan\": 5,\n                    \"style\": {\n                      \"font-size\": \"2pt\",\n                      \"border-width\": \"1 0 1 0\",\n                      \"border-color\": \"black\"\n                    }\n                  },\n                  \"2,4\": {\n                    \"style\": {\n                      \"border-width\": \"0 0 0 0\"\n                    }\n                  },\n                  \"2,0\": {\n                    \"style\": {\n                      \"border-width\": \"0 0 0 0\"\n                    }\n                  },\n                  \"3,0\": {\n                    \"style\": {\n                      \"border-width\": \"0 0 0 0\"\n                    }\n                  },\n                  \"3,1\": {\n                    \"style\": {\n                      \"border-width\": \"0 0 0 1\"\n                    },\n                    \"data\": \"***\"\n                  },\n                  \"3,2\": {\n                    \"style\": {\n                      \"border-width\": \"0 0 0 0\"\n                    }\n                  },\n                  \"3,3\": {\n                    \"style\": {\n                      \"border-width\": \"0 0 0 0\"\n                    }\n                  },\n                  \"2,1\": {\n                    \"style\": {\n                      \"border-width\": \"0 0 0 0\"\n                    }\n                  },\n                  \"2,2\": {\n                    \"style\": {\n                      \"border-width\": \"0 0 0 0\"\n                    }\n                  },\n                  \"2,3\": {\n                    \"style\": {\n                      \"border-width\": \"0 0 0 0\"\n                    }\n                  },\n                  \"3,4\": {\n                    \"style\": {\n                      \"border-width\": \"0 0 0 0\"\n                    }\n                  },\n                  \"4,0\": {\n                    \"style\": {\n                      \"border-width\": \"0 0 0 0\"\n                    }\n                  },\n                  \"4,1\": {\n                    \"style\": {\n                      \"border-width\": \"0 0 0 0\"\n                    }\n                  },\n                  \"4,2\": {\n                    \"style\": {\n                      \"border-width\": \"0 0 0 0\"\n                    }\n                  },\n                  \"4,3\": {\n                    \"style\": {\n                      \"border-width\": \"0 0 0 0\"\n                    }\n                  },\n                  \"4,4\": {\n                    \"style\": {\n                      \"border-width\": \"0 0 0 0\"\n                    }\n                  }\n                },\n                \"style\": {\n                  \"font-size\": \"10pt\"\n                }\n              }\n            },\n            {\n              \"role\": \"footer\",\n              \"data_source\": \"\",\n              \"groupby\": \"\",\n              \"table_groups\": [],\n              \"print_when\": \"\",\n              \"print_after\": \"\",\n              \"new_page_before\": \"\",\n              \"new_page_after\": \"\",\n              \"heights\": [\n                \"0-0\"\n              ],\n              \"cells\": {\n                \"0,0\": {\n                  \"data\": \"{get(\\\"customers\\\", \\\"cid=1\\\", \\\"name\\\")}\"\n                }\n              }\n            }\n          ],\n          \"widths\": [\n            \"0.00\",\n            \"0.00\",\n            \"3.00\",\n            \"3.00\",\n            \"3.00\"\n          ]\n        }\n      ],\n      \"page_width\": 21.0,\n      \"page_height\": 29.0,\n      \"page_margin_left\": 2.0,\n      \"page_margin_top\": 2.0,\n      \"page_margin_right\": 1.0,\n      \"page_margin_bottom\": 2.0,\n      \"style\": {\n        \"font-size\": \"8pt\"\n      }\n    }\n  ],\n  \"style\": {\n    \"font-family\": \"Arial\",\n    \"font-size\": \"12pt\",\n    \"font-weight\": \"normal\",\n    \"font-style\": \"\",\n    \"text-decoration\": \"underline\",\n    \"border-width\": \"1 1 1 1\",\n    \"padding\": \"0.05cm 0.05cm 0.05cm 0.05cm\",\n    \"background\": \"#ffffff\",\n    \"color\": \"black\",\n    \"border-color\": \"black\",\n    \"text-align\": \"left\",\n    \"vertical-align\": \"top\"\n  },\n  \"module\": \"#\"\n}",
    "comment": "",
-   "q2_time": "20240424144858",
-   "q2_mode": "u"
+   "q2_time": "20251127221333",
+   "q2_mode": "u",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
+  },
+  {
+   "name": "Test1",
+   "content": "{\n  \"queries\": {\n    \"new_query\": \"\"\n  },\n  \"params\": {},\n  \"pages\": [\n    {\n      \"columns\": [\n        {\n          \"rows\": [\n            {\n              \"role\": \"free\",\n              \"data_source\": \"\",\n              \"groupby\": \"\",\n              \"table_groups\": [],\n              \"print_when\": \"\",\n              \"print_after\": \"\",\n              \"new_page_before\": \"\",\n              \"new_page_after\": \"\",\n              \"heights\": [\n                \"0-0\"\n              ],\n              \"cells\": {\n                \"0,0\": {\n                  \"data\": \"{test()}\",\n                  \"style\": {\n                    \"border-color\": \"black\"\n                  }\n                },\n                \"0,2\": {\n                  \"data\": \"{get(\\\"customers\\\", f\\\"cid=1\\\", \\\"name\\\")}\",\n                  \"style\": {\n                    \"border-color\": \"black\"\n                  }\n                },\n                \"0,3\": {\n                  \"data\": \"{w1()}\",\n                  \"style\": {\n                    \"border-color\": \"black\"\n                  }\n                },\n                \"0,1\": {\n                  \"data\": \"123\",\n                  \"style\": {\n                    \"border-color\": \"black\"\n                  }\n                }\n              }\n            }\n          ],\n          \"widths\": [\n            \"50%\",\n            \"2.00\",\n            \"2\",\n            \"0\"\n          ]\n        }\n      ],\n      \"page_width\": 21.0,\n      \"page_height\": 29.0,\n      \"page_margin_left\": 2.0,\n      \"page_margin_top\": 2.0,\n      \"page_margin_right\": 1.0,\n      \"page_margin_bottom\": 2.0\n    }\n  ],\n  \"style\": {\n    \"font-family\": \"Arial\",\n    \"font-size\": \"8pt\",\n    \"font-weight\": \"normal\",\n    \"border-width\": \"1 1 1 1\",\n    \"padding\": \"0.05cm 0.05cm 0.05cm 0.05cm\",\n    \"text-align\": \"left\",\n    \"vertical-align\": \"top\"\n  },\n  \"module\": \"def test():\\r\\n    # import w1\\r\\n    # ?w1\\r\\n    return '333'\\r\\n\\r\\nimport w1\\r\\n\\r\\n# run_module(\\\"w1\\\",_globals=globals(), _locals=locals(), import_only=True)\"\n}",
+   "comment": "",
+   "q2_time": "20240813202336",
+   "q2_mode": "u",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   }
  ],
- "packages": []
+ "packages": [],
+ "locale": [],
+ "locale_po": []
 }
