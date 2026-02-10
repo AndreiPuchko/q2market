@@ -14207,10 +14207,10 @@
  "modules": [
   {
    "name": "autorun",
-   "script": "const.check(\"inv_num_day\", _(\"Invoice number - show day\"), \"\")\r\nconst.check(\"inv_num_month\", _(\"Invoice number - show month\"), \"\")\r\nconst.check(\"inv_num_year\", _(\"Invoice number - show year (1-4 digits,2-2 digits, 3-None)\"), \"1\")\r\nconst.check(\"inv_num_len\", _(\"Invoice number - Lenght of the numeric part (zero-padded)\"), \"5\")\r\nconst.check(\"inv_num_sep\", _(\"Invoice number - separator\"), \"-\")\r\nconst.check(\"inv_num_seq\", _(\"Invoice number - Sequential numbering by (1-year, 2-Year-Month, 3-Continuously over all years)\"), \"-\")\r\n\r\n\r\nconst.check(\"demo_mode\", _(\"Demo mode\"), \"*\")\r\n\r\n# const.check(\"base_cid\", \"Stamm W\u00e4hrung\", \"978\")\r\n# const.check(\"date1\", \"Beginn des Arbeitszeitraums\", \"2026-01-01\")\r\n# const.check(\"date2\", \"Ende  des Arbeitszeitraums\", \"2025-12-31\")\r\n\r\nself.heap.zugferd_files = \"zugferd_files\"\r\nos.makedirs(self.heap.zugferd_files,exist_ok=True)\r\nensure_record(table_name=\"bigcontent\", record={\"id\": \"0\"})\r\nrun_module(\"autofiller\")",
+   "script": "run_module(\"autofiller\")\r\nconst.check(\"inv_num_day\", _(\"Invoice number - show day\"), \"\")\r\nconst.check(\"inv_num_month\", _(\"Invoice number - show month\"), \"\")\r\nconst.check(\"inv_num_year\", _(\"Invoice number - show year (1-4 digits,2-2 digits, 3-None)\"), \"1\")\r\nconst.check(\"inv_num_len\", _(\"Invoice number - Lenght of the numeric part (zero-padded)\"), \"5\")\r\nconst.check(\"inv_num_sep\", _(\"Invoice number - separator\"), \"-\")\r\nconst.check(\"inv_num_seq\", _(\"Invoice number - Sequential numbering by (1-year, 2-Year-Month, 3-Continuously over all years)\"), \"1\")\r\n\r\n\r\nconst.check(\"demo_mode\", _(\"Demo mode\"), \"*\")\r\n\r\n# const.check(\"base_cid\", \"Stamm W\u00e4hrung\", \"978\")\r\n# const.check(\"date1\", \"Beginn des Arbeitszeitraums\", \"2026-01-01\")\r\n# const.check(\"date2\", \"Ende  des Arbeitszeitraums\", \"2025-12-31\")\r\n\r\nself.heap.zugferd_files = \"zugferd_files\"\r\nos.makedirs(self.heap.zugferd_files,exist_ok=True)\r\nensure_record(table_name=\"bigcontent\", record={\"id\": \"0\"})",
    "comment": "",
-   "last_line": "18",
-   "q2_time": "20260207205534",
+   "last_line": "7",
+   "q2_time": "20260210170959",
    "q2_mode": "u",
    "q2_hidden": "",
    "q2_bcolor": "0",
@@ -14251,10 +14251,10 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2026-02-10 15:04:18'",
+   "script": "self.app_version = '2026-02-10 17:10:08'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20260210150418",
+   "q2_time": "20260210171008",
    "q2_mode": "u",
    "q2_hidden": "",
    "q2_bcolor": "0",
