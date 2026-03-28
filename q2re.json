@@ -15707,10 +15707,10 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2026-03-28 07:34:51'",
+   "script": "self.app_version = '2026-03-28 07:56:14'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20260328073451",
+   "q2_time": "20260328075614",
    "q2_mode": "u",
    "q2_hidden": "",
    "q2_bcolor": "0",
@@ -15787,18 +15787,6 @@
   {
    "package_name": "q2zugferd",
    "package_pipname": "https://github.com/AndreiPuchko/q2zugferd",
-   "package_version": "",
-   "comment": "",
-   "q2_time": "20251223113441",
-   "q2_mode": "i",
-   "q2_hidden": "",
-   "q2_bcolor": "0",
-   "q2_fcolor": "0",
-   "dev_mode": ""
-  },
-  {
-   "package_name": "q2mysql55_win_local",
-   "package_pipname": "https://github.com/AndreiPuchko/q2mysql55_win_local",
    "package_version": "",
    "comment": "",
    "q2_time": "20251223113441",
