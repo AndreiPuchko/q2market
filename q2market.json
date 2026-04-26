@@ -46,7 +46,7 @@
   },
   "https://raw.githubusercontent.com/AndreiPuchko/q2market/main/q2cli_helper": {
     "app_title": "Q2CommandComposer",
-    "app_version": "2026-04-19 17:03:52",
+    "app_version": "2026-04-26 22:24:32",
     "app_description": "Run your command-line tools with predefined arguments in one click. "
   }
 }
