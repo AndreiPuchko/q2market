@@ -584,7 +584,7 @@
    "form_valid": "",
    "form_refresh": "",
    "after_form_closed": "",
-   "q2_time": "20260224233638",
+   "q2_time": "20260511184022",
    "q2_mode": "u",
    "q2_hidden": "",
    "q2_bcolor": "0",
@@ -16090,6 +16090,54 @@
    "q2_hidden": "",
    "q2_bcolor": "0",
    "q2_fcolor": "0"
+  },
+  {
+   "id": "2149",
+   "lang": "de",
+   "msgid": "Update error:",
+   "context": "",
+   "msgstr": "",
+   "q2_time": "20260511171329",
+   "q2_mode": "i",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
+  },
+  {
+   "id": "2150",
+   "lang": "ru",
+   "msgid": "Update error:",
+   "context": "",
+   "msgstr": "",
+   "q2_time": "20260511171329",
+   "q2_mode": "i",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
+  },
+  {
+   "id": "2153",
+   "lang": "de",
+   "msgid": "",
+   "context": "",
+   "msgstr": "",
+   "q2_time": "20260511181729",
+   "q2_mode": "i",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
+  },
+  {
+   "id": "2154",
+   "lang": "ru",
+   "msgid": "",
+   "context": "",
+   "msgstr": "",
+   "q2_time": "20260511181729",
+   "q2_mode": "i",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   }
  ],
  "modules": [
@@ -16139,10 +16187,10 @@
   },
   {
    "name": "version",
-   "script": "self.app_version = '2026-04-27 23:27:42'",
+   "script": "self.app_version = '2026-05-20 19:30:56'",
    "comment": "",
    "last_line": "0",
-   "q2_time": "20260427232742",
+   "q2_time": "20260520193056",
    "q2_mode": "u",
    "q2_hidden": "",
    "q2_bcolor": "0",
