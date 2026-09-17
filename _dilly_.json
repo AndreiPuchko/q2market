@@ -5,24 +5,33 @@
    "script": "def bank_extender(row):\r\n    row[\"std\"] = 0\r\n    return True",
    "comment": "",
    "last_line": "1",
-   "q2_time": "20240826223310",
-   "q2_mode": "u"
+   "q2_time": "20250829231050",
+   "q2_mode": "i",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   },
   {
    "name": "_dilly__print_contract_extender",
    "script": "def print_contract_extender(data):\r\n    q2mess(data)",
    "comment": "",
    "last_line": "2",
-   "q2_time": "20240828124643",
-   "q2_mode": "u"
+   "q2_time": "20250829231050",
+   "q2_mode": "i",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   },
   {
    "name": "_dilly__row_extender",
-   "script": "def row_extender(data, key):\r\n    import _school_default_row_extender\r\n    default_row_extender(data, id)\r\n    # q2mess(data)\r\n    lasting = 0\r\n    for tkey, tvalue in data[\"TABLA\"].items():\r\n        lasting +=num(tvalue[\"lasting\"])\r\n    data[\"TL\"] = str(lasting)\r\n    price_row = get(\"subjects\", f\" {lasting} <= lasting and code like 'ZP%' order by lasting limit 1\")\r\n    data[\"TS\"] = price_row[\"price\"]\r\n    tabla_index = len(data[\"TABLA\"]) + 1\r\n    data[\"TABLA\"][f\"{tabla_index }\"] = {'subj': price_row[\"subj\"],  'rprice': data[\"TS\"], \"name\": \"Zeitpreis\", \"date1\": data[\"date1\"], \"date2\":  data[\"date2\"]}\r\n    data[\"TOTAL\"] = str(num(data[\"TOTAL\"]) + num(data[\"TS\"]))\r\n    import _school_checkin\r\n    get_std(data)",
+   "script": "def row_extender(data, id):\r\n    import _school_default_row_extender\r\n    default_row_extender(data, id)\r\n    import _school_checkin\r\n    get_std(data)\r\n    lasting = 0\r\n    # q2mess(data[\"I\"])\r\n    for tkey, tvalue in data[\"TABLA\"].items():\r\n        # q2mess(tvalue)\r\n        if \"ohne\" in data[\"I\"]:\r\n            tvalue[\"price\"] = tvalue[\"price1\"]\r\n        if not tvalue['code'].startswith('VS'):\r\n            lasting +=num(tvalue[\"lasting\"])\r\n    data[\"TL\"] = str(lasting)\r\n    price_row = get(\"subjects\", f\" {lasting} <= lasting and code like 'ZP%' order by lasting limit 1\")\r\n    if \"mit\" in data[\"I\"]:\r\n        data[\"TS\"] = price_row[\"price1\"]\r\n        data[\"KF\"] = \"\u2610\ufe0f\"\r\n    else:\r\n        data[\"TS\"] = price_row[\"price\"]\r\n        data[\"KF\"] = \"\u2611\ufe0f\"\r\n    tabla_index = len(data[\"TABLA\"]) + 1\r\n    data[\"TABLA\"][f\"{tabla_index }\"] = {'subj': price_row[\"subj\"],  'rprice': data[\"TS\"], \"name\": price_row[\"name\"], \"date1\": data[\"date1\"]}\r\n    data[\"TOTAL\"] = str(num(data[\"TOTAL\"]) + num(data[\"TS\"]))\r\n    \r\n    # q2mess(data)",
    "comment": "",
-   "last_line": "12",
-   "q2_time": "20241118095700",
-   "q2_mode": "u"
+   "last_line": "18",
+   "q2_time": "20260917102701",
+   "q2_mode": "u",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   }
  ],
  "forms": [],
@@ -37,7 +46,13 @@
    "package_version": "",
    "comment": "",
    "q2_time": "20240802221205",
-   "q2_mode": "i"
+   "q2_mode": "i",
+   "dev_mode": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   }
- ]
+ ],
+ "locale": [],
+ "locale_po": []
 }
