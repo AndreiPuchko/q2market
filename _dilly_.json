@@ -51,6 +51,30 @@
    "q2_hidden": "",
    "q2_bcolor": "0",
    "q2_fcolor": "0"
+  },
+  {
+   "package_name": "certifi",
+   "package_pipname": "",
+   "package_version": "",
+   "comment": "",
+   "q2_time": "20260918220052",
+   "q2_mode": "i",
+   "dev_mode": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
+  },
+  {
+   "package_name": "python-certifi-win32",
+   "package_pipname": "",
+   "package_version": "",
+   "comment": "",
+   "q2_time": "20260918220052",
+   "q2_mode": "i",
+   "dev_mode": "",
+   "q2_hidden": "",
+   "q2_bcolor": "0",
+   "q2_fcolor": "0"
   }
  ],
  "locale": [],
