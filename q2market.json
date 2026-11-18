@@ -51,7 +51,7 @@
   },
   "https://raw.githubusercontent.com/AndreiPuchko/q2market/main/q2pdfcomposer": {
     "app_title": "Q2PdfComposer",
-    "app_version": "2026-11-18 16:33:59",
+    "app_version": "2026-11-18 17:06:54",
     "app_description": "Q2PdfComposer is a lightweight desktop utility for building custom PDF documents from selected pages.\nKey Features:\n\u2022 Multi-Source Assembly: Open one or more source PDFs and pick the exact pages you need.\n\u2022 Page Arrangement: Reorder selected pages into your desired sequence.\n\u2022 Page Rotation: Adjust the orientation of individual pages.\n\u2022 Clean Export: Save your final compilation as a new PDF file."
   }
 }
